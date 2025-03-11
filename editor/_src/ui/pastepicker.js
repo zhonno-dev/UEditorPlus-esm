@@ -1,12 +1,20 @@
+import utils from "../core/utils.js";
+import Stateful from "./stateful.js";
+import uiUtils from "./uiutils.js";
+import UIBase from "./uibase.js";
+
+
 ///import core
 ///import uicore
+var UE_ui_PastePicker;
 (function () {
-    var utils = baidu.editor.utils,
-        Stateful = baidu.editor.ui.Stateful,
-        uiUtils = baidu.editor.ui.uiUtils,
-        UIBase = baidu.editor.ui.UIBase;
+//     var utils = baidu.editor.utils,
+//         Stateful = baidu.editor.ui.Stateful,
+//         uiUtils = baidu.editor.ui.uiUtils,
+//         UIBase = baidu.editor.ui.UIBase;
 
-    var PastePicker = (baidu.editor.ui.PastePicker = function (options) {
+//     var PastePicker = (baidu.editor.ui.PastePicker = function (options) {
+	var PastePicker = (UE_ui_PastePicker = function (options) {
         this.initOptions(options);
         this.initPastePicker();
     });
@@ -69,3 +77,5 @@
     utils.inherits(PastePicker, UIBase);
     utils.extend(PastePicker.prototype, Stateful, true);
 })();
+
+export default UE_ui_PastePicker;

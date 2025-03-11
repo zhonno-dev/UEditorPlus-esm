@@ -1,15 +1,22 @@
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
+import UIBase from "./uibase.js";
+import uiUtils from "./uiutils.js";
+
+var UE_ui_ShortCutMenu;
 (function () {
-    var UI = baidu.editor.ui,
-        UIBase = UI.UIBase,
-        uiUtils = UI.uiUtils,
-        utils = baidu.editor.utils,
-        domUtils = baidu.editor.dom.domUtils;
+//     var UI = baidu.editor.ui,
+//         UIBase = UI.UIBase,
+//         uiUtils = UI.uiUtils,
+//         utils = baidu.editor.utils,
+//         domUtils = baidu.editor.dom.domUtils;
 
     var allMenus = [], //存储所有快捷菜单
         timeID,
         isSubMenuShow = false; //是否有子pop显示
 
-    var ShortCutMenu = (UI.ShortCutMenu = function (options) {
+//     var ShortCutMenu = (UI.ShortCutMenu = function (options) {
+	var ShortCutMenu = (UE_ui_ShortCutMenu = function (options) {
         this.initOptions(options);
         this.initShortCutMenu();
     });
@@ -256,3 +263,5 @@
         hideAllMenu(e);
     });
 })();
+
+export default UE_ui_ShortCutMenu;

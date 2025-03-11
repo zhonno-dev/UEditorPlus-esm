@@ -1,10 +1,17 @@
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
+import UIBase from "./uibase.js";
+
 ///import core
 ///import uicore
+var UE_ui_Message;
 (function () {
-    var utils = baidu.editor.utils,
-        domUtils = baidu.editor.dom.domUtils,
-        UIBase = baidu.editor.ui.UIBase,
-        Message = (baidu.editor.ui.Message = function (options) {
+	// var utils = baidu.editor.utils,
+	// 	domUtils = baidu.editor.dom.domUtils,
+	// 	UIBase = baidu.editor.ui.UIBase;
+	
+        // Message = (baidu.editor.ui.Message = function (options) {
+		var Message = (UE_ui_Message = function (options) {
             this.initOptions(options);
             this.initMessage();
         });
@@ -80,3 +87,5 @@
 
     utils.inherits(Message, UIBase);
 })();
+
+export default UE_ui_Message;

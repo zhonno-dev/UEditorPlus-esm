@@ -1,17 +1,24 @@
+import utils from "../core/utils.js";
+import Popup from "./popup.js";
+import Stateful from "./stateful.js";
+import UIBase from "./uibase.js";
+
 ///import core
 ///import uicore
+var UE_ui_CellAlignPicker;
 (function () {
-    var utils = baidu.editor.utils,
-        Popup = baidu.editor.ui.Popup,
-        Stateful = baidu.editor.ui.Stateful,
-        UIBase = baidu.editor.ui.UIBase;
+//     var utils = baidu.editor.utils,
+//         Popup = baidu.editor.ui.Popup,
+//         Stateful = baidu.editor.ui.Stateful,
+//         UIBase = baidu.editor.ui.UIBase;
 
     /**
      * 该参数将新增一个参数： selected， 参数类型为一个Object， 形如{ 'align': 'center', 'valign': 'top' }， 表示单元格的初始
      * 对齐状态为： 竖直居上，水平居中; 其中 align的取值为：'center', 'left', 'right'; valign的取值为: 'top', 'middle', 'bottom'
      * @update 2013/4/2 hancong03@baidu.com
      */
-    var CellAlignPicker = (baidu.editor.ui.CellAlignPicker = function (options) {
+//     var CellAlignPicker = (baidu.editor.ui.CellAlignPicker = function (options) {
+	var CellAlignPicker = (UE_ui_CellAlignPicker = function (options) {
         this.initOptions(options);
         this.initSelected();
         this.initCellAlignPicker();
@@ -97,3 +104,5 @@
     utils.inherits(CellAlignPicker, UIBase);
     utils.extend(CellAlignPicker.prototype, Stateful, true);
 })();
+
+export default UE_ui_CellAlignPicker;

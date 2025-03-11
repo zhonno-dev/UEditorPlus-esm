@@ -1,11 +1,17 @@
+import utils from "../core/utils.js";
+import uiUtils from "./uiutils.js";
+import UIBase from "./uibase.js";
+
 ///import core
 ///import uicore
+var UE_ui_TablePicker;
 (function () {
-    var utils = baidu.editor.utils,
-        uiUtils = baidu.editor.ui.uiUtils,
-        UIBase = baidu.editor.ui.UIBase;
+//     var utils = baidu.editor.utils,
+//         uiUtils = baidu.editor.ui.uiUtils,
+//         UIBase = baidu.editor.ui.UIBase;
 
-    var TablePicker = (baidu.editor.ui.TablePicker = function (options) {
+//     var TablePicker = (baidu.editor.ui.TablePicker = function (options) {
+	var TablePicker = (UE_ui_TablePicker = function (options) {
         this.initOptions(options);
         this.initTablePicker();
     });
@@ -100,3 +106,5 @@
     };
     utils.inherits(TablePicker, UIBase);
 })();
+
+export default UE_ui_TablePicker;

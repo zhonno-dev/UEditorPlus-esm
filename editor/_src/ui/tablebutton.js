@@ -1,14 +1,22 @@
+import utils from "../core/utils.js";
+import Popup from "./popup.js";
+import TablePicker from "./tablepicker.js";
+import SplitButton from "./splitbutton.js";
+
 ///import core
 ///import uicore
 ///import ui/popup.js
 ///import ui/tablepicker.js
 ///import ui/splitbutton.js
+var UE_ui_TableButton;
 (function () {
-    var utils = baidu.editor.utils,
-        Popup = baidu.editor.ui.Popup,
-        TablePicker = baidu.editor.ui.TablePicker,
-        SplitButton = baidu.editor.ui.SplitButton,
-        TableButton = (baidu.editor.ui.TableButton = function (options) {
+	// var utils = baidu.editor.utils,
+	// 	Popup = baidu.editor.ui.Popup,
+	// 	TablePicker = baidu.editor.ui.TablePicker,
+	// 	SplitButton = baidu.editor.ui.SplitButton;
+	
+        // var TableButton = (baidu.editor.ui.TableButton = function (options) {
+		var TableButton = (UE_ui_TableButton = function (options) {
             this.initOptions(options);
             this.initTableButton();
         });
@@ -34,3 +42,5 @@
     };
     utils.inherits(TableButton, SplitButton);
 })();
+
+export default UE_ui_TableButton;

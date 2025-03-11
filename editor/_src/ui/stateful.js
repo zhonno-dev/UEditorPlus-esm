@@ -1,7 +1,12 @@
+import browser from "../core/browser.js";
+import { domUtils } from "../core/domUtils.js";
+import uiUtils from "./uiutils.js";
+
+var UE_ui_Stateful;
 (function () {
-    var browser = baidu.editor.browser,
-        domUtils = baidu.editor.dom.domUtils,
-        uiUtils = baidu.editor.ui.uiUtils;
+//     var browser = baidu.editor.browser,
+//         domUtils = baidu.editor.dom.domUtils,
+//         uiUtils = baidu.editor.ui.uiUtils;
 
     var TPL_STATEFUL =
         'onmousedown="$$.Stateful_onMouseDown(event, this);"' +
@@ -12,7 +17,8 @@
             : ' onmouseover="$$.Stateful_onMouseOver(event, this);"' +
             ' onmouseout="$$.Stateful_onMouseOut(event, this);"');
 
-    baidu.editor.ui.Stateful = {
+//     baidu.editor.ui.Stateful = {
+	UE_ui_Stateful = {
         alwalysHoverable: false,
         target: null, //目标元素和this指向dom不一样
         Stateful_init: function () {
@@ -108,3 +114,5 @@
         }
     };
 })();
+
+export default UE_ui_Stateful;

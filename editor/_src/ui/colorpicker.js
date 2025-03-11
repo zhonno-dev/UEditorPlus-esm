@@ -1,9 +1,15 @@
+import utils from "../core/utils.js";
+import UIBase from "./uibase.js";
+
 ///import core
 ///import uicore
+
+var UE_ui_ColorPicker;
 (function () {
-    var utils = baidu.editor.utils,
-        UIBase = baidu.editor.ui.UIBase,
-        ColorPicker = (baidu.editor.ui.ColorPicker = function (options) {
+	// var utils = baidu.editor.utils,
+	// 	UIBase = baidu.editor.ui.UIBase;
+        // var ColorPicker = (baidu.editor.ui.ColorPicker = function (options) {
+	var ColorPicker = (UE_ui_ColorPicker = function (options) {
             this.initOptions(options);
             this.noColorText = this.noColorText || this.editor.getLang("clearColor");
             this.initUIBase();
@@ -100,3 +106,5 @@
         return html;
     }
 })();
+
+export default UE_ui_ColorPicker;

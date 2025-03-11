@@ -1,11 +1,19 @@
+import utils from "../core/utils.js";
+import Popup from "./popup.js";
+import SplitButton from "./splitbutton.js";
+
+
 ///import core
 ///import uicore
 ///commands 表情
+var UE_ui_MultiMenuPop;
 (function () {
-    var utils = baidu.editor.utils,
-        Popup = baidu.editor.ui.Popup,
-        SplitButton = baidu.editor.ui.SplitButton,
-        MultiMenuPop = (baidu.editor.ui.MultiMenuPop = function (options) {
+	// var utils = baidu.editor.utils,
+	// 	Popup = baidu.editor.ui.Popup,
+	// 	SplitButton = baidu.editor.ui.SplitButton;
+	
+//        var MultiMenuPop = (baidu.editor.ui.MultiMenuPop = function (options) {
+	var MultiMenuPop = (UE_ui_MultiMenuPop = function (options) {
             this.initOptions(options);
             this.initMultiMenu();
         });
@@ -43,3 +51,5 @@
 
     utils.inherits(MultiMenuPop, SplitButton);
 })();
+
+export default UE_ui_MultiMenuPop;

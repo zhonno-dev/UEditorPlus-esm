@@ -1,11 +1,18 @@
+import utils from "../core/utils.js";
+import UIBase from "./uibase.js";
+import Stateful from "./stateful.js";
+
 ///import core
 ///import uicore
 ///import ui/stateful.js
+var UE_ui_Button;
 (function () {
-    var utils = baidu.editor.utils,
-        UIBase = baidu.editor.ui.UIBase,
-        Stateful = baidu.editor.ui.Stateful,
-        Button = (baidu.editor.ui.Button = function (options) {
+	// var utils = baidu.editor.utils,
+	// 	UIBase = baidu.editor.ui.UIBase,
+	// 	Stateful = baidu.editor.ui.Stateful;
+	
+        // var Button = (baidu.editor.ui.Button = function (options) {
+	var Button = (UE_ui_Button = function (options) {
             if (options.name) {
                 var btnName = options.name;
                 var cssRules = options.cssRules;
@@ -78,3 +85,5 @@
     utils.inherits(Button, UIBase);
     utils.extend(Button.prototype, Stateful);
 })();
+
+export default UE_ui_Button;

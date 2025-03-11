@@ -1,15 +1,24 @@
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
+import Mask from "./mask.js";
+import UIBase from "./uibase.js";
+import Button from "./button.js";
+
 ///import core
 ///import uicore
 ///import ui/mask.js
 ///import ui/button.js
+var UE_ui_Dialog;
 (function () {
-    var utils = baidu.editor.utils,
-        domUtils = baidu.editor.dom.domUtils,
-        uiUtils = baidu.editor.ui.uiUtils,
-        Mask = baidu.editor.ui.Mask,
-        UIBase = baidu.editor.ui.UIBase,
-        Button = baidu.editor.ui.Button,
-        Dialog = (baidu.editor.ui.Dialog = function (options) {
+	// var utils = baidu.editor.utils,
+	// 	domUtils = baidu.editor.dom.domUtils,
+	// 	uiUtils = baidu.editor.ui.uiUtils,
+	// 	Mask = baidu.editor.ui.Mask,
+	// 	UIBase = baidu.editor.ui.UIBase,
+	// 	Button = baidu.editor.ui.Button;
+	
+        // var Dialog = (baidu.editor.ui.Dialog = function (options) {
+		var Dialog = (UE_ui_Dialog = function (options) {
             if (options.name) {
                 var name = options.name;
                 var cssRules = options.cssRules;
@@ -486,3 +495,5 @@
     };
     utils.inherits(Dialog, UIBase);
 })();
+
+export default UE_ui_Dialog;

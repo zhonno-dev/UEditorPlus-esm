@@ -1,5 +1,8 @@
 import browser from "../core/browser.js";
 import { domUtils } from "../core/domUtils.js";
+import utils from "../core/utils.js";
+
+var UE_ui_uiUtils;
 
 (function () {
 //     var browser = baidu.editor.browser,
@@ -10,7 +13,8 @@ import { domUtils } from "../core/domUtils.js";
     var uidMagic = "ID" + magic;
     var uidCount = 0;
 
-    var uiUtils = (baidu.editor.ui.uiUtils = {
+//     var uiUtils = (baidu.editor.ui.uiUtils = {
+	var uiUtils = (UE_ui_uiUtils = {
         uid: function (obj) {
             return obj ? obj[uidMagic] || (obj[uidMagic] = ++uidCount) : ++uidCount;
         },
@@ -278,7 +282,10 @@ import { domUtils } from "../core/domUtils.js";
         domUtils.on(
             window,
             "resize",
-            baidu.editor.utils.defer(updateFixedOffset, 0, true)
+        //     baidu.editor.utils.defer(updateFixedOffset, 0, true)
+            utils.defer(updateFixedOffset, 0, true)
         );
     }
 })();
+
+export default UE_ui_uiUtils;

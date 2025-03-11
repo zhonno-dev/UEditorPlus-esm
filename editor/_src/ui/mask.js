@@ -1,12 +1,20 @@
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
+import UIBase from "./uibase.js";
+import uiUtils from "./uiutils.js";
+
+var UE_ui_Mask;
+
 ///import core
 ///import uicore
 (function () {
-    var utils = baidu.editor.utils,
-        domUtils = baidu.editor.dom.domUtils,
-        UIBase = baidu.editor.ui.UIBase,
-        uiUtils = baidu.editor.ui.uiUtils;
+//     var utils = baidu.editor.utils,
+//         domUtils = baidu.editor.dom.domUtils,
+//         UIBase = baidu.editor.ui.UIBase,
+//         uiUtils = baidu.editor.ui.uiUtils;
 
-    var Mask = (baidu.editor.ui.Mask = function (options) {
+//     var Mask = (baidu.editor.ui.Mask = function (options) {
+	var Mask = (UE_ui_Mask = function (options) {
         this.initOptions(options);
         this.initUIBase();
     });
@@ -51,3 +59,5 @@
     };
     utils.inherits(Mask, UIBase);
 })();
+
+export default UE_ui_Mask;

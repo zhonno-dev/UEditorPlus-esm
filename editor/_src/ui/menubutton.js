@@ -1,12 +1,19 @@
+import utils from "../core/utils.js";
+import { UE_ui_Menu as Menu } from "./menu.js";
+import UE_ui_SplitButton from "./splitbutton.js";
+
 ///import core
 ///import uicore
 ///import ui/menu.js
 ///import ui/splitbutton.js
+var UE_ui_MenuButton;
 (function () {
-    var utils = baidu.editor.utils,
-        Menu = baidu.editor.ui.Menu,
-        SplitButton = baidu.editor.ui.SplitButton,
-        MenuButton = (baidu.editor.ui.MenuButton = function (options) {
+	// var utils = baidu.editor.utils,
+	// 	Menu = baidu.editor.ui.Menu,
+	// 	SplitButton = baidu.editor.ui.SplitButton;
+	
+        // var MenuButton = (baidu.editor.ui.MenuButton = function (options) {
+		var MenuButton = (UE_ui_MenuButton = function (options) {
             this.initOptions(options);
             this.initMenuButton();
         });
@@ -37,3 +44,5 @@
     };
     utils.inherits(MenuButton, SplitButton);
 })();
+
+export default UE_ui_MenuButton;

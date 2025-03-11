@@ -1,14 +1,22 @@
+import utils from "../core/utils.js";
+import uiUtils from "./uiutils.js";
+import { UE_ui_Menu as Menu } from "./menu.js";
+import SplitButton from "./splitbutton.js";
+
 ///import core
 ///import uicore
 ///import ui/menu.js
 ///import ui/splitbutton.js
+var UE_ui_Combox;
 (function () {
     // todo: menu和item提成通用list
-    var utils = baidu.editor.utils,
-        uiUtils = baidu.editor.ui.uiUtils,
-        Menu = baidu.editor.ui.Menu,
-        SplitButton = baidu.editor.ui.SplitButton,
-        Combox = (baidu.editor.ui.Combox = function (options) {
+	// var utils = baidu.editor.utils,
+	// 	uiUtils = baidu.editor.ui.uiUtils,
+	// 	Menu = baidu.editor.ui.Menu,
+	// 	SplitButton = baidu.editor.ui.SplitButton;
+	
+        // var Combox = (baidu.editor.ui.Combox = function (options) {
+		var Combox = (UE_ui_Combox = function (options) {
             this.initOptions(options);
             this.initCombox();
         });
@@ -97,3 +105,5 @@
     };
     utils.inherits(Combox, SplitButton);
 })();
+
+export default UE_ui_Combox;

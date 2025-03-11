@@ -1,10 +1,15 @@
+import utils from "../core/utils.js";
+import UIBase from "./uibase.js";
+
 ///import core
 ///import uicore
+var UE_ui_AutoTypeSetPicker;
 (function () {
-    var utils = baidu.editor.utils,
-        UIBase = baidu.editor.ui.UIBase;
+//     var utils = baidu.editor.utils,
+//         UIBase = baidu.editor.ui.UIBase;
 
-    var AutoTypeSetPicker = (baidu.editor.ui.AutoTypeSetPicker = function (
+//     var AutoTypeSetPicker = (baidu.editor.ui.AutoTypeSetPicker = function (
+	var AutoTypeSetPicker = (UE_ui_AutoTypeSetPicker = function (
         options
     ) {
         this.initOptions(options);
@@ -168,3 +173,5 @@
     };
     utils.inherits(AutoTypeSetPicker, UIBase);
 })();
+
+export default UE_ui_AutoTypeSetPicker;

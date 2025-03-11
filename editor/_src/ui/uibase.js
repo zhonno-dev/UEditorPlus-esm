@@ -1,8 +1,15 @@
+import utils from "../core/utils.js";
+import uiUtils from "./uiutils.js";
+import { EventBase } from "../core/EventBase.js";
+
+var UE_ui_UIBase;
+
 (function () {
-    var utils = baidu.editor.utils,
-        uiUtils = baidu.editor.ui.uiUtils,
-        EventBase = baidu.editor.EventBase,
-        UIBase = (baidu.editor.ui.UIBase = function () {
+	// var utils = baidu.editor.utils,
+	// 	uiUtils = baidu.editor.ui.uiUtils,
+	// 	EventBase = baidu.editor.EventBase;
+        // var UIBase = (baidu.editor.ui.UIBase = function () {
+		var UIBase = (UE_ui_UIBase = function () {
         });
 
     UIBase.prototype = {
@@ -102,3 +109,5 @@
     };
     utils.inherits(UIBase, EventBase);
 })();
+
+export default UE_ui_UIBase;

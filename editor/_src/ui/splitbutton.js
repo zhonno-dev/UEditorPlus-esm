@@ -1,13 +1,22 @@
+import utils from "../core/utils.js";
+import uiUtils from "./uiutils.js";
+import { domUtils } from "../core/domUtils.js";
+import UIBase from "./uibase.js";
+import Stateful from "./stateful.js";
+
 ///import core
 ///import uicore
 ///import ui/stateful.js
+var UE_ui_SplitButton;
 (function () {
-    var utils = baidu.editor.utils,
-        uiUtils = baidu.editor.ui.uiUtils,
-        domUtils = baidu.editor.dom.domUtils,
-        UIBase = baidu.editor.ui.UIBase,
-        Stateful = baidu.editor.ui.Stateful,
-        SplitButton = (baidu.editor.ui.SplitButton = function (options) {
+	// var utils = baidu.editor.utils,
+	// 	uiUtils = baidu.editor.ui.uiUtils,
+	// 	domUtils = baidu.editor.dom.domUtils,
+	// 	UIBase = baidu.editor.ui.UIBase,
+	// 	Stateful = baidu.editor.ui.Stateful;
+	
+        // var SplitButton = (baidu.editor.ui.SplitButton = function (options) {
+		var SplitButton = (UE_ui_SplitButton = function (options) {
             this.initOptions(options);
             this.initSplitButton();
         });
@@ -97,3 +106,5 @@
     utils.inherits(SplitButton, UIBase);
     utils.extend(SplitButton.prototype, Stateful, true);
 })();
+
+export default UE_ui_SplitButton;

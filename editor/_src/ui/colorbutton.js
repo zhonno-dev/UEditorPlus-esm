@@ -1,15 +1,24 @@
+import utils from "../core/utils.js";
+import uiUtils from "./uiutils.js";
+import ColorPicker from "./colorpicker.js";
+import Popup from "./popup.js";
+import SplitButton from "./splitbutton.js";
+
 ///import core
 ///import uicore
 ///import ui/colorpicker.js
 ///import ui/popup.js
 ///import ui/splitbutton.js
+var UE_ui_ColorButton;
 (function () {
-    var utils = baidu.editor.utils,
-        uiUtils = baidu.editor.ui.uiUtils,
-        ColorPicker = baidu.editor.ui.ColorPicker,
-        Popup = baidu.editor.ui.Popup,
-        SplitButton = baidu.editor.ui.SplitButton,
-        ColorButton = (baidu.editor.ui.ColorButton = function (options) {
+	// var utils = baidu.editor.utils,
+	// 	uiUtils = baidu.editor.ui.uiUtils,
+	// 	ColorPicker = baidu.editor.ui.ColorPicker,
+	// 	Popup = baidu.editor.ui.Popup,
+	// 	SplitButton = baidu.editor.ui.SplitButton;
+	
+        // var ColorButton = (baidu.editor.ui.ColorButton = function (options) {
+		var ColorButton = (UE_ui_ColorButton = function (options) {
             this.initOptions(options);
             this.initColorButton();
         });
@@ -59,3 +68,5 @@
     };
     utils.inherits(ColorButton, SplitButton);
 })();
+
+export default UE_ui_ColorButton;

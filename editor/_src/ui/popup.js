@@ -1,11 +1,20 @@
+import utils from "../core/utils.js";
+import uiUtils from "./uiutils.js";
+import { domUtils } from "../core/domUtils.js";
+import UIBase from "./uibase.js";
+
+var UE_ui_Popup;
+
 ///import core
 ///import uicore
 (function () {
-    var utils = baidu.editor.utils,
-        uiUtils = baidu.editor.ui.uiUtils,
-        domUtils = baidu.editor.dom.domUtils,
-        UIBase = baidu.editor.ui.UIBase,
-        Popup = (baidu.editor.ui.Popup = function (options) {
+	// var utils = baidu.editor.utils,
+	// 	uiUtils = baidu.editor.ui.uiUtils,
+	// 	domUtils = baidu.editor.dom.domUtils,
+	// 	UIBase = baidu.editor.ui.UIBase;
+	
+        // var Popup = (baidu.editor.ui.Popup = function (options) {
+		var Popup = (UE_ui_Popup = function (options) {
             this.initOptions(options);
             this.initPopup();
         });
@@ -265,3 +274,5 @@
         closeAllPopup(evt, el);
     });
 })();
+
+export default UE_ui_Popup;

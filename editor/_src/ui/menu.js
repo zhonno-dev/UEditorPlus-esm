@@ -1,16 +1,28 @@
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
+import uiUtils from "./uiutils.js";
+import UIBase from "./uibase.js";
+import Popup from "./popup.js";
+import Stateful from "./stateful.js";
+import CellAlignPicker from "./cellalignpicker.js";
+
 ///import core
 ///import uicore
 ///import ui\popup.js
 ///import ui\stateful.js
+var UE_ui_Menu;
+var UE_ui_MenuItem;
 (function () {
-    var utils = baidu.editor.utils,
-        domUtils = baidu.editor.dom.domUtils,
-        uiUtils = baidu.editor.ui.uiUtils,
-        UIBase = baidu.editor.ui.UIBase,
-        Popup = baidu.editor.ui.Popup,
-        Stateful = baidu.editor.ui.Stateful,
-        CellAlignPicker = baidu.editor.ui.CellAlignPicker,
-        Menu = (baidu.editor.ui.Menu = function (options) {
+	// var utils = baidu.editor.utils,
+	// 	domUtils = baidu.editor.dom.domUtils,
+	// 	uiUtils = baidu.editor.ui.uiUtils,
+	// 	UIBase = baidu.editor.ui.UIBase,
+	// 	Popup = baidu.editor.ui.Popup,
+	// 	Stateful = baidu.editor.ui.Stateful,
+	// 	CellAlignPicker = baidu.editor.ui.CellAlignPicker;
+	
+        // Menu = (baidu.editor.ui.Menu = function (options) {
+		var Menu = (UE_ui_Menu = function (options) {
             this.initOptions(options);
             this.initMenu();
         });
@@ -123,7 +135,9 @@
      * @update 2013/04/03 hancong03 新增一个参数menu, 该参数存储了menuItem所对应的menu引用
      * @type {Function}
      */
-    var MenuItem = (baidu.editor.ui.MenuItem = function (options) {
+    
+//     var MenuItem = (baidu.editor.ui.MenuItem = function (options) {
+	var MenuItem = (UE_ui_MenuItem = function (options) {
         this.initOptions(options);
         this.initUIBase();
         this.Stateful_init();
@@ -279,3 +293,5 @@
     utils.inherits(MenuItem, UIBase);
     utils.extend(MenuItem.prototype, Stateful, true);
 })();
+
+export { UE_ui_Menu, UE_ui_MenuItem };

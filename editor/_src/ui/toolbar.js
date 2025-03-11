@@ -1,8 +1,15 @@
+import utils from "../core/utils.js";
+import uiUtils from "./uiutils.js";
+import UIBase from "./uibase.js";
+
+var UE_ui_Toolbar;
 (function () {
-    var utils = baidu.editor.utils,
-        uiUtils = baidu.editor.ui.uiUtils,
-        UIBase = baidu.editor.ui.UIBase,
-        Toolbar = (baidu.editor.ui.Toolbar = function (options) {
+	// var utils = baidu.editor.utils,
+	// 	uiUtils = baidu.editor.ui.uiUtils,
+	// 	UIBase = baidu.editor.ui.UIBase;
+	
+        // var Toolbar = (baidu.editor.ui.Toolbar = function (options) {
+		var Toolbar = (UE_ui_Toolbar = function (options) {
             this.initOptions(options);
             this.initToolbar();
         });
@@ -47,3 +54,5 @@
     };
     utils.inherits(Toolbar, UIBase);
 })();
+
+export default UE_ui_Toolbar;

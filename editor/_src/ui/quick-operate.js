@@ -1,16 +1,27 @@
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
+import uiUtils from "./uiutils.js";
+import UIBase from "./uibase.js";
+import Popup from "./popup.js";
+import Stateful from "./stateful.js";
+import CellAlignPicker from "./cellalignpicker.js";
+
 ///import core
 ///import uicore
 ///import ui\popup.js
 ///import ui\stateful.js
+var UE_ui_QuickOperate;
 (function () {
-    var utils = baidu.editor.utils,
-        domUtils = baidu.editor.dom.domUtils,
-        uiUtils = baidu.editor.ui.uiUtils,
-        UIBase = baidu.editor.ui.UIBase,
-        Popup = baidu.editor.ui.Popup,
-        Stateful = baidu.editor.ui.Stateful,
-        CellAlignPicker = baidu.editor.ui.CellAlignPicker,
-        QuickOperate = (baidu.editor.ui.QuickOperate = function (options) {
+	// var utils = baidu.editor.utils,
+	// 	domUtils = baidu.editor.dom.domUtils,
+	// 	uiUtils = baidu.editor.ui.uiUtils,
+	// 	UIBase = baidu.editor.ui.UIBase,
+	// 	Popup = baidu.editor.ui.Popup,
+	// 	Stateful = baidu.editor.ui.Stateful;
+	// CellAlignPicker = baidu.editor.ui.CellAlignPicker;
+
+        // var QuickOperate = (baidu.editor.ui.QuickOperate = function (options) {
+		var QuickOperate = (UE_ui_QuickOperate = function (options) {
             this.initOptions(options);
             // this.initMenu();
         });
@@ -291,3 +302,5 @@
     // utils.inherits(MenuItem, UIBase);
     // utils.extend(MenuItem.prototype, Stateful, true);
 })();
+
+export default UE_ui_QuickOperate;

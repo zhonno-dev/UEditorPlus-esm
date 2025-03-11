@@ -1,14 +1,22 @@
+import utils from "../core/utils.js";
+import Popup from "./popup.js";
+import AutoTypeSetPicker from "./autotypesetpicker.js";
+import SplitButton from "./splitbutton.js";
+
 ///import core
 ///import uicore
 ///import ui/popup.js
 ///import ui/autotypesetpicker.js
 ///import ui/splitbutton.js
+var UE_ui_AutoTypeSetButton;
 (function () {
-    var utils = baidu.editor.utils,
-        Popup = baidu.editor.ui.Popup,
-        AutoTypeSetPicker = baidu.editor.ui.AutoTypeSetPicker,
-        SplitButton = baidu.editor.ui.SplitButton,
-        AutoTypeSetButton = (baidu.editor.ui.AutoTypeSetButton = function (options) {
+	// var utils = baidu.editor.utils,
+	// 	Popup = baidu.editor.ui.Popup,
+	// 	AutoTypeSetPicker = baidu.editor.ui.AutoTypeSetPicker,
+	// 	SplitButton = baidu.editor.ui.SplitButton;
+	
+        // var AutoTypeSetButton = (baidu.editor.ui.AutoTypeSetButton = function (options) {
+		var AutoTypeSetButton = (UE_ui_AutoTypeSetButton = function (options) {
             this.initOptions(options);
             this.initAutoTypeSetButton();
         });
@@ -149,3 +157,5 @@
     };
     utils.inherits(AutoTypeSetButton, SplitButton);
 })();
+
+export default UE_ui_AutoTypeSetButton;
