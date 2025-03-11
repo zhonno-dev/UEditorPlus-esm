@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态导入示例</title>
+</head>
+<body>
+    <script type="module">
+		console.log('begin');
+		// 使用动态导入加载 esm.js 模块
+		if (0) {
+			import('./esm.js')
+				.then(module => {
+					// 调用导入模块的默认导出函数
+					module.default();
+				})
+				.catch(error => {
+					// 处理导入错误
+					console.error('导入模块时出错:', error);
+				});
+		}
+		
+		// 使用 await 动态导入 esm.js 模块
+		if (1) {
+			const module = await import('./esm.js');
+			console.log(module);
+			// 调用导入模块的默认导出函数
+			module.default();
+		}
+		
+		console.log('end');
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Vue Component</title>
+    <!-- 引入 Vue 3 CDN -->
+    <script src="../UEditorPlus/third-party/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 使用自定义组件 -->
+        <vue-comp prop_name="123">
+			<p>插槽中的内容1</p>
+			<p>插槽中的内容2</p>
+			<p>插槽中的内容3</p>
+		</vue-comp>
+    </div>
+
+    <!-- 引入自定义组件 -->
+    <script type="module">
+        // import vueComp from './vueComp.js';
+
+        // 创建 Vue 应用实例
+        const { createApp, defineAsyncComponent } = Vue;
+
+        const app = createApp({
+            components: {
+                vueComp: defineAsyncComponent(() => import('./vueComp.js'))
+            }
+        });
+
+        // 挂载应用实例
+        app.mount('#app');
+    </script>
+</body>
+</html>

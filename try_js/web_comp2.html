@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Components 示例</title>
+    <script>
+        // 定义一个自定义元素类
+        class MyCustomElement extends HTMLElement {
+            constructor() {
+                super();
+                // 创建一个 shadow DOM
+                const shadow = this.attachShadow({ mode: 'open' });
+				let p;
+                // 创建一个段落元素
+                p = document.createElement('div');
+                p.textContent = '这是一个自定义的 Web Component!';
+                // 将段落元素添加到 shadow DOM 中
+                shadow.appendChild(p);
+                // 创建一个段落元素
+                p = document.createElement('div');
+                p.textContent = '这是一个自定义的 Web Component!';
+                // 将段落元素添加到 shadow DOM 中
+                shadow.appendChild(p);
+                // 创建一个段落元素
+                p = document.createElement('div');
+                p.textContent = '这是一个自定义的 Web Component!';
+                // 将段落元素添加到 shadow DOM 中
+                shadow.appendChild(p);
+                // 创建一个段落元素
+                p = document.createElement('div');
+                p.textContent = '这是一个自定义的 Web Component!';
+                // 将段落元素添加到 shadow DOM 中
+                shadow.appendChild(p);
+            }
+        }
+
+        // 定义自定义元素
+        customElements.define('my-custom-element', MyCustomElement);
+
+        // 在页面加载完成后，将 Shadow DOM 内容克隆到主文档
+        window.addEventListener('load', () => {
+            // 查询文档中所有的 <my-custom-element> 元素
+            const customElements = document.querySelectorAll('my-custom-element');
+            // 遍历每个找到的自定义元素
+            customElements.forEach((element) => {
+                // 获取当前元素的 Shadow DOM 根节点
+                const shadowRoot = element.shadowRoot;
+                // 如果当前元素有 Shadow DOM
+                if (shadowRoot) {
+                    // 创建一个新的 <div> 元素作为 Shadow DOM 内容的包装器
+                    const wrapper = document.createElement('div');
+                    // 为新创建的 <div> 设置自定义属性，用于标识它包裹了 Shadow DOM 的克隆内容
+                    wrapper.setAttribute('data-shadow-clone', '');
+                    // 直接克隆 ShadowRoot 内的子节点
+                    shadowRoot.childNodes.forEach((child) => {
+                        // 深度克隆当前子节点，包括其所有子节点
+                        const clone = child.cloneNode(true);
+                        // 将克隆的子节点添加到包装器中
+                        wrapper.appendChild(clone);
+                    });
+                    // 将包装器插入到当前自定义元素之后
+                    element.after(wrapper);
+                    // 隐藏原始的自定义元素
+                    element.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- 使用自定义元素 -->
+    <my-custom-element></my-custom-element>
+</body>
+</html>

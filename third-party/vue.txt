@@ -1,0 +1,5 @@
+Vue文件说明：
+版本：v3.5.13
+
+vue3.js = vue.global.js
+vue3.esm.js = vue.esm-browser.js

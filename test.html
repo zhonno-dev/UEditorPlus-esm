@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test.html</title>
+
+<script>
+//test.html中声明的全局变量
+var test_global = {
+	testHtml: 'test.html',
+}
+</script>
+
+<!-- <script src="../../../lib.public/site/init.js"></script> -->
+<script src="../demo/lib.public/gbase/gbase.js"></script>
+<script src="./import().js"></script>
+
+<style>
+html,body{height:100%;}
+</style>
+
+	<!--加载渲染功能-->
+	<!-- <script type="text/javascript" charset="utf-8" src="../../../lib.public/front/ueditor/ueditor/ueditor.parse.js"></script> -->
+  </head>
+<body>
+
+<button onclick="console.log(test_global)">log(test_global)</button>
+
+<div id="app" style="height:calc(100% - 10px);">
+	<editor></editor>
+
+</div>
+
+<script type="module">
+// document.title = '123'; //修改页面 标题|title
+import * as Vue from './UEditorPlus/third-party/vue.esm.js';
+// console.log(Vue);
+window.Vue = Vue;
+
+//创建Vue实例
+const app = Vue.createApp({
+	props: { //定义参数
+		/** 参数说明 */
+		// prop_name: { default: 0 },
+	},
+	emits: [ //定义事件
+		// 'theme_input' //事件:xxx  回调参数说明()
+	],
+	components: { //定义会用到的组件
+		//代码规范：使用 Vue.defineAsyncComponent() 引用其它Vue3组件
+		editor: Vue.defineAsyncComponent(() => import('./ueditorplus.vue.js')),
+
+	},
+	setup($props, { attrs: $attrs, slots: $slots, emit: $emit, expose }) { //组合式代码
+		const sr = {}; //返回值(sr=setup return)
+		const $refs = {}; //存放模板引用：$refs.xxx = Vue.useTemplateRef('domRef');
+
+		
+		return sr;
+	},
+	data() {
+		return {
+			FILE: import.meta.url,
+		};
+	},
+});
+
+	//挂载
+	app.mount('#app');
+</script>
+
+
+</body>
+</html>

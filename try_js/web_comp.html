@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Components 示例</title>
+    <script>
+        // 定义一个自定义元素类
+        class MyCustomElement extends HTMLElement {
+            constructor() {
+                super();
+                // 创建一个 shadow DOM
+                const shadow = this.attachShadow({ mode: 'open' });
+                // 创建一个段落元素
+				let p;
+                p = document.createElement('p');
+                p.textContent = '这是一个自定义的 Web Component!';
+                // 将段落元素添加到 shadow DOM 中
+                shadow.appendChild(p);
+                // 创建一个段落元素
+                p = document.createElement('p');
+                p.textContent = '这是一个自定义的 Web Component!';
+                // 将段落元素添加到 shadow DOM 中
+                shadow.appendChild(p);
+                // 创建一个段落元素
+                 p = document.createElement('p');
+                p.textContent = '这是一个自定义的 Web Component!';
+                // 将段落元素添加到 shadow DOM 中
+                shadow.appendChild(p);
+                // 创建一个段落元素
+                 p = document.createElement('p');
+                p.textContent = '这是一个自定义的 Web Component!';
+                // 将段落元素添加到 shadow DOM 中
+                shadow.appendChild(p);
+            }
+        }
+
+        // 定义自定义元素
+        customElements.define('my-custom-element', MyCustomElement);
+    </script>
+</head>
+<body>
+	<div id="theDiv">
+		<!-- 使用自定义元素 -->
+		<my-custom-element></my-custom-element>
+	</div>
+	<div>
+		<button onclick="getHtml()">getHtml</button>
+	</div>
+    <script>
+	//获取 #theDiv 的HTML内容
+	function getHtml() {
+		var theDiv = document.getElementById("theDiv");
+		var theDivHTML = theDiv.innerHTML;
+		//获取到的是自定义标签<my-custom-element>
+		console.log(theDivHTML);
+	}
+	
+	
+	</script>
+</body>
+</html>

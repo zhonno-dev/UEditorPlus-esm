@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESM Example</title>
+</head>
+<body>
+    <script type="module">
+		/* 
+		  global.js  global_plugins.js 这两个文件用JS的iife模式（即默认模式）加载时， global_plugins.js 中的插件函数可以借助全局变量myApp追加，并保持追加后的状态。
+如果把这两文件都改成 esm 模式（但依然需要拆分为两个js文件），如何保持iife模式时的效果呢？​并且我希望改为esm模式后，也是先import global.js 后再import global_plugins.js 并让 global_plugins.js 中的插件扩展函数可以追加入 global.js 中并持续保持。
+		 */
+
+		 /* 
+		//import 的对象其实是【单例模式】
+        import { myApp } from './global.esm.js';
+        import './global_plugins.esm.js';
+
+        // 现在可以使用 myApp 对象及其插件
+        myApp.plugins.demo();  // 输出: 功能插件示例
+        myApp.plugins.plugin1();  // 输出: 向 myApp 追加功能插件
+		  */
+
+		/* 
+		//原来是可以直接import一个没有export的js脚本的，能直接执行，这个js脚本也能读写window.*全局变量
+		import './global.js';
+		import './global_plugins.js';
+		console.log(myApp);
+		 */
+
+		//用 import() 导入与上方效果相同，一样可以挂载到 myApp.plugins 里面
+        import { myApp } from './global.esm.js';
+
+		function import_plugin() {
+			import('./global_plugins.esm.js').then(import_callback);
+		}
+
+		function import_callback() {
+			myApp.plugins.demo();  // 输出: 功能插件示例
+        	myApp.plugins.plugin1();  // 输出: 向 myApp 追加功能插件
+		}
+
+		import_plugin();
+
+    </script>
+
+</body>
+</html>
