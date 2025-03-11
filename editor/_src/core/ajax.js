@@ -7,7 +7,7 @@ import utils from "./utils.js";
  * @since 1.2.6.1
  */
 
-ajax = (function () {
+const ajax = (function () {
     //创建一个ajaxRequest对象
     var fnStr = "XMLHttpRequest()";
     try {

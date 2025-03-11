@@ -1,3 +1,5 @@
+import utils from "./utils.js";
+
 /**
  * Created with JetBrains PhpStorm.
  * User: campaign
@@ -5,7 +7,7 @@
  * Time: 6:15 PM
  * To change this template use File | Settings | File Templates.
  */
-plugin = (function () {
+const plugin = (function () {
     var _plugins = {};
     return {
         register: function (pluginName, fn, oldOptionName, afterDisabled) {

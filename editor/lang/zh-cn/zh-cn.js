@@ -1,3 +1,5 @@
+import UE from "../../_src/UE.js";
+
 /**
  * Created with JetBrains PhpStorm.
  * User: taoqili

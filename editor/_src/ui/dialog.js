@@ -3,6 +3,7 @@ import { domUtils } from "../core/domUtils.js";
 import Mask from "./mask.js";
 import UIBase from "./uibase.js";
 import Button from "./button.js";
+import uiUtils from "./uiutils.js";
 
 ///import core
 ///import uicore
@@ -430,7 +431,7 @@ var UE_ui_Dialog;
                     this.editor.container.style.zIndex * 1 + 10);
                 this._hidden = false;
                 this.fireEvent("show");
-                baidu.editor.ui.uiUtils.getFixedLayer().style.zIndex =
+                uiUtils.getFixedLayer().style.zIndex =
                     this.getDom().style.zIndex - 4;
             }
         },

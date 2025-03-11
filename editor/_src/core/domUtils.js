@@ -1,6 +1,7 @@
 import dtd from "./dtd.js";
 import utils from "./utils.js";
 import browser from "./browser.js";
+const {ie, webkit, gecko, opera} = browser;
 
 /**
  * Dom操作工具包
@@ -8,7 +9,7 @@ import browser from "./browser.js";
  * @module UE.dom.domUtils
  * @since 1.2.6.1
  */
-const domUtils = {};
+var domUtils = {};
 
 function getDomNode(node, start, ltr, startFromChild, fn, guard) {
     var tmpNode = startFromChild && node[start],

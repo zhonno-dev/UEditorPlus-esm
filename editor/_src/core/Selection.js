@@ -1,7 +1,7 @@
 import domRange from "./Range.js";
-import domUtils from "./utils/domUtils.js";
+import { domUtils } from "./domUtils.js";
 import dtd from "./dtd.js";
-
+import browser from "./browser.js";
 
 /**
  * 选集

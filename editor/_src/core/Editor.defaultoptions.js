@@ -1,6 +1,6 @@
 //维护编辑器一下默认的不在插件中的配置项
 // UE.Editor.defaultOptions = function (editor) {
-EditorDefaultOptions = function (editor) {
+var EditorDefaultOptions = function (editor) {
     var _url = editor.options.UEDITOR_HOME_URL;
     return {
         isShow: true,

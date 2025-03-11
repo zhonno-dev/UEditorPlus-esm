@@ -1,12 +1,21 @@
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
+import uiUtils from "../ui/uiutils.js";
+import UIBase from "../ui/uibase.js";
+import UE from "../UE.js";
+
 ///import core
 ///commands 全屏
 ///commandsName FullScreen
 ///commandsTitle  全屏
+let baidu = {
+	editor: UE,
+};
 (function () {
-    var utils = baidu.editor.utils,
-        uiUtils = baidu.editor.ui.uiUtils,
-        UIBase = baidu.editor.ui.UIBase,
-        domUtils = baidu.editor.dom.domUtils;
+//     var utils = baidu.editor.utils,
+//         uiUtils = baidu.editor.ui.uiUtils,
+//         UIBase = baidu.editor.ui.UIBase,
+//         domUtils = baidu.editor.dom.domUtils;
     var nodeStack = [];
 
     function EditorUI(options) {
@@ -53,7 +62,8 @@
                 if (editor.options.wordCount) {
                     function countFn() {
                         setCount(editor, me);
-                        domUtils.un(editor.document, "click", arguments.callee);
+                        // domUtils.un(editor.document, "click", arguments.callee);
+                        domUtils.un(editor.document, "click", countFn);
                     }
 
                     domUtils.on(editor.document, "click", countFn);

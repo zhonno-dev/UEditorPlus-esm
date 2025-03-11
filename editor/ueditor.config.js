@@ -1,3 +1,5 @@
+import UE from "./_src/UE.js";
+
 /**
  * ueditor plus 完整配置项
  * 可以在这里配置整个编辑器的特性
@@ -37,7 +39,8 @@
     /**
      * 配置项主体。注意，此处所有涉及到路径的配置别遗漏URL变量。
      */
-    window.UEDITOR_CONFIG = {
+//     window.UEDITOR_CONFIG = {
+	UE.UEDITOR_CONFIG = {
 
         // 为编辑器实例添加一个路径，这个不能被注释
         UEDITOR_HOME_URL: URL,
@@ -306,7 +309,7 @@
         //主题配置项,默认是default。有需要的话也可以使用如下这样的方式来自动多主题切换，当然，前提条件是themes文件夹下存在对应的主题文件：
         //现有如下皮肤:default
         //,theme:'default'
-        //,themePath:URL +"themes/"
+        ,themePath:URL +"editor/themes/"
 
         //,zIndex : 900     //编辑器层级的基数,默认是900
 
@@ -334,7 +337,7 @@
         , initialStyle: '' // p{line-height:1em}
 
         //,iframeJsUrl: '' //给编辑区域的iframe引入一个js文件
-        //,iframeCssUrl: URL + '/themes/iframe.css' //给编辑区域的iframe引入一个css文件
+        ,iframeCssUrl: URL + '/editor/themes/iframe.css' //给编辑区域的iframe引入一个css文件
         // 给编辑器引入更多样式文件
         //,iframeCssUrlsAddition: []
 
@@ -695,7 +698,8 @@
         return protocol + res.join("/");
     }
 
-    window.UE = {
-        getUEBasePath: getUEBasePath
-    };
+//     window.UE = {
+//         getUEBasePath: getUEBasePath
+	//     };
+	UE.getUEBasePath = getUEBasePath;
 })();

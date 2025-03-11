@@ -876,32 +876,60 @@ const utils = {
 			} else {
 				doc.isReady && doReady(doc);
 				if (browser.ie && browser.version != 11) {
-					(function () {
+					// (function () {
+					// 	if (doc.isReady) return;
+					// 	try {
+					// 		doc.documentElement.doScroll("left");
+					// 	} catch (error) {
+					// 		setTimeout(arguments.callee, 0);
+					// 		return;
+					// 	}
+					// 	doReady(doc);
+					// })();
+					// 定义具名函数 checkReady
+					function checkReady() {
 						if (doc.isReady) return;
 						try {
 							doc.documentElement.doScroll("left");
 						} catch (error) {
-							setTimeout(arguments.callee, 0);
+							// 使用具名函数名设置定时器
+							setTimeout(checkReady, 0);
 							return;
 						}
 						doReady(doc);
-					})();
+					}
+					// 调用具名函数
+					checkReady();
+					
 					win.attachEvent("onload", function () {
 						doReady(doc);
 					});
 				} else {
+					// doc.addEventListener(
+					// 	"DOMContentLoaded",
+					// 	function () {
+					// 		doc.removeEventListener(
+					// 			"DOMContentLoaded",
+					// 			arguments.callee,
+					// 			false
+					// 		);
+					// 		doReady(doc);
+					// 	},
+					// 	false
+					// );
 					doc.addEventListener(
 						"DOMContentLoaded",
-						function () {
+						function onDOMContentLoaded() { // 使用具名函数
 							doc.removeEventListener(
 								"DOMContentLoaded",
-								arguments.callee,
+								onDOMContentLoaded, // 使用具名函数引用自身
 								false
 							);
 							doReady(doc);
 						},
 						false
 					);
+
 					win.addEventListener(
 						"load",
 						function () {

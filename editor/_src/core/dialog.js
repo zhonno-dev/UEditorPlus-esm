@@ -1,4 +1,4 @@
-dialog = (function () {
+const dialog = (function () {
     return {
         loadingPlaceholder: function (me) {
             var loadingId = "loading_" + (+new Date()).toString(36);

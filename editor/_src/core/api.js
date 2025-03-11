@@ -1,4 +1,4 @@
-api = (function () {
+const api = (function () {
     // axios import
     var axios = null;
     !function (e, t) {

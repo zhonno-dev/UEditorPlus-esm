@@ -1,6 +1,6 @@
 import utils from "../core/utils.js";
 import { UE_ui_Menu as Menu } from "./menu.js";
-import UE_ui_SplitButton from "./splitbutton.js";
+import SplitButton from "./splitbutton.js";
 
 ///import core
 ///import uicore

@@ -1,10 +1,13 @@
-import browser from "./browser.js";
 import utils from "./utils.js";
 import domSelection from "./Selection.js";
 import { domUtils } from "./domUtils.js";
 import dtd from "./dtd.js";
 import { EventBase } from "./EventBase.js";
 import EditorDefaultOptions from "./Editor.defaultoptions.js";
+import UE from "../UE.js";
+import browser from "./browser.js";
+const {ie, webkit, gecko, opera} = browser;
+
 
 /**
  * 编辑器主类，包含编辑器提供的大部分公用接口
@@ -242,7 +245,7 @@ var UE_Editor;
         me.uid = uid++;
         EventBase.call(me);
         me.commands = {};
-        me.options = utils.extend(utils.clone(options || {}), UEDITOR_CONFIG, true);
+        me.options = utils.extend(utils.clone(options || {}), UE.UEDITOR_CONFIG, true);
         me.shortcutkeys = {};
         me.inputRules = [];
         me.outputRules = [];

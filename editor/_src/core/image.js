@@ -1,4 +1,4 @@
-image = (function () {
+const image = (function () {
     // import browser-image-compression
     // https://www.npmjs.com/package/browser-image-compression
     var imageCompression = null;

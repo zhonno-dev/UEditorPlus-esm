@@ -211,3 +211,13 @@ _src/ui/message.js
 ### _src/adapter/editorui.js
 _src/adapter/editorui.js
 
+### _src/adapter/editor.js
+_src/adapter/editor.js
+
+### _src/adapter/message.js
+_src/adapter/message.js
+
+## lang/
+
+### lang/zh-cn/zh-cn.js
+lang/zh-cn/zh-cn.js
