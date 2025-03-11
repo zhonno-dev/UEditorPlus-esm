@@ -1,29 +1,19 @@
 /**
- * html字符串转换成uNode节点
- * @file
- * @module UE
- * @since 1.2.6.1
- */
-
-/**
- * UEditor公用空间，UEditor所有的功能都挂载在该空间下
- * @unfile
- * @module UE
- */
-
-/**
  * html字符串转换成uNode节点的静态方法
+ * html字符串转换成uNode节点
+ * @module UE
  * @method htmlparser
  * @param { String } htmlstr 要转换的html代码
  * @param { Boolean } ignoreBlank 若设置为true，转换的时候忽略\n\r\t等空白字符
  * @return { uNode } 给定的html片段转换形成的uNode对象
+ * @since 1.2.6.1
  * @example
  * ```javascript
  * var root = UE.htmlparser('<p><b>htmlparser</b></p>', true);
  * ```
  */
 
-var htmlparser = (UE.htmlparser = function (htmlstr, ignoreBlank) {
+var htmlparser = (function (htmlstr, ignoreBlank) {
     //todo 原来的方式  [^"'<>\/] 有\/就不能配对上 <TD vAlign=top background=../AAA.JPG> 这样的标签了
     //先去掉了，加上的原因忘了，这里先记录
     //var re_tag = /<(?:(?:\/([^>]+)>)|(?:!--([\S|\s]*?)-->)|(?:([^\s\/<>]+)\s*((?:(?:"[^"]*")|(?:'[^']*')|[^"'<>])*)\/?>))/g,
@@ -248,3 +238,5 @@ var htmlparser = (UE.htmlparser = function (htmlstr, ignoreBlank) {
     }
     return root;
 });
+
+export default htmlparser;

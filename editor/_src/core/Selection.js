@@ -1,3 +1,8 @@
+import domRange from "./Range.js";
+import domUtils from "./utils/domUtils.js";
+import dtd from "./dtd.js";
+
+
 /**
  * 选集
  * @file
@@ -5,13 +10,8 @@
  * @class Selection
  * @since 1.2.6.1
  */
+var domSelection;
 
-/**
- * 选区集合
- * @unfile
- * @module UE.dom
- * @class Selection
- */
 (function () {
     function getBoundaryInformation(range, start) {
         var getIndex = domUtils.getNodeIndex;
@@ -128,7 +128,7 @@
         return null;
     }
 
-    var Selection = (dom.Selection = function (doc) {
+    var Selection = (domSelection = function (doc) {
         var me = this,
             iframe;
         me.document = doc;
@@ -286,7 +286,8 @@
             if (me._cachedRange != null) {
                 return this._cachedRange;
             }
-            var range = new baidu.editor.dom.Range(me.document);
+        //     var range = new baidu.editor.dom.Range(me.document);
+            var range = new domRange(me.document);
 
             if (browser.ie9below) {
                 var nativeRange = me.getIERange();
@@ -417,3 +418,5 @@
         }
     };
 })();
+
+export default domSelection;

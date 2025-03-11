@@ -1,26 +1,16 @@
 /**
- * UE过滤word的静态方法
- * @file
- */
-
-/**
- * UEditor公用空间，UEditor所有的功能都挂载在该空间下
- * @module UE
- */
-
-/**
  * 根据传入html字符串过滤word
- * @module UE
- * @since 1.2.6.1
- * @method filterWord
+ * UE过滤word的静态方法
+ * @method UE.filterWord
  * @param { String } html html字符串
  * @return { String } 已过滤后的结果字符串
+ * @since 1.2.6.1
  * @example
  * ```javascript
  * UE.filterWord(html);
  * ```
  */
-var filterWord = (UE.filterWord = (function () {
+var filterWord = ((function () {
     //是否是word过来的内容
     function isWordDocument(str) {
         return /(class="?Mso|style="[^"]*\bmso\-|w:WordDocument|<(v|o):|lang=)/gi.test(
@@ -225,3 +215,5 @@ var filterWord = (UE.filterWord = (function () {
         return isWordDocument(html) ? filterPasteWord(html) : html;
     };
 })());
+
+export default filterWord;

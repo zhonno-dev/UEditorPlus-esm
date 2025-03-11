@@ -1,15 +1,15 @@
+import dtd from "./dtd.js";
+import utils from "./utils.js";
+import browser from "./browser.js";
+
 /**
  * Dom操作工具包
  * @file
  * @module UE.dom.domUtils
  * @since 1.2.6.1
  */
+const domUtils = {};
 
-/**
- * Dom操作工具包
- * @unfile
- * @module UE.dom.domUtils
- */
 function getDomNode(node, start, ltr, startFromChild, fn, guard) {
     var tmpNode = startFromChild && node[start],
         parent;
@@ -59,7 +59,8 @@ var attrFix = ie && browser.version < 9
         "table-cell",
         "table-caption"
     ]);
-var domUtils = (dom.domUtils = {
+
+domUtils = {
     //节点常量
     NODE_ELEMENT: 1,
     NODE_DOCUMENT: 9,
@@ -2572,5 +2573,7 @@ var domUtils = (dom.domUtils = {
         };
         document.getElementsByTagName('head')[0].appendChild(script);
     }
-});
-var fillCharReg = new RegExp(domUtils.fillChar, "g");
+};
+const fillCharReg = new RegExp(domUtils.fillChar, "g");
+
+export { domUtils, fillCharReg };

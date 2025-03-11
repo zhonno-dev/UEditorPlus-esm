@@ -5,7 +5,7 @@
  * Time: 6:15 PM
  * To change this template use File | Settings | File Templates.
  */
-UE.plugin = (function () {
+plugin = (function () {
     var _plugins = {};
     return {
         register: function (pluginName, fn, oldOptionName, afterDisabled) {
@@ -77,3 +77,5 @@ UE.plugin = (function () {
         }
     };
 })();
+
+export default plugin;

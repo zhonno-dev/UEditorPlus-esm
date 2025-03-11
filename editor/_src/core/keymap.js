@@ -1,4 +1,4 @@
-var keymap = (UE.keymap = {
+var keymap = ({
     Backspace: 8,
     Tab: 9,
     Enter: 13,
@@ -46,3 +46,5 @@ var keymap = (UE.keymap = {
 
     n: 78
 });
+
+export default keymap;

@@ -1,23 +1,15 @@
+import { domUtils, fillCharReg } from "./domUtils.js";
+import dtd from "./dtd.js";
+
 /**
  * Range封装
- * @file
- * @module UE.dom
- * @class Range
- * @since 1.2.6.1
- */
-
-/**
- * dom操作封装
- * @unfile
- * @module UE.dom
- */
-
-/**
  * Range实现类，本类是UEditor底层核心类，封装不同浏览器之间的Range操作。
  * @unfile
  * @module UE.dom
  * @class Range
+ * @since 1.2.6.1
  */
+var domRange;
 
 (function () {
     var guid = 0,
@@ -231,7 +223,7 @@
      * @property { Document } document 当前Range所属的Document对象
      * @remind 不同range的的document属性可以是不同的
      */
-    var Range = (dom.Range = function (document) {
+    var Range = (domRange = function (document) {
         var me = this;
         me.startContainer = me.startOffset = me.endContainer = me.endOffset = null;
         me.document = document;
@@ -1993,3 +1985,5 @@
         }
     };
 })();
+
+export default domRange;

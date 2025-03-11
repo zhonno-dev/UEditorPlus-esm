@@ -1,5 +1,6 @@
 //维护编辑器一下默认的不在插件中的配置项
-UE.Editor.defaultOptions = function (editor) {
+// UE.Editor.defaultOptions = function (editor) {
+EditorDefaultOptions = function (editor) {
     var _url = editor.options.UEDITOR_HOME_URL;
     return {
         isShow: true,
@@ -29,3 +30,5 @@ UE.Editor.defaultOptions = function (editor) {
         fileNameFormat: "{time}{rand:6}"
     };
 };
+
+export default EditorDefaultOptions;

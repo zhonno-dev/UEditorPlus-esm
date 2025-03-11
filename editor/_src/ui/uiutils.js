@@ -1,6 +1,9 @@
+import browser from "../core/browser.js";
+import { domUtils } from "../core/domUtils.js";
+
 (function () {
-    var browser = baidu.editor.browser,
-        domUtils = baidu.editor.dom.domUtils;
+//     var browser = baidu.editor.browser,
+//         domUtils = baidu.editor.dom.domUtils;
 
     var magic = "$EDITORUI";
     var root = (window[magic] = {});

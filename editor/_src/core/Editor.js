@@ -1,22 +1,25 @@
+import browser from "./browser.js";
+import utils from "./utils.js";
+import domSelection from "./Selection.js";
+import { domUtils } from "./domUtils.js";
+import dtd from "./dtd.js";
+import { EventBase } from "./EventBase.js";
+import EditorDefaultOptions from "./Editor.defaultoptions.js";
+
 /**
  * 编辑器主类，包含编辑器提供的大部分公用接口
+ * UEditor的核心类，为用户提供与编辑器交互的接口。
  * @file
  * @module UE
  * @class Editor
  * @since 1.2.6.1
  */
+var UE_Editor;
 
 /**
  * UEditor公用空间，UEditor所有的功能都挂载在该空间下
  * @unfile
  * @module UE
- */
-
-/**
- * UEditor的核心类，为用户提供与编辑器交互的接口。
- * @unfile
- * @module UE
- * @class Editor
  */
 
 (function () {
@@ -234,7 +237,7 @@
      * ```
      * @see UE.Config
      */
-    var Editor = (UE.Editor = function (options) {
+    var Editor = (UE_Editor = function (options) {
         var me = this;
         me.uid = uid++;
         EventBase.call(me);
@@ -527,7 +530,8 @@
             me.window = doc.defaultView || doc.parentWindow;
             me.iframe = me.window.frameElement;
             me.body = doc.body;
-            me.selection = new dom.Selection(doc);
+        //     me.selection = new dom.Selection(doc);
+            me.selection = new domSelection(doc);
             //gecko初始化就能得到range,无法判断isFocus了
             var geckoSel;
             if (browser.gecko && (geckoSel = this.selection.getNative())) {
@@ -1759,3 +1763,7 @@
     };
     utils.inherits(Editor, EventBase);
 })();
+
+UE_Editor.defaultOptions = EditorDefaultOptions;
+
+export default UE_Editor;

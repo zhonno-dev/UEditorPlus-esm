@@ -1,3 +1,6 @@
+import htmlparser from "./htmlparser.js";
+import utils from "./utils.js";
+
 /**
  * 编辑器模拟的节点类
  * @file
@@ -5,12 +8,7 @@
  * @class uNode
  * @since 1.2.6.1
  */
-
-/**
- * UEditor公用空间，UEditor所有的功能都挂载在该空间下
- * @unfile
- * @module UE
- */
+var UE_uNode;
 
 (function () {
     /**
@@ -33,7 +31,7 @@
      * })
      * ```
      */
-    var uNode = (UE.uNode = function (obj) {
+    var uNode = (UE_uNode = function (obj) {
         this.type = obj.type;
         this.data = obj.data;
         this.tagName = obj.tagName;
@@ -74,7 +72,7 @@
     //支持标签和html
     uNode.createElement = function (html) {
         if (/[<>]/.test(html)) {
-            return UE.htmlparser(html).children[0];
+            return htmlparser(html).children[0];
         } else {
             return new uNode({
                 type: "element",
@@ -84,7 +82,7 @@
         }
     };
     uNode.createText = function (data, noTrans) {
-        return new UE.uNode({
+        return new UE_uNode({
             type: "text",
             data: noTrans ? data : utils.unhtml(data || "")
         });
@@ -306,14 +304,14 @@
                     }
                 }
                 this.children = [];
-                var tmpRoot = UE.htmlparser(htmlstr);
+                var tmpRoot = htmlparser(htmlstr);
                 for (var i = 0, ci; (ci = tmpRoot.children[i++]);) {
                     this.children.push(ci);
                     ci.parentNode = this;
                 }
                 return this;
             } else {
-                var tmpRoot = new UE.uNode({
+                var tmpRoot = new UE_uNode({
                     type: "root",
                     children: this.children
                 });
@@ -773,3 +771,5 @@
         }
     };
 })();
+
+export default UE_uNode;

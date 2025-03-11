@@ -1,4 +1,4 @@
-UE.api = (function () {
+api = (function () {
     // axios import
     var axios = null;
     !function (e, t) {
@@ -1218,3 +1218,5 @@ UE.api = (function () {
         }
     }
 })();
+
+export default api;

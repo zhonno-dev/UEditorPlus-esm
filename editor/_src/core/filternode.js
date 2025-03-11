@@ -1,14 +1,6 @@
+
 /**
  * UE过滤节点的静态方法
- * @file
- */
-
-/**
- * UEditor公用空间，UEditor所有的功能都挂载在该空间下
- * @module UE
- */
-
-/**
  * 根据传入节点和过滤规则过滤相应节点
  * @module UE
  * @since 1.2.6.1
@@ -20,7 +12,7 @@
  * UE.filterNode(root,editor.options.filterRules);
  * ```
  */
-var filterNode = (UE.filterNode = (function () {
+var filterNode = ((function () {
     function filterNode(node, rules) {
         switch (node.type) {
             case "text":
@@ -125,3 +117,5 @@ var filterNode = (UE.filterNode = (function () {
         return root;
     };
 })());
+
+export default filterNode;

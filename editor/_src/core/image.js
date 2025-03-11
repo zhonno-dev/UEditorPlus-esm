@@ -1,4 +1,4 @@
-UE.image = (function () {
+image = (function () {
     // import browser-image-compression
     // https://www.npmjs.com/package/browser-image-compression
     var imageCompression = null;
@@ -1996,3 +1996,5 @@ UE.image = (function () {
         }
     };
 })();
+
+export default image;

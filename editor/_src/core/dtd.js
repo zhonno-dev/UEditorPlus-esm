@@ -1,18 +1,34 @@
 ///import editor.js
 ///import core/dom/dom.js
 ///import core/utils.js
+////////////////////////////////////////
+import utils from "./utils.js";
+
 /**
  * dtd html语义化的体现类
  * @constructor
  * @namespace dtd
  */
-var dtd = (dom.dtd = (function () {
-    function _(s) {
-        for (var k in s) {
-            s[k.toUpperCase()] = s[k];
-        }
-        return s;
+// var dtd = (dom.dtd = (function () {
+// })());
+
+/**
+ * 将对象的键转换为大写，并保留原键值对
+ * 此函数的目的是为了在不改变原对象的基础上，增加键的大写版本
+ * 这在处理某些对键大小写敏感的情况时特别有用
+ * 
+ * @param {Object} s - 需要转换键为大写的对象
+ * @return {Object} - 添加了大写键的原对象
+ */
+function _(s) {
+    // 遍历对象s的所有键
+    for (var k in s) {
+        // 为每个键的大写版本在对象s中添加对应的值
+        s[k.toUpperCase()] = s[k];
     }
+    // 返回增加了大写键的原对象
+    return s;
+}
 
     var X = utils.extend2;
     var A = _({isindex: 1, fieldset: 1}),
@@ -214,7 +230,7 @@ var dtd = (dom.dtd = (function () {
             wbr: 1
         });
 
-    return _({
+const returnOld = _({
         // $ 表示自定的属性
 
         // body外的元素列表.
@@ -431,5 +447,10 @@ var dtd = (dom.dtd = (function () {
         em: L,
         dfn: L,
         mark: L
-    });
-})());
+});
+
+//原本的 dtd(dom.dtd) 应该就是这个 returnOld
+/** dtd html语义化的体现类 */
+const dtd = returnOld;
+
+export default dtd;

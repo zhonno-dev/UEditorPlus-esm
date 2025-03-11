@@ -1,4 +1,4 @@
-UE.dialog = (function () {
+dialog = (function () {
     return {
         loadingPlaceholder: function (me) {
             var loadingId = "loading_" + (+new Date()).toString(36);
@@ -29,3 +29,5 @@ UE.dialog = (function () {
         }
     }
 })();
+
+export default dialog;

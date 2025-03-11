@@ -57,6 +57,7 @@ export default {
 			`${url_pre}_src/core/plugin.js`,
 			`${url_pre}_src/core/keymap.js`,
 			`${url_pre}_src/core/localstorage.js`,
+			
 			`${url_pre}_src/plugins/defaultfilter.js`,
 			`${url_pre}_src/plugins/inserthtml.js`,
 			`${url_pre}_src/plugins/autotypeset.js`,

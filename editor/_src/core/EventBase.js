@@ -1,24 +1,14 @@
 /**
  * UE采用的事件基类
+ * UEditor公用空间，UEditor所有的功能都挂载在该空间下
+ * UE采用的事件基类，继承此类的对应类将获取addListener,removeListener,fireEvent方法。
+ * 在UE中，Editor以及所有ui实例都继承了该类，故可以在对应的ui对象以及editor对象上使用上述方法。
  * @file
  * @module UE
  * @class EventBase
  * @since 1.2.6.1
  */
-
-/**
- * UEditor公用空间，UEditor所有的功能都挂载在该空间下
- * @unfile
- * @module UE
- */
-
-/**
- * UE采用的事件基类，继承此类的对应类将获取addListener,removeListener,fireEvent方法。
- * 在UE中，Editor以及所有ui实例都继承了该类，故可以在对应的ui对象以及editor对象上使用上述方法。
- * @unfile
- * @module UE
- * @class EventBase
- */
+import utils from "./utils.js";
 
 /**
  * 通过此构造器，子类可以继承EventBase获取事件监听的方法
@@ -28,8 +18,12 @@
  * UE.EventBase.call(editor);
  * ```
  */
-var EventBase = (UE.EventBase = function () {
-});
+const EventBase = function () {
+
+};
+// var EventBase = (UE.EventBase = function () {
+// });
+
 
 EventBase.prototype = {
     /**
@@ -170,3 +164,6 @@ function getListener(obj, type, force) {
         (allListeners[type] || (force && (allListeners[type] = [])))
     );
 }
+
+// 导出 EventBase 类和 getListener 函数
+export { EventBase, getListener };

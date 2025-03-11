@@ -1,14 +1,13 @@
+import utils from "./utils.js";
+
 /**
+ * 提供对ajax请求的支持
  * @file
  * @module UE.ajax
  * @since 1.2.6.1
  */
 
-/**
- * 提供对ajax请求的支持
- * @module UE.ajax
- */
-UE.ajax = (function () {
+ajax = (function () {
     //创建一个ajaxRequest对象
     var fnStr = "XMLHttpRequest()";
     try {
@@ -290,3 +289,5 @@ UE.ajax = (function () {
         }
     };
 })();
+
+export default ajax;
