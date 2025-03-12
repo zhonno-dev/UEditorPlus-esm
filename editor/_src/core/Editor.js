@@ -229,6 +229,7 @@ function langReadied(me) {
  * @since 1.2.6.1
  */
 const UE_Editor = function (options) {
+	/** @type UE_Editor */
 	var me = this;
 	me.uid = uid++;
 	EventBase.call(me);

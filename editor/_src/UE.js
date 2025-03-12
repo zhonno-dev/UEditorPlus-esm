@@ -32,13 +32,13 @@ const UE = {
 	dom: {
 		/**
 		 * dtd html语义化的体现类，引用自 "./core/dtd.js" 模块
-		 * @type {import('./core/dtd.js').default}
+		 * @type {import('./core/dtd.js').default} //这样是不行的
 		*/
 		dtd: null,
 		/**
 		 * Dom操作工具包
-		 * @import {domUtils} from './core/domUtils.js'
-		 * @type {domUtils}
+		 * @import keymap from './core/keymap.js'
+		 * @type keymap
 		 */
 		domUtils: null,
 	},
