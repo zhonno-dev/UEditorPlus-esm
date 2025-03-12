@@ -3,6 +3,7 @@ import { domUtils } from "../core/domUtils.js";
 import uiUtils from "../ui/uiutils.js";
 import UIBase from "../ui/uibase.js";
 import UE from "../UE.js";
+import UE_Editor from "../core/Editor.js";
 
 ///import core
 ///commands 全屏
@@ -861,7 +862,8 @@ let baidu = {
     var instances = {};
 
     UE.ui.Editor = function (options) {
-        var editor = new UE.Editor(options);
+        // var editor = new UE.Editor(options);
+        var editor = new UE_Editor(options);
         editor.options.editor = editor;
         utils.loadFile(document, {
             href:
