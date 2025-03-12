@@ -47,6 +47,9 @@ const UE = {
 
 	},
 
+	//原本在 editor/_src/adapter/editor.js 中的 var instances = {};
+	//	移入 UE 入口实现共享。
+	instances: {},
 };
 
 export default UE;
