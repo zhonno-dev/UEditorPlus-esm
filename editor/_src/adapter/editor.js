@@ -4,6 +4,7 @@ import uiUtils from "../ui/uiutils.js";
 import UIBase from "../ui/uibase.js";
 import UE from "../UE.js";
 import UE_Editor from "../core/Editor.js";
+import UE_ui_Toolbar from "../ui/toolbar.js";
 
 ///import core
 ///commands 全屏
@@ -411,7 +412,7 @@ let baidu = {
                 });
             }
         },
-        _initToolbars: function () {
+	    _initToolbars: function () {
             var editor = this.editor;
             var toolbars = this.toolbars || [];
             if (toolbars[0]) {
@@ -423,7 +424,8 @@ let baidu = {
             var extraUIs = [];
             for (var i = 0; i < toolbars.length; i++) {
                 var toolbar = toolbars[i];
-                var toolbarUi = new baidu.editor.ui.Toolbar({
+                // var toolbarUi = new baidu.editor.ui.Toolbar({
+		    var toolbarUi = new UE_ui_Toolbar({
                     theme: editor.options.theme
                 });
                 for (var j = 0; j < toolbar.length; j++) {
@@ -541,7 +543,7 @@ let baidu = {
                     this._bakEditorContaninerWidth = editor.iframe.parentNode.style.width;
 
                     while (container.tagName !== "BODY") {
-                        var position = baidu.editor.dom.domUtils.getComputedStyle(
+                        var position = domUtils.getComputedStyle(
                             container,
                             "position"
                         );
@@ -603,7 +605,7 @@ let baidu = {
                             editor.body.contentEditable = true;
                             editor.fireEvent("fullscreenchanged", fullscreen);
                             editor.selection.getRange().moveToBookmark(bk).select(true);
-                            baidu.editor.dom.domUtils.remove(input);
+                            domUtils.remove(input);
                             fullscreen && window.scroll(0, 0);
                         }, 0);
                     }, 0);
@@ -857,7 +859,7 @@ let baidu = {
             }
         }
     };
-    utils.inherits(EditorUI, baidu.editor.ui.UIBase);
+    utils.inherits(EditorUI, UIBase);
 
     var instances = {};
 

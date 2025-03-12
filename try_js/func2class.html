@@ -1,0 +1,59 @@
+<script>
+function testFunc() {
+	console.log('testFunc');
+
+}
+testFunc.prototype = {
+	run() {
+		console.log('testFunc run()');
+	},
+	run2() {
+		console.log('testFunc run2()');
+	},
+};
+
+class testFunc2 {
+	constructor() {
+		console.log('testFunc2');
+	}
+
+	run() {
+		console.log('testFunc2 run()');
+	}
+
+	run2() {
+		console.log('testFunc2 run2()');
+	}
+}
+
+class testFunc3 extends testFunc2 {
+fgz
+//构造函数
+constructor() {
+	// super(); // 调用父类的构造函数
+	console.log('testFunc3');
+}
+
+	// 可以重写父类的方法
+	run() {
+		console.log('testFunc3 run()');
+	}
+
+	run3() {
+		console.log('testFunc3 run3()');
+	}
+}
+
+
+var cls = new testFunc();
+cls.run2();
+
+var cls2 = new testFunc2();
+cls2.run2();
+
+var cls3 = new testFunc3;
+cls3.run3();
+
+console.log(testFunc.prototype);
+console.log(testFunc2.prototype);
+</script>

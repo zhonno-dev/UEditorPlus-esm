@@ -1,15 +1,10 @@
+//Dom操作工具包
 import dtd from "./dtd.js";
 import utils from "./utils.js";
 import browser from "./browser.js";
 const {ie, webkit, gecko, opera} = browser;
 
-/**
- * Dom操作工具包
- * @file
- * @module UE.dom.domUtils
- * @since 1.2.6.1
- */
-var domUtils = {};
+
 
 function getDomNode(node, start, ltr, startFromChild, fn, guard) {
     var tmpNode = startFromChild && node[start],
@@ -61,7 +56,13 @@ var attrFix = ie && browser.version < 9
         "table-caption"
     ]);
 
-domUtils = {
+/**
+ * Dom操作工具包
+ * @file
+ * @module UE.dom.domUtils
+ * @since 1.2.6.1
+ */
+const domUtils = {
     //节点常量
     NODE_ELEMENT: 1,
     NODE_DOCUMENT: 9,

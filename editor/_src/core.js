@@ -53,10 +53,12 @@ UE.LocalStorage = LocalStorage;
 
 /**
  * dtd html语义化的体现类，引用自 "./core/dtd.js" 模块
- * @type {import('./core/dtd.js').default}
  */
 UE.dom.dtd = dtd;
-/** Dom操作工具包 */
+/**  */
+/**
+ * Dom操作工具包
+ */
 UE.dom.domUtils = domUtils;
 /** ？？？ */
 UE.dom.fillCharReg = fillCharReg;
@@ -64,3 +66,4 @@ UE.dom.fillCharReg = fillCharReg;
 UE.dom.Range = domRange;
 /** 选集 */
 UE.dom.Selection = domSelection;
+

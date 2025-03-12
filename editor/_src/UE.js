@@ -30,13 +30,23 @@ const UE = {
 		},
 	},
 	dom: {
-
+		/**
+		 * dtd html语义化的体现类，引用自 "./core/dtd.js" 模块
+		 * @type {import('./core/dtd.js').default}
+		*/
+		dtd: null,
+		/**
+		 * Dom操作工具包
+		 * @import {domUtils} from './core/domUtils.js'
+		 * @type {domUtils}
+		 */
+		domUtils: null,
 	},
 
 	ui: {
 
 	},
 
-}
+};
 
 export default UE;

@@ -128,6 +128,7 @@ var domSelection;
         return null;
     }
 
+	
     var Selection = (domSelection = function (doc) {
         var me = this,
             iframe;
@@ -149,8 +150,12 @@ var domSelection;
         }
         iframe = doc = null;
     });
-
-    Selection.prototype = {
+	/**
+	 * Selection 类的原型方法
+	 * @lends domSelection
+	 */
+	Selection.prototype = {
+	    
         rangeInBody: function (rng, txtRange) {
             var node = browser.ie9below || txtRange
                 ? rng.item ? rng.item() : rng.parentElement()
@@ -416,7 +421,7 @@ var domSelection;
         clearRange: function () {
             this.getNative()[browser.ie9below ? "empty" : "removeAllRanges"]();
         }
-    };
+	};
 })();
 
 export default domSelection;
