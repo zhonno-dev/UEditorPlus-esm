@@ -6,10 +6,14 @@ import { domUtils } from "../core/domUtils.js";
 
 var instances = UE.instances;
 //     UE.ui.Editor = function (options) {
+// 定义一个UE.ui.Editor类，用于创建和管理编辑器实例
+// 参数options是编辑器的配置项
 const cls_UE_ui_Editor = function (options) {
 	// var editor = new UE.Editor(options);
 	var editor = new UE_Editor(options);
+	// 将编辑器实例本身设置为其options的editor属性
 	editor.options.editor = editor;
+	// 加载编辑器的主题样式表
 	utils.loadFile(document, {
 		href:
 			editor.options.themePath + editor.options.theme + "/_css/ueditor.css?{timestamp:dist/themes/default/css/ueditor.css}",
@@ -18,22 +22,29 @@ const cls_UE_ui_Editor = function (options) {
 		rel: "stylesheet"
 	});
 
+	// 保存原有的render方法，并重写render方法
 	var oldRender = editor.render;
 	editor.render = function (holder) {
+		// 如果holder是一个字符串，则将其作为editor的key，并在实例中保存
 		if (holder.constructor === String) {
 			editor.key = holder;
 			instances[holder] = editor;
 		}
+		// 在DOM准备好后渲染UI
 		utils.domReady(function () {
+			// 如果语言资源已经加载完毕，则直接渲染UI，否则等待语言资源加载完毕后再渲染
 			editor.langIsReady
 				? renderUI()
 				: editor.addListener("langReady", renderUI);
 
 			function renderUI() {
+				// 设置编辑器的labelMap选项
 				editor.setOpt({
 					labelMap: editor.options.labelMap || editor.getLang("labelMap")
 				});
+				// 创建一个新的EditorUI实例
 				new EditorUI(editor.options);
+				// 如果有holder参数，则根据其类型处理相应的逻辑
 				if (holder) {
 					if (holder.constructor === String) {
 						holder = document.getElementById(holder);
@@ -68,10 +79,12 @@ const cls_UE_ui_Editor = function (options) {
 						holder.innerHTML = "";
 					}
 				}
+				// 为holder添加编辑器主题的CSS类名
 				domUtils.addClass(holder, "edui-" + editor.options.theme);
+				// 渲染编辑器UI
 				editor.ui.render(holder);
 				var opt = editor.options;
-				//给实例添加一个编辑器的容器引用
+				// 给实例添加一个编辑器的容器引用
 				editor.container = editor.ui.getDom();
 				var parents = domUtils.findParents(holder, true);
 				var displays = [];
@@ -96,8 +109,8 @@ const cls_UE_ui_Editor = function (options) {
 				for (var i = 0, ci; (ci = parents[i]); i++) {
 					ci.style.display = displays[i];
 				}
-				//编辑器最外容器设置了高度，会导致，编辑器不占位
-				//todo 先去掉，没有找到原因
+				// 编辑器最外容器设置了高度，会导致，编辑器不占位
+				// todo 先去掉，没有找到原因
 				if (holder.style.height) {
 					holder.style.height = "";
 				}
@@ -105,13 +118,15 @@ const cls_UE_ui_Editor = function (options) {
 					opt.initialFrameWidth +
 					(/%$/.test(opt.initialFrameWidth) ? "" : "px");
 				editor.container.style.zIndex = opt.zIndex;
+				// 调用原有的render方法渲染编辑器的iframe
 				oldRender.call(editor, editor.ui.getDom("iframeholder"));
+				// 触发afteruiready事件
 				editor.fireEvent("afteruiready");
 			}
 		});
 	};
 
+	// 返回编辑器实例
 	return editor;
 };
-
 export default cls_UE_ui_Editor;
