@@ -238,6 +238,7 @@ class cls_Editor extends EventBase {
 	key = '';
 	langIsReady = false;
 	/**
+	 * cls_EditorUI
 	 * @type cls_EditorUI
 	 */
 	ui;
@@ -1772,9 +1773,9 @@ class cls_Editor extends EventBase {
 		}
 	}
 
-	defaultOptions(editor) {
-		return EditorDefaultOptions(editor);
-	}
+	// defaultOptions(editor) {
+	// 	return EditorDefaultOptions(editor);
+	// }
 
 	////////////////////////////////////
 	//	以下方法原本在 _src/core/loadconfig.js 中，移到此处
