@@ -84,7 +84,7 @@ cls_UIBase.prototype.renderHtml = function () {
 };
 cls_UIBase.prototype.dispose = function () {
 	var box = this.getDom();
-	if (box) baidu.editor.dom.domUtils.remove(box);
+	if (box) domUtils.remove(box);
 	uiUtils.unsetGlobal(this.id);
 };
 

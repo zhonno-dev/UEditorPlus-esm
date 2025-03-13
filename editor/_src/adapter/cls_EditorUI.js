@@ -11,20 +11,33 @@ import browser from "../core/browser.js";
 import { domUtils } from "../core/domUtils.js";
 import UE from "../UE.js";
 
+import cls_UIBase from "../ui/UIBase.cls.js";
+
 var nodeStack = [];
 
-function cls_EditorUI(options) {
-	this.initOptions(options); //这是从 UIBase 继承的方法
-	this.initEditorUI();
-}
+class cls_EditorUI extends cls_UIBase{
+	uiName = "editor";
 
-cls_EditorUI.prototype = {
-	uiName: "editor",
-	initEditorUI: function () {
+	/**
+	 * 构造函数
+	 */
+	constructor(options) {
+		super(); // 调用父类的构造函数
+		// console.log(options);
+		
+		this.initOptions(options); //这是从 UIBase 继承的方法
+		this.initEditorUI();
+	}
+
+	initEditorUI() {
 		this.editor.ui = this;
 		this._dialogs = {};
 		this.initUIBase();
 		this._initToolbars();
+		/** 
+		 * @import UE_Editor from "../core/Editor.js"
+		 * @type UE_Editor 
+		 */
 		var editor = this.editor,
 			me = this;
 
@@ -404,8 +417,9 @@ cls_EditorUI.prototype = {
 				}
 			});
 		}
-	},
-	_initToolbars: function () {
+	}
+	
+	_initToolbars() {
 		var editor = this.editor;
 		var toolbars = this.toolbars || [];
 		if (toolbars[0]) {
@@ -479,8 +493,9 @@ cls_EditorUI.prototype = {
 			toolbarUi.add(obj.itemUI, obj.index);
 		});
 		this.toolbars = toolbarUis;
-	},
-	getHtmlTpl: function () {
+	}
+	
+	getHtmlTpl() {
 		return (
 			'<div id="##" class="%%">' +
 			'<div id="##_toolbarbox" class="%%-toolbarbox">' +
@@ -510,18 +525,19 @@ cls_EditorUI.prototype = {
 			'<div id="##_scalelayer"></div>' +
 			"</div>"
 		);
-	},
-	showWordImageDialog: function () {
+	}
+
+	showWordImageDialog() {
 		this._dialogs["wordimageDialog"].open();
-	},
-	renderToolbarBoxHtml: function () {
+	}
+	renderToolbarBoxHtml() {
 		var buff = [];
 		for (var i = 0; i < this.toolbars.length; i++) {
 			buff.push(this.toolbars[i].renderHtml());
 		}
 		return buff.join("");
-	},
-	setFullScreen: function (fullscreen) {
+	}
+	setFullScreen(fullscreen) {
 		var editor = this.editor,
 			container = editor.container.parentNode.parentNode;
 		if (this._fullscreen != fullscreen) {
@@ -609,8 +625,8 @@ cls_EditorUI.prototype = {
 				this.triggerLayout();
 			}
 		}
-	},
-	_updateFullScreen: function () {
+	}
+	_updateFullScreen() {
 		if (this._fullscreen) {
 			var vpRect = uiUtils.getViewportRect();
 			this.getDom().style.cssText =
@@ -641,8 +657,8 @@ cls_EditorUI.prototype = {
 				}
 			}
 		}
-	},
-	_updateElementPath: function () {
+	}
+	_updateElementPath() {
 		var bottom = this.getDom("elementpath"),
 			list;
 		if (
@@ -668,20 +684,20 @@ cls_EditorUI.prototype = {
 		} else {
 			bottom.style.display = "none";
 		}
-	},
-	disableElementPath: function () {
+	}
+	disableElementPath() {
 		var bottom = this.getDom("elementpath");
 		bottom.innerHTML = "";
 		bottom.style.display = "none";
 		this.elementPathEnabled = false;
-	},
-	enableElementPath: function () {
+	}
+	enableElementPath() {
 		var bottom = this.getDom("elementpath");
 		bottom.style.display = "";
 		this.elementPathEnabled = true;
 		this._updateElementPath();
-	},
-	_scale: function () {
+	}
+	_scale() {
 		var doc = document,
 			editor = this.editor,
 			editorHolder = editor.container,
@@ -801,12 +817,12 @@ cls_EditorUI.prototype = {
 			this.scaleEnabled = false;
 			domUtils.un(scale, "mousedown", down);
 		};
-	},
-	isFullScreen: function () {
+	}
+	isFullScreen() {
 		return this._fullscreen;
-	},
-	postRender: function () {
-		UIBase.prototype.postRender.call(this);
+	}
+	postRender() {
+		cls_UIBase.prototype.postRender.call(this);
 		for (var i = 0; i < this.toolbars.length; i++) {
 			this.toolbars[i].postRender();
 		}
@@ -825,8 +841,8 @@ cls_EditorUI.prototype = {
 			domUtils.un(window, "resize", updateFullScreenTime);
 			clearTimeout(timerId);
 		});
-	},
-	showToolbarMsg: function (msg, flag) {
+	}
+	showToolbarMsg(msg, flag) {
 		this.getDom("toolbarmsg_label").innerHTML = msg;
 		this.getDom("toolbarmsg").style.display = "";
 		//
@@ -834,16 +850,16 @@ cls_EditorUI.prototype = {
 			var w = this.getDom("upload_dialog");
 			w.style.display = "none";
 		}
-	},
-	hideToolbarMsg: function () {
+	}
+	hideToolbarMsg() {
 		this.getDom("toolbarmsg").style.display = "none";
-	},
-	mapUrl: function (url) {
+	}
+	mapUrl(url) {
 		return url
 			? url.replace("~/", this.editor.options.UEDITOR_CORS_URL || "")
 			: "";
-	},
-	triggerLayout: function () {
+	}
+	triggerLayout() {
 		var dom = this.getDom();
 		if (dom.style.zoom == "1") {
 			dom.style.zoom = "100%";
@@ -851,7 +867,8 @@ cls_EditorUI.prototype = {
 			dom.style.zoom = "1";
 		}
 	}
-};
-utils.inherits(cls_EditorUI, UIBase);
+}
+
+// utils.inherits(cls_EditorUI, UIBase);
 
 export default cls_EditorUI;
