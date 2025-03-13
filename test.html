@@ -1,8 +1,9 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 
 <script>
-//EventBase的空构造函数call()一下就可以继承prototype中定义的方法啦？
-//！不行啊
+//试试 new 一个 function 而这个 function return 另一个实例看看return 的到底是什么
+
+
 const EventBase = function () {
 	console.log('EventBase 构造函数');
 };

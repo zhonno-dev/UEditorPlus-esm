@@ -1,7 +1,7 @@
 //此文件是从原本的 _src/adapter/editor.js 中的 UE.ui.Editor = function (options) 独立​出来的
 
 import UE_Editor from "../core/Editor.js";
-import EditorUI from "./cls_EditorUI.js";
+import cls_EditorUI from "./cls_EditorUI.js";
 import utils from "../core/utils.js";
 import UE from "../UE.js";
 import { domUtils } from "../core/domUtils.js";
@@ -44,8 +44,17 @@ const cls_UE_ui_Editor = function (options) {
 				editor.setOpt({
 					labelMap: editor.options.labelMap || editor.getLang("labelMap")
 				});
-				// 创建一个新的EditorUI实例
-				new EditorUI(editor.options);
+				//创建一个新的EditorUI实例
+				//	editor.ui = 这个 new cls_EditorUI(editor.options)，因为：
+				//	上面设了一个 editor.options.editor = editor;
+				//	然后这里把 editor.options 传进去（options.editor = editor）
+				//	然后在 cls_UIBase.initOptions(options) 中：
+				//		me[editor] = options[editor] 让这个 new cls_EditorUI.editor = editor
+				//	最后在这个 cls_EditorUI.initEditorUI() 中：
+				//		this.editor.ui = this;
+				//		即 editor.ui = 这个 new cls_EditorUI(editor.options)
+				//	真特么的绕~~~
+				new cls_EditorUI(editor.options);
 				// 如果有holder参数，则根据其类型处理相应的逻辑
 				if (holder) {
 					if (holder.constructor === String) {
@@ -84,6 +93,10 @@ const cls_UE_ui_Editor = function (options) {
 				// 为holder添加编辑器主题的CSS类名
 				domUtils.addClass(holder, "edui-" + editor.options.theme);
 				// 渲染编辑器UI
+				/**
+				 * @type {cls_EditorUI}
+				 * 声明 editor.ui 的类型为 cls_EditorUI
+				 */
 				editor.ui.render(holder);
 				var opt = editor.options;
 				// 给实例添加一个编辑器的容器引用
