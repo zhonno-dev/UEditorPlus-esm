@@ -9,6 +9,7 @@ import EditorDefaultOptions from "./Editor.defaultoptions.js";
 import UE from "../UE.js";
 import LocalStorage from "./localstorage.js";
 import browser from "./browser.js";
+import cls_EditorUI from "../adapter/cls_EditorUI.js";
 const { ie, webkit, gecko, opera } = browser;
 
 var uid = 0,
@@ -234,6 +235,13 @@ var ROOT_KEY = "UEditorPlusPref";
  * @since 1.2.6.1
  */
 class cls_Editor extends EventBase {
+	key = '';
+	langIsReady = false;
+	/**
+	 * @type cls_EditorUI
+	 */
+	ui;
+
 	/**
 	 * 构造函数
 	 */

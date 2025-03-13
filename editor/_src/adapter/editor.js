@@ -999,7 +999,7 @@ let baidu = {
 	 */
 	UE.getEditor = function (id, opt) {
 		/**
-		 * @import cls_Editor from "../core/Editor.cls.js";
+		 * @import cls_Editor from "../core/Editor.cls.js"
 		 * @type cls_Editor
 		 */
 		var editor = instances[id];
