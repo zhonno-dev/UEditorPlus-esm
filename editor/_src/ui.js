@@ -28,6 +28,9 @@ import UE_ui_ShortCutMenu from "./ui/shortcutmenu.js";
 import UE_ui_Breakline from "./ui/breakline.js";
 import UE_ui_Message from "./ui/message.js";
 
+import cls_uiButton from "./ui/button.cls.js";
+import cls_uiStateful from "./ui/stateful.cls.js";
+
 //ui/
 UE.ui.uiUtils = UE_ui_uiUtils;
 UE.ui.UIBase = UE_ui_UIBase;
@@ -36,8 +39,10 @@ UE.ui.Mask = UE_ui_Mask;
 UE.ui.Popup = UE_ui_Popup;
 UE.ui.ColorPicker = UE_ui_ColorPicker;
 UE.ui.TablePicker = UE_ui_TablePicker;
-UE.ui.Stateful = UE_ui_Stateful;
-UE.ui.Button = UE_ui_Button;
+// UE.ui.Stateful = UE_ui_Stateful;
+UE.ui.Stateful = cls_uiStateful;
+// UE.ui.Button = UE_ui_Button;
+UE.ui.Button = cls_uiButton;
 UE.ui.SplitButton = UE_ui_SplitButton;
 UE.ui.ColorButton = UE_ui_ColorButton;
 UE.ui.TableButton = UE_ui_TableButton;
