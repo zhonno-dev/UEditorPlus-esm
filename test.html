@@ -1,130 +1,25 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 
 <script>
-//以 prototype 方式定义【类】
-console.log('clsFunc:以 prototype 方式定义【类】');
-const clsFunc = function () {
-	
+//EventBase的空构造函数call()一下就可以继承prototype中定义的方法啦？
+//！不行啊
+const EventBase = function () {
+	console.log('EventBase 构造函数');
 };
-clsFunc.prototype = {
-	name: 'defaultName',
+
+EventBase.prototype = {
 	run1: function () {
-		//这里的 this 会指向【实例】（即下方的:c1、c2），this.name值也会按c1、c2而改变
-		console.log(`name:${this.name}`);
-		console.log(this);
+		console.log(`run1()`);
 	}
-}
-
-//可以 new
-var a1 = new clsFunc;
-//VSCode可以感知到 a1.name, a1.run1()
-a1.name = 'a1';
-var a2 = new clsFunc;
-a2.name = 'a2';
-// a1.run1();
-// a2.run1();
-
-///////////////////////////////////////////////////////////////////////////
-
-//Qwen所实现的prototype方式的继承
-console.log('clsFunc2:Qwen所实现的prototype方式的继承');
-const clsFunc2 = function () {
-    clsFunc.call(this); // 继承 clsFunc 的实例属性
-    this.clsName = 'clsFunc2'; // 可以重写或添加新的属性
-};
-// 继承 clsFunc 的原型方法
-clsFunc2.prototype = Object.create(clsFunc.prototype);
-clsFunc2.prototype.constructor = clsFunc2;
-// 可以重写或添加新的方法
-clsFunc2.prototype.run2 = function () {
-    console.log(`This is clsFunc2, name:${this.name}`);
-    console.log(this);
 };
 
-var b1 = new clsFunc2;
-//VSCode 只能感知到 clsFunc2中定义的 b1.clsName, b1.run2()
-//	无法感知到所继承的 clsFunc.name, clsFunc.run2()
-b1.name = 'b1';
-// b1.run1();
-// b1.run2();
-
-///////////////////////////////////////////////////////////////////////////
-
-//先用 class+extends 继承，再用 prototype 来追加新方法
-console.log('clsFunc3:先用 class+extends 继承，再用 prototype 来追加新方法');
-class clsFunc3 extends clsFunc2 {
-	//构造函数
-	constructor() {
-		super(); // 调用父类的构造函数
-		
-	}
-
-	run3 () {
-		console.log(`[run3()] name=${this.name}`);
-	};
+var func1 = function () {
+	console.log('func1()');
 }
-
-clsFunc3.prototype.run4 = function () {
-	console.log(`[run4()] name=${this.name}`);
-}
-
-var c1 = new clsFunc3;
-//VSCode 可以感知到从 clsFunc2.prototype 中定义的 run2()，还可以继续感知到 clsFunc3 自身所增加的 run3(), run4()
-c1.name = 'c1';
-// c1.run1();
-// c1.run3();
-var c2 = new clsFunc3;
-c2.name = 'c2';
-c2.run4.call(c1);
-
-///////////////////////////////////////////////////////////////////////////
-
-
-class clsFunc4 extends clsFunc3{
-	//构造函数
-	constructor() {
-		super(); // 调用父类的构造函数
-		
-	}
-}
-//下面这种直接覆盖prototype的方式是不行的，调用run5()会报`c4.run5 is not a function`错误
-//反而是继承回来的 run2(), run3(), run4() 可以被调用，原因不明（AI也无法解答）
-clsFunc4.prototype = {
-	run5: function() {
-		console.log(`[run5()] name=${this.name}`);
-	},
-}
-
-var d1 = new clsFunc4;
-// d1.run2();
-// d1.run3();
-// d1.run4();
-
-///////////////////////////////////////////////////////////////////////////
-
-
-class cls {
-	name = 'defaultName';
-
-    constructor() {
-        // this.name = 'defaultName';
-    }
-
-    run1() {
-        console.log(`name:${this.name}`);
-        console.log(this);
-    }
-}
-
-var c1 = new cls();
-c1.name = 'c1';
-var c2 = new cls();
-c2.name = 'c2';
-var c3 = new cls();
-
-// c1.run1();
-// c2.run1();
-// c3.run1();
+var a1 = new func1;
+EventBase.call(a1);
+console.log(a1);
+a1.run1();
 
 </script>
 

@@ -1,0 +1,11 @@
+<div>
+	<div v-if="ifVal" >
+		1111:ifVal=true;
+	</div>
+	<div v-else>
+		22222:ifVal=false;
+	</div>
+	<button @click="ifVal = !ifVal">ifVal</button>
+	<button @click="btnAlert" ref="btnRef">按钮</button>
+	<button @click="call_btnRef_click" >按钮click()</button>
+</div>
