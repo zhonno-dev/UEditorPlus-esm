@@ -8,7 +8,7 @@ import dtd from "./core/dtd.js";
 import { domUtils, fillCharReg } from "./core/domUtils.js";
 import domRange from "./core/Range.js";
 import domSelection from "./core/Selection.js";
-import UE_Editor from "./core/Editor.js";
+import cls_Editor from "./core/Editor.cls.js";
 import './core/loadconfig.js';
 import ajax from "./core/ajax.js";
 import api from "./core/api.js";
@@ -32,7 +32,7 @@ UE.EventBase = EventBase;
 /** EventBase =获得对象所拥有监听类型的所有监听器 */
 // UE.getListener = getListener;
 /** UEditor的核心类，为用户提供与编辑器交互的接口 */
-UE.Editor = UE_Editor;
+UE.Editor = cls_Editor;
 /** 提供对ajax请求的支持 */
 UE.ajax = ajax;
 UE.api = api;

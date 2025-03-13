@@ -3,7 +3,7 @@ import { domUtils } from "../core/domUtils.js";
 import uiUtils from "../ui/uiutils.js";
 import UIBase from "../ui/uibase.js";
 import UE from "../UE.js";
-// import UE_Editor from "../core/Editor.js";
+// import cls_Editor from "../core/Editor.cls.js";
 // import UE_ui_Toolbar from "../ui/toolbar.js";
 import cls_UE_ui_Editor from "./cls_UE_ui_Editor.js";
 
@@ -870,7 +870,7 @@ let baidu = {
 	//     var instances = {};
 	//     UE.ui.Editor = function (options) {
 	//         // var editor = new UE.Editor(options);
-	//         var editor = new UE_Editor(options);
+	//         var editor = new cls_Editor(options);
 	//         editor.options.editor = editor;
 	//         utils.loadFile(document, {
 	//             href:
@@ -999,8 +999,8 @@ let baidu = {
 	 */
 	UE.getEditor = function (id, opt) {
 		/**
-		 * @import UE_Editor from "../core/Editor.js";
-		 * @type UE_Editor
+		 * @import cls_Editor from "../core/Editor.cls.js";
+		 * @type cls_Editor
 		 */
 		var editor = instances[id];
 		if (!editor) {
@@ -1014,8 +1014,8 @@ let baidu = {
 
 	UE.delEditor = function (id) {
 		/**
-		 * @import UE_Editor from "../core/Editor.js";
-		 * @type UE_Editor
+		 * @import cls_Editor from "../core/Editor.cls.js";
+		 * @type cls_Editor
 		 */
 		var editor;
 		if ((editor = instances[id])) {

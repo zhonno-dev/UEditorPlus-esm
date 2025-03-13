@@ -1,8 +1,8 @@
-import UE_Editor from "./Editor.js";
+import cls_Editor from "./Editor.cls.js";
 
 (function () {
 //     UE.Editor.prototype.loadServerConfig = function () {
-	UE_Editor.prototype.loadServerConfig = function () {
+	cls_Editor.prototype.loadServerConfig = function () {
         var me = this;
         setTimeout(function () {
 
@@ -66,13 +66,13 @@ import UE_Editor from "./Editor.js";
     };
 
 //     UE.Editor.prototype.isServerConfigLoaded = function () {
-	UE_Editor.prototype.isServerConfigLoaded = function () {
+	cls_Editor.prototype.isServerConfigLoaded = function () {
         var me = this;
         return me._serverConfigLoaded || false;
     };
 
 //     UE.Editor.prototype.afterConfigReady = function (handler) {
-	UE_Editor.prototype.afterConfigReady = function (handler) {
+	cls_Editor.prototype.afterConfigReady = function (handler) {
         if (!handler || !utils.isFunction(handler)) return;
         var me = this;
         var readyHandler = function () {

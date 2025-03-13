@@ -1,4 +1,4 @@
-import UE_Editor from "./Editor.js";
+import cls_Editor from "./Editor.cls.js";
 
 var LocalStorage = ((function () {
 
@@ -34,7 +34,7 @@ export default LocalStorage;
 
     var ROOT_KEY = "UEditorPlusPref";
 
-    UE_Editor.prototype.setPreferences = function (key, value) {
+    cls_Editor.prototype.setPreferences = function (key, value) {
         // console.log('setPreferences', key, value);
         var obj = {};
         if (utils.isString(key)) {
@@ -51,7 +51,7 @@ export default LocalStorage;
         data && LocalStorage.saveLocalData(ROOT_KEY, utils.json2str(data));
     };
 
-    UE_Editor.prototype.getPreferences = function (key) {
+    cls_Editor.prototype.getPreferences = function (key) {
         // console.log('getPreferences', key);
         var data = LocalStorage.getLocalData(ROOT_KEY);
         if (data && (data = utils.str2json(data))) {
@@ -60,7 +60,7 @@ export default LocalStorage;
         return null;
     };
 
-    UE_Editor.prototype.removePreferences = function (key) {
+    cls_Editor.prototype.removePreferences = function (key) {
         // console.log('removePreferences', key);
         var data = LocalStorage.getLocalData(ROOT_KEY);
         if (data && (data = utils.str2json(data))) {

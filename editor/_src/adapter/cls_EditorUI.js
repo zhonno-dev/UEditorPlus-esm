@@ -35,8 +35,8 @@ class cls_EditorUI extends cls_UIBase{
 		this.initUIBase();
 		this._initToolbars();
 		/** 
-		 * @import UE_Editor from "../core/Editor.js"
-		 * @type UE_Editor 
+		 * @import cls_Editor from "../core/Editor.cls.js"
+		 * @type cls_Editor 
 		 */
 		var editor = this.editor,
 			me = this;

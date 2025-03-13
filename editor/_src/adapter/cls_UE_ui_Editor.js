@@ -1,6 +1,6 @@
 //此文件是从原本的 _src/adapter/editor.js 中的 UE.ui.Editor = function (options) 独立​出来的
 
-import UE_Editor from "../core/Editor.js";
+import cls_Editor from "../core/Editor.cls.js";
 import cls_EditorUI from "./cls_EditorUI.js";
 import utils from "../core/utils.js";
 import UE from "../UE.js";
@@ -12,7 +12,7 @@ var instances = UE.instances;
 // 参数options是编辑器的配置项
 const cls_UE_ui_Editor = function (options) {
 	// var editor = new UE.Editor(options);
-	var editor = new UE_Editor(options);
+	var editor = new cls_Editor(options);
 	// 将编辑器实例本身设置为其options的editor属性
 	editor.options.editor = editor;
 	// 加载编辑器的主题样式表
