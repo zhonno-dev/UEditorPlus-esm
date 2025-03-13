@@ -9,7 +9,7 @@ import { domUtils, fillCharReg } from "./core/domUtils.js";
 import domRange from "./core/Range.js";
 import domSelection from "./core/Selection.js";
 import cls_Editor from "./core/Editor.cls.js";
-import './core/loadconfig.js';
+// import './core/loadconfig.js';
 import ajax from "./core/ajax.js";
 import api from "./core/api.js";
 import image from "./core/image.js";

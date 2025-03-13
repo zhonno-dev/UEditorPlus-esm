@@ -1,5 +1,6 @@
 import cls_Editor from "./Editor.cls.js";
 
+//zhu:以下方法已移到 _src/core/Editor.cls.js 本身
 (function () {
 //     UE.Editor.prototype.loadServerConfig = function () {
 	cls_Editor.prototype.loadServerConfig = function () {

@@ -7,6 +7,7 @@ import dtd from "./dtd.js";
 import EventBase from "./EventBase.js";
 import EditorDefaultOptions from "./Editor.defaultoptions.js";
 import UE from "../UE.js";
+import LocalStorage from "./localstorage.js";
 import browser from "./browser.js";
 const { ie, webkit, gecko, opera } = browser;
 
@@ -212,6 +213,8 @@ function langReadied(me) {
  * @see UE.Config
  */
 
+/** 应该改为 cls_Editor.ROOT_KEY */
+var ROOT_KEY = "UEditorPlusPref";
 
 /**
  * 编辑器主类，包含编辑器提供的大部分公用接口
@@ -230,56 +233,62 @@ function langReadied(me) {
  * @see UE.Config
  * @since 1.2.6.1
  */
-const cls_Editor = function (options) {
-	/** @type cls_Editor */
-	var me = this;
-	me.uid = uid++;
-	// EventBase.call(me); //zhu:这句其实是没用的
-	// console.log(me.addListener);
-	me.commands = {};
-	me.options = utils.extend(utils.clone(options || {}), UE.UEDITOR_CONFIG, true);
-	me.shortcutkeys = {};
-	me.inputRules = [];
-	me.outputRules = [];
-	//设置默认的常用属性
-	// me.setOpt(cls_Editor.defaultOptions(me));
-	me.setOpt(EditorDefaultOptions(me));
+class cls_Editor extends EventBase {
+	/**
+	 * 构造函数
+	 */
+	constructor(options) {
+		super(); // 调用父类的构造函数
 
-	/* 尝试异步加载后台配置 */
-	me.loadServerConfig();
+		/** @type cls_Editor */
+		var me = this;
+		me.uid = uid++;
+		// EventBase.call(me); //zhu:这句其实是没用的
+		// console.log(me.addListener);
+		me.commands = {};
+		me.options = utils.extend(utils.clone(options || {}), UE.UEDITOR_CONFIG, true);
+		me.shortcutkeys = {};
+		me.inputRules = [];
+		me.outputRules = [];
+		//设置默认的常用属性
+		// me.setOpt(cls_Editor.defaultOptions(me));
+		me.setOpt(EditorDefaultOptions(me));
 
-	if (!utils.isEmptyObject(UE.I18N)) {
-		//修改默认的语言类型
-		me.options.lang = checkCurLang(UE.I18N);
-		UE.plugin.load(me);
-		langReadied(me);
-	} else {
-		utils.loadFile(
-			document,
-			{
-				src:
-					me.options.langPath +
-					me.options.lang +
-					"/" +
-					me.options.lang +
-					".js?{timestamp:dist/lang/zh-cn/zh-cn.js}",
-				tag: "script",
-				type: "text/javascript",
-				defer: "defer"
-			},
-			function () {
-				UE.plugin.load(me);
-				langReadied(me);
-			}
-		);
+		/* 尝试异步加载后台配置 */
+		me.loadServerConfig();
+
+		if (!utils.isEmptyObject(UE.I18N)) {
+			//修改默认的语言类型
+			me.options.lang = checkCurLang(UE.I18N);
+			UE.plugin.load(me);
+			langReadied(me);
+		} else {
+			utils.loadFile(
+				document,
+				{
+					src:
+						me.options.langPath +
+						me.options.lang +
+						"/" +
+						me.options.lang +
+						".js?{timestamp:dist/lang/zh-cn/zh-cn.js}",
+					tag: "script",
+					type: "text/javascript",
+					defer: "defer"
+				},
+				function () {
+					UE.plugin.load(me);
+					langReadied(me);
+				}
+			);
+		}
+
+		UE.instants["ueditorInstant" + me.uid] = me;
 	}
 
-	UE.instants["ueditorInstant" + me.uid] = me;
-}
-cls_Editor.prototype = {
-	registerCommand: function (name, obj) {
+	registerCommand(name, obj) {
 		this.commands[name] = obj;
-	},
+	};
 	/**
 	 * 编辑器对外提供的监听ready事件的接口， 通过调用该方法，达到的效果与监听ready事件是一致的
 	 * @method ready
@@ -294,12 +303,12 @@ cls_Editor.prototype = {
 	 * ```
 	 * @see UE.Editor.event:ready
 	 */
-	ready: function (fn) {
+	ready(fn) {
 		var me = this;
 		if (fn) {
 			me.isReady ? fn.apply(me) : me.addListener("ready", fn);
 		}
-	},
+	};
 
 	/**
 	 * 该方法是提供给插件里面使用，设置配置项默认值
@@ -327,7 +336,7 @@ cls_Editor.prototype = {
 	 * } );
 	 * ```
 	 */
-	setOpt: function (key, val) {
+	setOpt(key, val) {
 		var obj = {};
 		if (utils.isString(key)) {
 			obj[key] = val;
@@ -335,10 +344,10 @@ cls_Editor.prototype = {
 			obj = key;
 		}
 		utils.extend(this.options, obj, true);
-	},
-	getOpt: function (key) {
+	};
+	getOpt(key) {
 		return this.options[key];
-	},
+	};
 	/**
 	 * 销毁编辑器实例，使用textarea代替
 	 * @method destroy
@@ -347,7 +356,7 @@ cls_Editor.prototype = {
 	 * editor.destroy();
 	 * ```
 	 */
-	destroy: function () {
+	destroy() {
 		var me = this;
 		me.fireEvent("destroy");
 		var container = me.container.parentNode;
@@ -373,7 +382,7 @@ cls_Editor.prototype = {
 			}
 		}
 		UE.delEditor(key);
-	},
+	};
 
 	/**
 	 * 渲染编辑器的DOM到指定容器
@@ -390,7 +399,7 @@ cls_Editor.prototype = {
 	 * @remind 执行该方法,会触发ready事件
 	 * @warning 必须且只能调用一次
 	 */
-	render: function (container) {
+	render(container) {
 		var me = this,
 			options = me.options,
 			getStyleValue = function (attr) {
@@ -503,7 +512,7 @@ cls_Editor.prototype = {
 				}
 			});
 		}
-	},
+	};
 
 	/**
 	 * 编辑器初始化
@@ -511,7 +520,7 @@ cls_Editor.prototype = {
 	 * @private
 	 * @param { Element } doc 编辑器Iframe中的文档对象
 	 */
-	_setup: function (doc) {
+	_setup(doc) {
 		var me = this,
 			options = me.options;
 		if (ie) {
@@ -640,7 +649,7 @@ cls_Editor.prototype = {
 
 		!options.isShow && me.setHide();
 		options.readonly && me.setDisabled();
-	},
+	};
 
 	/**
 	 * 同步数据到编辑器所在的form
@@ -660,7 +669,7 @@ cls_Editor.prototype = {
 	 * @method sync
 	 * @param { String } formID 指定一个要同步数据的form的id,编辑器的数据会同步到你指定form下
 	 */
-	sync: function (formId) {
+	sync(formId) {
 		var me = this,
 			form = formId
 				? document.getElementById(formId)
@@ -672,24 +681,24 @@ cls_Editor.prototype = {
 					true
 				);
 		form && setValue(form, me);
-	},
+	};
 
 	/**
 	 * 手动触发更新按钮栏状态
 	 */
-	syncCommandState: function () {
+	syncCommandState() {
 		this.fireEvent("selectionchange");
-	},
+	};
 
 	/**
 	 * 设置编辑器宽度
 	 * @param width
 	 */
-	setWidth: function (width) {
+	setWidth(width) {
 		if (width !== parseInt(this.iframe.parentNode.parentNode.style.width)) {
 			this.iframe.parentNode.parentNode.style.width = width + "px";
 		}
-	},
+	};
 
 	/**
 	 * 设置编辑器高度
@@ -701,7 +710,7 @@ cls_Editor.prototype = {
 	 * editor.setHeight(number);
 	 * ```
 	 */
-	setHeight: function (height, notSetHeight) {
+	setHeight(height, notSetHeight) {
 		if (height !== parseInt(this.iframe.parentNode.style.height)) {
 			this.iframe.parentNode.style.height = height + "px";
 		}
@@ -709,7 +718,7 @@ cls_Editor.prototype = {
 			(this.options.minFrameHeight = this.options.initialFrameHeight = height);
 		this.body.style.height = height + "px";
 		!notSetHeight && this.trigger("setHeight");
-	},
+	};
 
 	/**
 	 * 为编辑器的编辑命令提供快捷键
@@ -734,7 +743,7 @@ cls_Editor.prototype = {
 	 * editor.addshortcutkey("Underline", "ctrl+85"); //^U
 	 * ```
 	 */
-	addshortcutkey: function (cmd, keys) {
+	addshortcutkey(cmd, keys) {
 		var obj = {};
 		if (keys) {
 			obj[cmd] = keys;
@@ -742,14 +751,14 @@ cls_Editor.prototype = {
 			obj = cmd;
 		}
 		utils.extend(this.shortcutkeys, obj);
-	},
+	};
 
 	/**
 	 * 对编辑器设置keydown事件监听，绑定快捷键和命令，当快捷键组合触发成功，会响应对应的命令
 	 * @method _bindshortcutKeys
 	 * @private
 	 */
-	_bindshortcutKeys: function () {
+	_bindshortcutKeys() {
 		var me = this,
 			shortcutkeys = this.shortcutkeys;
 		me.addListener("keydown", function (type, e) {
@@ -791,7 +800,7 @@ cls_Editor.prototype = {
 				}
 			}
 		});
-	},
+	};
 
 	/**
 	 * 获取编辑器的内容
@@ -823,7 +832,7 @@ cls_Editor.prototype = {
 	 * } );
 	 * ```
 	 */
-	getContent: function (cmd, fn, notSetCursor, ignoreBlank, formatter) {
+	getContent(cmd, fn, notSetCursor, ignoreBlank, formatter) {
 		var me = this;
 		if (cmd && utils.isFunction(cmd)) {
 			fn = cmd;
@@ -837,7 +846,7 @@ cls_Editor.prototype = {
 		me.filterOutputRule(root);
 		me.fireEvent("aftergetcontent", cmd, root);
 		return root.toHtml(formatter);
-	},
+	};
 
 	/**
 	 * 取得完整的html代码，可以直接显示成完整的html文档
@@ -848,7 +857,7 @@ cls_Editor.prototype = {
 	 * editor.getAllHtml(); //返回格式大致是: <html><head>...</head><body>...</body></html>
 	 * ```
 	 */
-	getAllHtml: function () {
+	getAllHtml() {
 		var me = this,
 			headHtml = [],
 			html = "";
@@ -881,7 +890,7 @@ cls_Editor.prototype = {
 			me.getContent(null, null, true) +
 			"</body></html>"
 		);
-	},
+	};
 
 	/**
 	 * 得到编辑器的纯文本内容，但会保留段落格式
@@ -893,7 +902,7 @@ cls_Editor.prototype = {
 	 * console.log(editor.getPlainTxt()); //输出:"1\n2\n
 	 * ```
 	 */
-	getPlainTxt: function () {
+	getPlainTxt() {
 		var reg = new RegExp(domUtils.fillChar, "g"),
 			html = this.body.innerHTML.replace(/[\n\r]/g, ""); //ie要先去了\n在处理
 		html = html
@@ -908,7 +917,7 @@ cls_Editor.prototype = {
 			.replace(reg, "")
 			.replace(/\u00a0/g, " ")
 			.replace(/&nbsp;/g, " ");
-	},
+	};
 
 	/**
 	 * 获取编辑器中的纯文本内容,没有段落格式
@@ -920,13 +929,13 @@ cls_Editor.prototype = {
 	 * console.log(editor.getPlainTxt()); //输出:"12
 	 * ```
 	 */
-	getContentTxt: function () {
+	getContentTxt() {
 		var reg = new RegExp(domUtils.fillChar, "g");
 		//取出来的空格会有c2a0会变成乱码，处理这种情况\u00a0
 		return this.body[browser.ie ? "innerText" : "textContent"]
 			.replace(reg, "")
 			.replace(/\u00a0/g, " ");
-	},
+	};
 
 	/**
 	 * 设置编辑器的内容，可修改编辑器当前的html内容
@@ -954,7 +963,7 @@ cls_Editor.prototype = {
 	 * editor.setContent('<p>new text</p>', true); //插入的结果是<p>old text</p><p>new text</p>
 	 * ```
 	 */
-	setContent: function (html, isAppendTo, notFireSelectionchange) {
+	setContent(html, isAppendTo, notFireSelectionchange) {
 		var me = this;
 
 		me.fireEvent("beforesetcontent", html);
@@ -1026,7 +1035,7 @@ cls_Editor.prototype = {
 		if (me.options.autoSyncData) {
 			me.form && setValue(me.form, me);
 		}
-	},
+	};
 
 	/**
 	 * 让编辑器获得焦点，默认focus到编辑器头部
@@ -1046,7 +1055,7 @@ cls_Editor.prototype = {
 	 * editor.focus(true)
 	 * ```
 	 */
-	focus: function (toEnd) {
+	focus(toEnd) {
 		try {
 			var me = this,
 				rng = me.selection.getRange();
@@ -1078,11 +1087,11 @@ cls_Editor.prototype = {
 			this.fireEvent("focus selectionchange");
 		} catch (e) {
 		}
-	},
-	isFocus: function () {
+	};
+	isFocus() {
 		return this.selection.isFocus();
-	},
-	blur: function () {
+	};
+	blur() {
 		var sel = this.selection.getNative();
 		if (sel.empty && browser.ie) {
 			var nativeRng = document.body.createTextRange();
@@ -1095,13 +1104,13 @@ cls_Editor.prototype = {
 		}
 
 		//this.fireEvent('blur selectionchange');
-	},
+	};
 	/**
 	 * 初始化UE事件及部分事件代理
 	 * @method _initEvents
 	 * @private
 	 */
-	_initEvents: function () {
+	_initEvents() {
 		var me = this,
 			doc = me.document,
 			win = me.window;
@@ -1161,7 +1170,7 @@ cls_Editor.prototype = {
 			if (evt.button === 2) return;
 			me._selectionChange(250, evt);
 		});
-	},
+	};
 	/**
 	 * 触发事件代理
 	 * @method _proxyDomEvent
@@ -1169,7 +1178,7 @@ cls_Editor.prototype = {
 	 * @return { * } fireEvent的返回值
 	 * @see UE.EventBase:fireEvent(String)
 	 */
-	_proxyDomEvent: function (evt) {
+	_proxyDomEvent(evt) {
 		if (
 			this.fireEvent("before" + evt.type.replace(/^on/, "").toLowerCase()) ===
 			false
@@ -1182,13 +1191,13 @@ cls_Editor.prototype = {
 		return this.fireEvent(
 			"after" + evt.type.replace(/^on/, "").toLowerCase()
 		);
-	},
+	};
 	/**
 	 * 变化选区
 	 * @method _selectionChange
 	 * @private
 	 */
-	_selectionChange: function (delay, evt) {
+	_selectionChange(delay, evt) {
 		var me = this;
 		//有光标才做selectionchange 为了解决未focus时点击source不能触发更改工具栏状态的问题（source命令notNeedUndo=1）
 		//            if ( !me.selection.isFocus() ){
@@ -1240,7 +1249,7 @@ cls_Editor.prototype = {
 				me.selection.clear();
 			}
 		}, delay || 50);
-	},
+	};
 
 	/**
 	 * 执行编辑命令
@@ -1250,7 +1259,7 @@ cls_Editor.prototype = {
 	 * @param { * } args 传给命令函数的参数
 	 * @return { * } 返回命令函数运行的返回值
 	 */
-	_callCmdFn: function (fnName, args) {
+	_callCmdFn(fnName, args) {
 		var cmdName = args[0].toLowerCase(),
 			cmd,
 			cmdFn;
@@ -1262,7 +1271,7 @@ cls_Editor.prototype = {
 		} else if (cmdFn) {
 			return cmdFn.apply(this, args);
 		}
-	},
+	};
 
 	/**
 	 * 执行编辑命令cmdName，完成富文本编辑效果
@@ -1275,7 +1284,7 @@ cls_Editor.prototype = {
 	 * editor.execCommand(cmdName);
 	 * ```
 	 */
-	execCommand: function (cmdName) {
+	execCommand(cmdName) {
 		cmdName = cmdName.toLowerCase();
 		var me = this,
 			result,
@@ -1313,7 +1322,7 @@ cls_Editor.prototype = {
 			!me._ignoreContentChange &&
 			me._selectionChange();
 		return result;
-	},
+	};
 
 	/**
 	 * 根据传入的command命令，查选编辑器当前的选区，返回命令的状态
@@ -1327,9 +1336,9 @@ cls_Editor.prototype = {
 	 * ```
 	 * @see COMMAND.LIST
 	 */
-	queryCommandState: function (cmdName) {
+	queryCommandState(cmdName) {
 		return this._callCmdFn("queryCommandState", arguments);
-	},
+	};
 
 	/**
 	 * 根据传入的command命令，查选编辑器当前的选区，根据命令返回相关的值
@@ -1341,9 +1350,9 @@ cls_Editor.prototype = {
 	 * @grammar editor.queryCommandValue(cmdName)  =>  {*}
 	 * @see COMMAND.LIST
 	 */
-	queryCommandValue: function (cmdName) {
+	queryCommandValue(cmdName) {
 		return this._callCmdFn("queryCommandValue", arguments);
-	},
+	};
 
 	/**
 	 * 检查编辑区域中是否有内容
@@ -1367,7 +1376,7 @@ cls_Editor.prototype = {
 	 * editor.hasContents(['span']);
 	 * ```
 	 */
-	hasContents: function (tags) {
+	hasContents(tags) {
 		if (tags) {
 			for (var i = 0, ci; (ci = tags[i++]);) {
 				if (this.document.getElementsByTagName(ci).length > 0) {
@@ -1397,7 +1406,7 @@ cls_Editor.prototype = {
 			}
 		}
 		return false;
-	},
+	};
 
 	/**
 	 * 重置编辑器，可用来做多个tab 使用同一个编辑器实例
@@ -1408,11 +1417,10 @@ cls_Editor.prototype = {
 	 * editor.reset()
 	 * ```
 	 */
-	reset: function () {
+	reset() {
 		this.clear();
 		this.fireEvent("reset");
-	},
-
+	};
 	/**
 	 * 清空编辑器内容
 	 * @method clear
@@ -1422,9 +1430,9 @@ cls_Editor.prototype = {
 	 * editor.clear()
 	 * ```
 	 */
-	clear: function () {
+	clear() {
 		this.setContent("");
-	},
+	};
 
 	/**
 	 * 设置当前编辑区域可以编辑
@@ -1434,7 +1442,7 @@ cls_Editor.prototype = {
 	 * editor.setEnabled()
 	 * ```
 	 */
-	setEnabled: function () {
+	setEnabled() {
 		var me = this,
 			range;
 		if (me.body.contentEditable === "false") {
@@ -1458,10 +1466,10 @@ cls_Editor.prototype = {
 			}
 			me.fireEvent("selectionchange");
 		}
-	},
-	enable: function () {
+	};
+	enable() {
 		return this.setEnabled();
-	},
+	};
 
 	/** 设置当前编辑区域不可编辑
 	 * @method setDisabled
@@ -1486,7 +1494,7 @@ cls_Editor.prototype = {
 	 * editor.setDisabled(['bold','insertimage']); //禁用工具栏中除加粗和插入图片之外的所有功能
 	 * ```
 	 */
-	setDisabled: function (except) {
+	setDisabled(except) {
 		var me = this;
 		except = except ? (utils.isArray(except) ? except : [except]) : [];
 		if (me.body.contentEditable == "true") {
@@ -1510,18 +1518,22 @@ cls_Editor.prototype = {
 			};
 			me.fireEvent("selectionchange");
 		}
-	},
-	disable: function (except) {
+	};
+	disable(except) {
 		return this.setDisabled(except);
-	},
+	};
 
 	/**
 	 * 设置默认内容
+	 * //zhu: 此方法修改了一下定义风格，如果出现问题可到 Editor.bak.js 中查看原本的风格
 	 * @method _setDefaultContent
 	 * @private
 	 * @param  { String } cont 要存入的内容
 	 */
-	_setDefaultContent: (function () {
+	_setDefaultContent(cont) {
+		var me = this;
+		me.body.innerHTML = '<p id="initContent">' + cont + "</p>";
+
 		function clear() {
 			var me = this;
 			if (me.document.getElementById("initContent")) {
@@ -1533,14 +1545,9 @@ cls_Editor.prototype = {
 				}, 0);
 			}
 		}
+		me.addListener("firstBeforeExecCommand focus", clear);
+	}
 
-		return function (cont) {
-			var me = this;
-			me.body.innerHTML = '<p id="initContent">' + cont + "</p>";
-
-			me.addListener("firstBeforeExecCommand focus", clear);
-		};
-	})(),
 
 	/**
 	 * 显示编辑器
@@ -1550,7 +1557,7 @@ cls_Editor.prototype = {
 	 * editor.setShow()
 	 * ```
 	 */
-	setShow: function () {
+	setShow() {
 		var me = this,
 			range = me.selection.getRange();
 		if (me.container.style.display == "none") {
@@ -1567,10 +1574,10 @@ cls_Editor.prototype = {
 			}, 100);
 			me.container.style.display = "";
 		}
-	},
-	show: function () {
+	}
+	show() {
 		return this.setShow();
-	},
+	}
 	/**
 	 * 隐藏编辑器
 	 * @method setHide
@@ -1579,16 +1586,16 @@ cls_Editor.prototype = {
 	 * editor.setHide()
 	 * ```
 	 */
-	setHide: function () {
+	setHide() {
 		var me = this;
 		if (!me.lastBk) {
 			me.lastBk = me.selection.getRange().createBookmark(true);
 		}
 		me.container.style.display = "none";
-	},
-	hide: function () {
+	}
+	hide() {
 		return this.setHide();
-	},
+	}
 
 	/**
 	 * 根据指定的路径，获取对应的语言资源
@@ -1600,7 +1607,7 @@ cls_Editor.prototype = {
 	 * editor.getLang('contextMenu.delete'); //如果当前是中文，那返回是的是'删除'
 	 * ```
 	 */
-	getLang: function (path) {
+	getLang(path) {
 		var lang = UE.I18N[this.options.lang];
 		if (!lang) {
 			throw Error("not import language file");
@@ -1611,7 +1618,7 @@ cls_Editor.prototype = {
 			if (!lang) break;
 		}
 		return lang;
-	},
+	}
 
 	/**
 	 * 计算编辑器html内容字符串的长度
@@ -1634,7 +1641,7 @@ cls_Editor.prototype = {
 	 * editor.getContentLength() //返回3
 	 * ```
 	 */
-	getContentLength: function (ingoneHtml, tagNames) {
+	getContentLength(ingoneHtml, tagNames) {
 		var count = this.getContent(false, false, true).length;
 		if (ingoneHtml) {
 			tagNames = (tagNames || []).concat(["hr", "img", "iframe"]);
@@ -1644,14 +1651,14 @@ cls_Editor.prototype = {
 			}
 		}
 		return count;
-	},
+	}
 
-	getScrollTop: function () {
+	getScrollTop() {
 		return Math.max(this.document.documentElement.scrollTop, this.document.body.scrollTop);
-	},
-	getScrollLeft: function () {
+	}
+	getScrollLeft() {
 		return Math.max(this.document.documentElement.scrollLeft, this.document.body.scrollLeft);
-	},
+	}
 
 	/**
 	 * 注册输入过滤规则
@@ -1666,9 +1673,9 @@ cls_Editor.prototype = {
 	 * });
 	 * ```
 	 */
-	addInputRule: function (rule) {
+	addInputRule(rule) {
 		this.inputRules.push(rule);
-	},
+	}
 
 	/**
 	 * 执行注册的过滤规则
@@ -1681,11 +1688,11 @@ cls_Editor.prototype = {
 	 * ```
 	 * @see UE.Editor:addInputRule
 	 */
-	filterInputRule: function (root) {
+	filterInputRule(root) {
 		for (var i = 0, ci; (ci = this.inputRules[i++]);) {
 			ci.call(this, root);
 		}
-	},
+	}
 
 	/**
 	 * 注册输出过滤规则
@@ -1700,9 +1707,9 @@ cls_Editor.prototype = {
 	 * });
 	 * ```
 	 */
-	addOutputRule: function (rule) {
+	addOutputRule(rule) {
 		this.outputRules.push(rule);
-	},
+	}
 
 	/**
 	 * 根据输出过滤规则，过滤编辑器内容
@@ -1715,11 +1722,11 @@ cls_Editor.prototype = {
 	 * ```
 	 * @see UE.Editor:addOutputRule
 	 */
-	filterOutputRule: function (root) {
+	filterOutputRule(root) {
 		for (var i = 0, ci; (ci = this.outputRules[i++]);) {
 			ci.call(this, root);
 		}
-	},
+	}
 
 	/**
 	 * 根据action名称获取请求的路径
@@ -1734,7 +1741,7 @@ cls_Editor.prototype = {
 	 * editor.getActionUrl('imageManager'); //返回 "/ueditor/php/controller.php?action=listimage"
 	 * ```
 	 */
-	getActionUrl: function (action) {
+	getActionUrl(action) {
 		var serverUrl = this.getOpt("serverUrl");
 		if (!action) {
 			return serverUrl;
@@ -1756,11 +1763,143 @@ cls_Editor.prototype = {
 			return "";
 		}
 	}
-};
 
-utils.inherits(cls_Editor, EventBase);
+	defaultOptions(editor) {
+		return EditorDefaultOptions(editor);
+	}
+
+	////////////////////////////////////
+	//	以下方法原本在 _src/core/loadconfig.js 中，移到此处
+	////////////////////////////////////
+
+	loadServerConfig() {
+		var me = this;
+		setTimeout(function () {
+
+			if (me.options.loadConfigFromServer === false) {
+				return;
+			}
+
+			try {
+				me.options.imageUrl &&
+					me.setOpt(
+						"serverUrl",
+						me.options.imageUrl.replace(
+							/^(.*[\/]).+([\.].+)$/,
+							"$1controller$2"
+						)
+					);
+
+				var configUrl = me.getActionUrl("config"),
+					isJsonp = utils.isCrossDomainUrl(configUrl);
+
+				/* 发出ajax请求 */
+				me._serverConfigLoaded = false;
+
+				configUrl &&
+					UE.ajax.request(configUrl, {
+						method: "GET",
+						dataType: isJsonp ? "jsonp" : "",
+						headers: me.options.serverHeaders || {},
+						onsuccess: function (r) {
+							try {
+								var config = isJsonp ? r : eval("(" + r.responseText + ")");
+								config = me.options.serverResponsePrepare(config);
+								// console.log('me.options.before', me.options.audioConfig);
+								me.options = utils.merge(me.options, config);
+								// console.log('server.config', config.audioConfig);
+								// console.log('me.options.after', me.options.audioConfig);
+								me.fireEvent("serverConfigLoaded");
+								me._serverConfigLoaded = true;
+							} catch (e) {
+								showErrorMsg(me.getLang("loadconfigFormatError"));
+							}
+						},
+						onerror: function () {
+							showErrorMsg(me.getLang("loadconfigHttpError"));
+						}
+					});
+
+
+			} catch (e) {
+				showErrorMsg(me.getLang("loadconfigError"));
+			}
+		});
+
+		function showErrorMsg(msg) {
+			console && console.error(msg);
+			//me.fireEvent('showMessage', {
+			//    'title': msg,
+			//    'type': 'error'
+			//});
+		}
+	}
+
+	isServerConfigLoaded() {
+		var me = this;
+		return me._serverConfigLoaded || false;
+	}
+
+	afterConfigReady(handler) {
+		if (!handler || !utils.isFunction(handler)) return;
+		var me = this;
+		var readyHandler = function () {
+			handler.apply(me, arguments);
+			me.removeListener("serverConfigLoaded", readyHandler);
+		};
+
+		if (me.isServerConfigLoaded()) {
+			handler.call(me, "serverConfigLoaded");
+		} else {
+			me.addListener("serverConfigLoaded", readyHandler);
+		}
+	}
+
+	
+	////////////////////////////////////
+	//	以下方法原本在 /_src/core/localstorage.js 中，移到此处
+	////////////////////////////////////
+	setPreferences(key, value) {
+		// console.log('setPreferences', key, value);
+		var obj = {};
+		if (utils.isString(key)) {
+		    obj[key] = value;
+		} else {
+		    obj = key;
+		}
+		var data = LocalStorage.getLocalData(ROOT_KEY);
+		if (data && (data = utils.str2json(data))) {
+		    utils.extend(data, obj);
+		} else {
+		    data = obj;
+		}
+		data && LocalStorage.saveLocalData(ROOT_KEY, utils.json2str(data));
+	    };
+	
+	    getPreferences(key) {
+		// console.log('getPreferences', key);
+		var data = LocalStorage.getLocalData(ROOT_KEY);
+		if (data && (data = utils.str2json(data))) {
+		    return key ? data[key] : data;
+		}
+		return null;
+	    };
+	
+	    removePreferences(key) {
+		// console.log('removePreferences', key);
+		var data = LocalStorage.getLocalData(ROOT_KEY);
+		if (data && (data = utils.str2json(data))) {
+		    data[key] = undefined;
+		    delete data[key];
+		}
+		data && LocalStorage.saveLocalData(ROOT_KEY, utils.json2str(data));
+	    };
+
+}
+
+// utils.inherits(cls_Editor, EventBase);
 
 // cls_Editor.defaultOptions = EditorDefaultOptions;
-cls_Editor.defaultOptions = EditorDefaultOptions;
+// cls_Editor.defaultOptions = EditorDefaultOptions;
 
 export default cls_Editor;
