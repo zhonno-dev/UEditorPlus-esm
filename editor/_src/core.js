@@ -3,7 +3,7 @@ import UE from "./UE.js";
 //core/
 import browser from "./core/browser.js"; //浏览器检测的模块
 import utils from "./core/utils.js";
-import { EventBase, getListener } from "./core/EventBase.js";
+import EventBase from "./core/EventBase.js";
 import dtd from "./core/dtd.js";
 import { domUtils, fillCharReg } from "./core/domUtils.js";
 import domRange from "./core/Range.js";
@@ -30,7 +30,7 @@ UE.utils = utils;
 /** UE采用的事件基类 */
 UE.EventBase = EventBase;
 /** EventBase =获得对象所拥有监听类型的所有监听器 */
-UE.getListener = getListener;
+// UE.getListener = getListener;
 /** UEditor的核心类，为用户提供与编辑器交互的接口 */
 UE.Editor = UE_Editor;
 /** 提供对ajax请求的支持 */

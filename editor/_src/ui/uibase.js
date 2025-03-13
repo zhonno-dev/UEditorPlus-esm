@@ -1,6 +1,6 @@
 import utils from "../core/utils.js";
 import uiUtils from "./uiutils.js";
-import { EventBase } from "../core/EventBase.js";
+import EventBase from "../core/EventBase.js";
 import { domUtils } from "../core/domUtils.js";
 
 var UE_ui_UIBase;

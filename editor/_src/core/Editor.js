@@ -4,7 +4,7 @@ import utils from "./utils.js";
 import domSelection from "./Selection.js";
 import { domUtils } from "./domUtils.js";
 import dtd from "./dtd.js";
-import { EventBase } from "./EventBase.js";
+import EventBase from "./EventBase.js";
 import EditorDefaultOptions from "./Editor.defaultoptions.js";
 import UE from "../UE.js";
 import browser from "./browser.js";
