@@ -1,3 +1,5 @@
+
+
 import utils from "./utils.js";
 import domSelection from "./Selection.js";
 import { domUtils } from "./domUtils.js";
@@ -232,7 +234,8 @@ const UE_Editor = function (options) {
 	/** @type UE_Editor */
 	var me = this;
 	me.uid = uid++;
-	EventBase.call(me);
+	// EventBase.call(me); //zhu:这句其实是没用的
+	// console.log(me.addListener);
 	me.commands = {};
 	me.options = utils.extend(utils.clone(options || {}), UE.UEDITOR_CONFIG, true);
 	me.shortcutkeys = {};

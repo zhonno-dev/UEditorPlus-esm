@@ -1,3 +1,6 @@
+//此文件是从原本的 _src/adapter/editor.js 中的 function EditorUI(options) { 独立​出来的
+
+
 import utils from "../core/utils.js";
 import UIBase from "../ui/uibase.js";
 import UE_ui_Toolbar from "../ui/toolbar.js";

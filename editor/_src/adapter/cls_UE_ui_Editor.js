@@ -1,3 +1,5 @@
+//此文件是从原本的 _src/adapter/editor.js 中的 UE.ui.Editor = function (options) 独立​出来的
+
 import UE_Editor from "../core/Editor.js";
 import EditorUI from "./cls_EditorUI.js";
 import utils from "../core/utils.js";
