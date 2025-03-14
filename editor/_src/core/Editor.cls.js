@@ -8,6 +8,7 @@ import EventBase from "./EventBase.js";
 import EditorDefaultOptions from "./Editor.defaultoptions.js";
 import UE from "../UE.js";
 import LocalStorage from "./localstorage.js";
+import htmlparser from "./htmlparser.js";
 import browser from "./browser.js";
 // import cls_EditorUI from "../adapter/cls_EditorUI.js";
 const { ie, webkit, gecko, opera } = browser;
@@ -486,6 +487,7 @@ class cls_Editor extends EventBase {
 					"'></script>"
 					: "") +
 				"</html>";
+			// console.log(html);
 
 			container.appendChild(
 				domUtils.createElement(document, "iframe", {
@@ -851,7 +853,7 @@ class cls_Editor extends EventBase {
 			return "";
 		}
 		me.fireEvent("beforegetcontent");
-		var root = UE.htmlparser(me.body.innerHTML, ignoreBlank);
+		var root = htmlparser(me.body.innerHTML, ignoreBlank);
 		me.filterOutputRule(root);
 		me.fireEvent("aftergetcontent", cmd, root);
 		return root.toHtml(formatter);
@@ -973,10 +975,12 @@ class cls_Editor extends EventBase {
 	 * ```
 	 */
 	setContent(html, isAppendTo, notFireSelectionchange) {
+		console.log(html);
 		var me = this;
 
 		me.fireEvent("beforesetcontent", html);
-		var root = UE.htmlparser(html);
+		var root = htmlparser(html);
+		console.log(root);
 		me.filterInputRule(root);
 		html = root.toHtml();
 
