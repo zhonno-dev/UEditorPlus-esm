@@ -1,20 +1,23 @@
 import { domUtils } from "./domUtils.js";
+
 /**
- * html字符串转换成uNode节点的静态方法
  * html字符串转换成uNode节点
- * @module UE
- * @method htmlparser
- * @param { String } htmlstr 要转换的html代码
- * @param { Boolean } ignoreBlank 若设置为true，转换的时候忽略\n\r\t等空白字符
- * @return { uNode } 给定的html片段转换形成的uNode对象
+ * 
+ * 该函数将给定的HTML字符串转换为一个树形结构，以便于进一步处理和操作
+ * 它会根据HTML标签、属性和内容创建一个节点树，其中包含了所有元素、属性和文本内容
+ * 
+ * @param {string} htmlstr - 需要解析的HTML字符串
+ * @param {boolean} ignoreBlank - 是否忽略空白字符，包括空格、换行符等；若设置为true，转换的时候忽略\n\r\t等空白字符
+ * @returns {UE.uNode} 给定的html片段转换形成的uNode对象
  * @since 1.2.6.1
  * @example
  * ```javascript
  * var root = UE.htmlparser('<p><b>htmlparser</b></p>', true);
  * ```
  */
-
 function htmlparser(htmlstr, ignoreBlank) {
+	// 正则表达式，用于匹配HTML标签和属性
+	// 这里的正则表达式经过多次修改，以适应不同的HTML格式和需求
 	//todo 原来的方式  [^"'<>\/] 有\/就不能配对上 <TD vAlign=top background=../AAA.JPG> 这样的标签了
 	//先去掉了，加上的原因忘了，这里先记录
 	//var re_tag = /<(?:(?:\/([^>]+)>)|(?:!--([\S|\s]*?)-->)|(?:([^\s\/<>]+)\s*((?:(?:"[^"]*")|(?:'[^']*')|[^"'<>])*)\/?>))/g,
@@ -24,6 +27,7 @@ function htmlparser(htmlstr, ignoreBlank) {
 		re_attr = /([\w\-:.]+)(?:(?:\s*=\s*(?:(?:"([^"]*)")|(?:'([^']*)')|([^\s>]+)))|(?=\s|$))/g;
 
 	//ie下取得的html可能会有\n存在，要去掉，在处理replace(/[\t\r\n]*/g,'');代码高量的\n不能去除
+	// 允许存在的空标签，这些标签在解析时不会被忽略
 	var allowEmptyTags = {
 		b: 1,
 		code: 1,
@@ -48,7 +52,11 @@ function htmlparser(htmlstr, ignoreBlank) {
 		br: 1,
 		pre: 1
 	};
+
+	// 移除HTML字符串中的特定字符，以确保解析的准确性
 	htmlstr = htmlstr.replace(new RegExp(domUtils.fillChar, "g"), "");
+
+	// 如果不忽略空白字符，则对HTML字符串进行进一步处理，以移除多余的空白字符
 	if (!ignoreBlank) {
 		htmlstr = htmlstr.replace(
 			new RegExp(
@@ -74,30 +82,40 @@ function htmlparser(htmlstr, ignoreBlank) {
 		);
 	}
 
+	// 不需要转换的属性，直接使用原始值
 	var notTransAttrs = {
 		href: 1,
 		src: 1
 	};
 
-	var uNode = UE.uNode,
-		needParentNode = {
-			td: "tr",
-			tr: ["tbody", "thead", "tfoot"],
-			tbody: "table",
-			th: "tr",
-			thead: "table",
-			tfoot: "table",
-			caption: "table",
-			li: ["ul", "ol"],
-			dt: "dl",
-			dd: "dl",
-			option: "select"
-		},
-		needChild = {
-			ol: "li",
-			ul: "li"
-		};
+	var uNode = UE.uNode;
+	// 需要父节点的标签，这些标签在解析时需要找到其父节点
+	var needParentNode = {
+		td: "tr",
+		tr: ["tbody", "thead", "tfoot"],
+		tbody: "table",
+		th: "tr",
+		thead: "table",
+		tfoot: "table",
+		caption: "table",
+		li: ["ul", "ol"],
+		dt: "dl",
+		dd: "dl",
+		option: "select"
+	};
 
+	// 需要子节点的标签，这些标签在解析时需要自动创建子节点
+	var needChild = {
+		ol: "li",
+		ul: "li"
+	};
+
+	/**
+	 * 创建文本节点
+	 * 
+	 * @param {UE.uNode} parent - 父节点
+	 * @param {string} data - 文本内容
+	 */
 	function text(parent, data) {
 		if (needChild[parent.tagName]) {
 			var tmpNode = uNode.createElement(needChild[parent.tagName]);
@@ -109,6 +127,14 @@ function htmlparser(htmlstr, ignoreBlank) {
 		}
 	}
 
+	/**
+	 * 创建元素节点
+	 * 
+	 * @param {UE.uNode} parent - 父节点
+	 * @param {string} tagName - 元素标签名
+	 * @param {string} htmlattr - 元素属性字符串
+	 * @returns {UE.uNode} 返回创建的元素节点或其父节点
+	 */
 	function element(parent, tagName, htmlattr) {
 		var needParentTag;
 		if ((needParentTag = needParentNode[tagName])) {
@@ -165,6 +191,12 @@ function htmlparser(htmlstr, ignoreBlank) {
 		return dtd.$empty[tagName] ? parent : elm;
 	}
 
+	/**
+	 * 创建注释节点
+	 * 
+	 * @param {UE.uNode} parent - 父节点
+	 * @param {string} data - 注释内容
+	 */
 	function comment(parent, data) {
 		parent.children.push(
 			new uNode({
@@ -229,7 +261,6 @@ function htmlparser(htmlstr, ignoreBlank) {
 			}
 		} catch (e) {
 		}
-
 		nextIndex = re_tag.lastIndex;
 	}
 	//如果结束是文本，就有可能丢掉，所以这里手动判断一下
