@@ -38,13 +38,7 @@ function getListener(obj, type, force) {
  * ```
  * @since 1.2.6.1
  */
-const EventBase = function () {
-
-};
-// var EventBase = (UE.EventBase = function () { //这是UE原本的语句
-// });
-
-EventBase.prototype = {
+class EventBase {
 	/**
 	 * 注册事件监听器
 	 * @method addListener
@@ -65,24 +59,24 @@ EventBase.prototype = {
 	 *         console.log(this.getContent) // this是注册的事件的编辑器实例
 	 * })
 	 * ```
-	 * @see UE.EventBase:fireEvent(String)
+	 * @see fireEvent(String)
 	 */
-	addListener: function (types, listener) {
+	addListener(types, listener) {
 		types = utils.trim(types).split(/\s+/);
 		for (var i = 0, ti; (ti = types[i++]);) {
 			getListener(this, ti, true).push(listener);
 		}
-	},
+	}
 
-	on: function (types, listener) {
+	on(types, listener) {
 		return this.addListener(types, listener);
-	},
-	off: function (types, listener) {
+	}
+	off(types, listener) {
 		return this.removeListener(types, listener);
-	},
-	trigger: function () {
+	}
+	trigger() {
 		return this.fireEvent.apply(this, arguments);
-	},
+	}
 	/**
 	 * 移除事件监听器
 	 * @method removeListener
@@ -94,12 +88,12 @@ EventBase.prototype = {
 	 * editor.removeListener("selectionchange",changeCallback);
 	 * ```
 	 */
-	removeListener: function (types, listener) {
+	removeListener(types, listener) {
 		types = utils.trim(types).split(/\s+/);
 		for (var i = 0, ti; (ti = types[i++]);) {
 			utils.removeItem(getListener(this, ti) || [], listener);
 		}
-	},
+	}
 
 	/**
 	 * 触发事件
@@ -133,7 +127,7 @@ EventBase.prototype = {
 	 * editor.fireEvent("selectionchange", "Hello", "World");
 	 * ```
 	 */
-	fireEvent: function () {
+	fireEvent() {
 		var types = arguments[0];
 		types = utils.trim(types).split(" ");
 		for (var i = 0, ti; (ti = types[i++]);) {
@@ -160,12 +154,7 @@ EventBase.prototype = {
 		}
 		return r;
 	}
-};
-
-
-
-// 导出 EventBase 类和 getListener 函数
-// export { EventBase, getListener };
+}
 
 // 导出 EventBase 类
 export default EventBase;
