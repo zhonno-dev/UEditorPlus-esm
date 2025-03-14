@@ -1,4 +1,6 @@
 import __UE from './__UE.js';
+import utils from './core/utils.js';
+import cls_UE_ui_Editor from './adapter/cls_UE_ui_Editor.js';
 
 /** 编辑器统一入口对象 */
 const UE = {
@@ -52,7 +54,61 @@ const UE = {
 	//	移入 UE 入口实现共享。
 	instances: __UE.instances,
 	
-	
+	/**
+	 * @name getEditor
+	 * @since 1.2.4+
+	 * @grammar UE.getEditor(id,[opt])  =>  Editor实例
+	 * @desc 提供一个全局的方法得到编辑器实例
+	 *
+	 * * ''id''  放置编辑器的容器id, 如果容器下的编辑器已经存在，就直接返回
+	 * * ''opt'' 编辑器的可选参数
+	 * @example
+	 *  UE.getEditor('containerId',{onready:function(){//创建一个编辑器实例
+	 *      this.setContent('hello')
+	 *  }});
+	 *  UE.getEditor('containerId'); //返回刚创建的实例
+	 *
+	 */
+	getEditor(id, opt) {
+		/**
+		 * @import cls_Editor from './core/Editor.cls.js'; 
+		 * @type cls_Editor
+		 */
+		var editor = __UE.instances[id];
+		
+		if (!editor) {
+			//     editor = instances[id] = new UE.ui.Editor(opt);
+			editor = __UE.instances[id] = cls_UE_ui_Editor(opt);
+			// console.log(editor.constructor.name);
+			editor.render(id);
+		}
+		return editor;
+	},
+
+	delEditor(id) {
+		/**
+		 * @type {typeof import('./core/Editor.cls.js').default}
+		 */
+		var editor;
+		if ((editor = __UE.instances[id])) {
+			editor.key && editor.destroy();
+			delete __UE.instances[id];
+		}
+	},
+
+	registerUI(uiName, fn, index, editorId) {
+		var me = this;
+		// console.log(me);
+		utils.each(uiName.split(/\s+/), function (name) {
+			// console.log(this);
+			me.ui[name] = {
+				id: editorId,
+				execFn: fn,
+				index: index
+			};
+		});
+	},
 };
+
 
 export default UE;
