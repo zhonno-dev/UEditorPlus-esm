@@ -3,6 +3,9 @@
  * @file
  * @since 1.2.6.1
  */
+import UE from "../UE.js";
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
 
 UE.plugins["basestyle"] = function () {
     /**

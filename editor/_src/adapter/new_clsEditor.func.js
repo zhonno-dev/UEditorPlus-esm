@@ -93,7 +93,7 @@ const new_clsEditor = function (options) {
 				}
 				// 为holder添加编辑器主题的CSS类名
 				domUtils.addClass(holder, "edui-" + editor.options.theme);
-				// 渲染编辑器UI
+				// 渲染编辑器UI(toolbar|工具栏)
 				editor.ui.render(holder);
 				var opt = editor.options;
 				// 给实例添加一个编辑器的容器引用

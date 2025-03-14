@@ -402,7 +402,7 @@ class cls_Editor extends EventBase {
 	 */
 
 	/**
-	 * 渲染编辑器的DOM到指定容器
+	 * 渲染编辑器的<iframe>DOM到指定容器
 	 * @method render
 	 * @param { Element } containerDom 直接指定容器对象
 	 * @remind 执行该方法,会触发ready事件

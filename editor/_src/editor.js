@@ -4,7 +4,13 @@
 import UE from "./UE.js";
 import '../ueditor.config.js';
 
+//core/
 import './core.js';
+
+//plugins/
+import './plugins/basestyle.js';
+
+//ui/
 import './ui.js';
 
 //adapter/

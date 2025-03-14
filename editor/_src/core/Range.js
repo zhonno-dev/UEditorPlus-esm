@@ -1,6 +1,7 @@
 import { domUtils, fillCharReg } from "./domUtils.js";
 import dtd from "./dtd.js";
 import browser from "./browser.js";
+import utils from "./utils.js";
 
 /**
  * Range封装
