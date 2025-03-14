@@ -9,7 +9,7 @@ import EditorDefaultOptions from "./Editor.defaultoptions.js";
 import UE from "../UE.js";
 import LocalStorage from "./localstorage.js";
 import browser from "./browser.js";
-import cls_EditorUI from "../adapter/cls_EditorUI.js";
+// import cls_EditorUI from "../adapter/cls_EditorUI.js";
 const { ie, webkit, gecko, opera } = browser;
 
 var uid = 0,
@@ -239,7 +239,7 @@ class cls_Editor extends EventBase {
 	langIsReady = false;
 	/**
 	 * cls_EditorUI
-	 * @type cls_EditorUI
+	 * @type {typeof import('../adapter/cls_EditorUI.js').default.prototype}
 	 */
 	ui;
 
