@@ -3,6 +3,7 @@ import { domUtils } from "../core/domUtils.js";
 import uiUtils from "../ui/uiutils.js";
 import UIBase from "../ui/uibase.js";
 import UE from "../UE.js";
+import __UE from "../__UE.js";
 // import cls_Editor from "../core/Editor.cls.js";
 // import UE_ui_Toolbar from "../ui/toolbar.js";
 import cls_UE_ui_Editor from "./cls_UE_ui_Editor.js";
@@ -864,7 +865,7 @@ let baidu = {
 	//     utils.inherits(EditorUI, UIBase);
 	//#endregion 原EditorUI
 
-	var instances = UE.instances;
+	var instances = __UE.instances;
 
 	//#region 原UE.ui.Editor
 	//     var instances = {};
@@ -1026,7 +1027,7 @@ let baidu = {
 
 	UE.registerUI = function (uiName, fn, index, editorId) {
 		utils.each(uiName.split(/\s+/), function (name) {
-			baidu.editor.ui[name] = {
+			UE.ui[name] = {
 				id: editorId,
 				execFn: fn,
 				index: index

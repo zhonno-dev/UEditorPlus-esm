@@ -1,3 +1,5 @@
+import __UE from './__UE.js';
+
 /** 编辑器入口对象 */
 const UE = {
 	version: "4.3.0", //zhu:TODO 版本号待定
@@ -32,13 +34,12 @@ const UE = {
 	dom: {
 		/**
 		 * dtd html语义化的体现类，引用自 "./core/dtd.js" 模块
-		 * @type {import('./core/dtd.js').default} //这样是不行的
+		 * @type {typeof import('./core/dtd.js').default}
 		*/
 		dtd: null,
 		/**
 		 * Dom操作工具包
-		 * @import keymap from './core/keymap.js'
-		 * @type keymap
+		 * @type {typeof import('./core/domUtils.js').domUtils}
 		 */
 		domUtils: null,
 	},
@@ -49,7 +50,8 @@ const UE = {
 
 	//原本在 editor/_src/adapter/editor.js 中的 var instances = {};
 	//	移入 UE 入口实现共享。
-	instances: {},
+	instances: __UE.instances,
+	
 };
 
 export default UE;

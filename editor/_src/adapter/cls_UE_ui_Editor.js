@@ -3,10 +3,11 @@
 import cls_Editor from "../core/Editor.cls.js";
 import cls_EditorUI from "./cls_EditorUI.js";
 import utils from "../core/utils.js";
-import UE from "../UE.js";
+// import UE from "../UE.js";
 import { domUtils } from "../core/domUtils.js";
+import __UE from "../__UE.js";
 
-var instances = UE.instances;
+var instances = __UE.instances;
 //     UE.ui.Editor = function (options) {
 // 定义一个UE.ui.Editor类，用于创建和管理编辑器实例
 // 参数options是编辑器的配置项
