@@ -1,6 +1,6 @@
 import __UE from './__UE.js';
 
-/** 编辑器入口对象 */
+/** 编辑器统一入口对象 */
 const UE = {
 	version: "4.3.0", //zhu:TODO 版本号待定
 	/** 编辑器配置 */
@@ -51,6 +51,7 @@ const UE = {
 	//原本在 editor/_src/adapter/editor.js 中的 var instances = {};
 	//	移入 UE 入口实现共享。
 	instances: __UE.instances,
+	
 	
 };
 

@@ -978,12 +978,6 @@ let baidu = {
 	//#endregion 原UE.ui.Editor
 
 	/**
-	 * @file
-	 * @name UE
-	 * @short UE
-	 * @desc UEditor的顶部命名空间
-	 */
-	/**
 	 * @name getEditor
 	 * @since 1.2.4+
 	 * @grammar UE.getEditor(id,[opt])  =>  Editor实例
