@@ -1,6 +1,6 @@
 import __UE from './__UE.js';
 import utils from './core/utils.js';
-import cls_UE_ui_Editor from './adapter/cls_UE_ui_Editor.js';
+import new_clsEditor from './adapter/new_clsEditor.func.js';
 
 /** 编辑器统一入口对象 */
 const UE = {
@@ -78,7 +78,7 @@ const UE = {
 		
 		if (!editor) {
 			//     editor = instances[id] = new UE.ui.Editor(opt);
-			editor = __UE.instances[id] = cls_UE_ui_Editor(opt);
+			editor = __UE.instances[id] = new_clsEditor(opt);
 			// console.log(editor.constructor.name);
 			editor.render(id);
 		}

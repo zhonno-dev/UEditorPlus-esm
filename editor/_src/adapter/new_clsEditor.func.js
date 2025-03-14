@@ -11,7 +11,7 @@ var instances = __UE.instances;
 //     UE.ui.Editor = function (options) {
 // 定义一个UE.ui.Editor类，用于创建和管理编辑器实例
 // 参数options是编辑器的配置项
-const cls_UE_ui_Editor = function (options) {
+const new_clsEditor = function (options) {
 	// var editor = new UE.Editor(options);
 	var editor = new cls_Editor(options);
 	// 将编辑器实例本身设置为其options的editor属性
@@ -145,4 +145,4 @@ const cls_UE_ui_Editor = function (options) {
 	// 返回编辑器实例
 	return editor;
 };
-export default cls_UE_ui_Editor;
+export default new_clsEditor;

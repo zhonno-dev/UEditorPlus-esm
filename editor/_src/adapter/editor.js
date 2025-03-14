@@ -1,3 +1,5 @@
+//zhu:！这个文件中的代码已全部移出，如无意外可以删掉了。
+
 import utils from "../core/utils.js";
 import { domUtils } from "../core/domUtils.js";
 import uiUtils from "../ui/uiutils.js";
@@ -6,7 +8,6 @@ import UE from "../UE.js";
 import __UE from "../__UE.js";
 // import cls_Editor from "../core/Editor.cls.js";
 // import UE_ui_Toolbar from "../ui/toolbar.js";
-import cls_UE_ui_Editor from "./cls_UE_ui_Editor.js";
 
 ///import core
 ///commands 全屏

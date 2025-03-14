@@ -9,7 +9,7 @@ import './ui.js';
 
 //adapter/
 import './adapter/editorui.js';
-import './adapter/editor.js';
+// import './adapter/editor.js';
 import './adapter/message.js';
 
 //lang/
