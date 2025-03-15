@@ -2,7 +2,8 @@
 
 //旧 baidu.editor = 新 UE
 import UE from "./UE.js";
-import '../ueditor.config.js';
+import UEDITOR_CONFIG from "../ueditor.config.js";
+UE.UEDITOR_CONFIG = UEDITOR_CONFIG;
 
 //core/
 import './core.js';

@@ -1,34 +1,14 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 
+<script src="editor/webComp.js"></script>
+
 <script>
 
 
 </script>
 
 <script type="module" >
-var run1 = function () {
-		console.log('run1', this);
-	};
-
-function run2(){
-	console.log('run2', this);
-};
-
-var obj = {
-	name: 'obj',
-
-	run1: function () {
-		console.log('obj.run1', this);
-	},
-
-	run2() {
-		console.log('obj.run2', this);
-	},
-}; 
-
-run1.call(obj);
-run2();
-
-obj.run1(obj);
-obj.run2();
 </script>
+
+<my-custom-element></my-custom-element>
+<my-abc></my-abc>
