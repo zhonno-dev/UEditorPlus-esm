@@ -220,53 +220,80 @@ function htmlparser(htmlstr, ignoreBlank, cls_uNode, nodeUtils) {
 	});
 	var currentParent = root;
 
+	/**
+	 * 使用正则表达式 re_tag 对 HTML 字符串进行循环匹配，解析 HTML 标签和内容
+	 * 
+	 * @param {Array} match - 正则表达式匹配结果数组
+	 * @param {number} currentIndex - 当前匹配到的 HTML 字符串的索引位置
+	 * @param {number} nextIndex - 下一次匹配的起始索引位置
+	 */
 	while ((match = re_tag.exec(htmlstr))) {
 		// console.log(match);
+		// 记录当前匹配的起始索引
 		currentIndex = match.index;
 		try {
+			// 如果当前匹配的起始索引大于下一次匹配的起始索引，说明存在文本节点
 			if (currentIndex > nextIndex) {
 				//text node
+				// 调用 text 函数创建文本节点
 				text(currentParent, htmlstr.slice(nextIndex, currentIndex));
 			}
+			// 如果匹配到开始标签
 			if (match[3]) {
+				// 如果当前父节点是 CDATA 类型，将整个匹配内容作为文本处理
 				if (dtd.$cdata[currentParent.tagName]) {
 					text(currentParent, match[0]);
 				} else {
 					//start tag
+					// 调用 element 函数创建元素节点，并更新当前父节点
 					currentParent = element(
 						currentParent,
 						match[3].toLowerCase(),
 						match[4]
 					);
 				}
-			} else if (match[1]) {
+			}
+			// 如果匹配到结束标签
+			else if (match[1]) {
+				// 确保当前父节点不是根节点
 				if (currentParent.type != "root") {
+					// 如果当前父节点是 CDATA 类型且结束标签不是 CDATA 类型，将整个匹配内容作为文本处理
 					if (dtd.$cdata[currentParent.tagName] && !dtd.$cdata[match[1]]) {
 						text(currentParent, match[0]);
 					} else {
+						// 临时保存当前父节点
 						var tmpParent = currentParent;
+						// 向上查找父节点，直到找到匹配的结束标签或根节点
 						while (
 							currentParent.type == "element" &&
 							currentParent.tagName != match[1].toLowerCase()
 						) {
 							currentParent = currentParent.parentNode;
+							// 如果找到根节点，恢复临时父节点并抛出异常
 							if (currentParent.type == "root") {
 								currentParent = tmpParent;
 								throw "break";
 							}
 						}
 						//end tag
+						// 更新当前父节点为其父节点
 						currentParent = currentParent.parentNode;
 					}
 				}
-			} else if (match[2]) {
-				//comment
+			}
+			// 如果匹配到注释标签
+			else if (match[2]) {
+				// 调用 comment 函数创建注释节点
 				comment(currentParent, match[2]);
 			}
-		} catch (e) {
 		}
+		// 捕获异常，不做处理
+		catch (e) {
+		}
+		// 更新下一次匹配的起始索引
 		nextIndex = re_tag.lastIndex;
 	}
+
 	//如果结束是文本，就有可能丢掉，所以这里手动判断一下
 	//例如 <li>sdfsdfsdf<li>sdfsdfsdfsdf
 	if (nextIndex < htmlstr.length) {
