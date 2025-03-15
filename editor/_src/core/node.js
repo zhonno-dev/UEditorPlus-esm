@@ -194,9 +194,6 @@ function nodeTraversal(root, fn) {
 
 /**
  * 编辑器模拟的节点类
- * @file
- * @module UE
- * @class uNode
  * @since 1.2.6.1
  */
 class cls_uNode {
@@ -267,7 +264,7 @@ class cls_uNode {
 	 * @method innerHTML
 	 * @warning 假如节点的type不是'element'，或节点的标签名称不在dtd列表里，直接返回当前节点
 	 * @param { String } htmlstr 传入要设置的html内容
-	 * @return { UE.uNode } 返回节点本身
+	 * @return {cls_uNode} 返回节点本身
 	 * @example
 	 * ```javascript
 	 * node.innerHTML('<span>text</span>');
@@ -315,7 +312,7 @@ class cls_uNode {
 	 * @method innerText
 	 * @warning 假如节点的type不是'element'，或节点的标签名称不在dtd列表里，直接返回当前节点
 	 * @param { String } textStr 传入要设置的文本内容
-	 * @return { UE.uNode } 返回节点本身
+	 * @return {cls_uNode} 返回节点本身
 	 * @example
 	 * ```javascript
 	 * node.innerText('<span>text</span>');
@@ -362,7 +359,7 @@ class cls_uNode {
 	/**
 	 * 获取当前节点下的第一个子节点
 	 * @method firstChild
-	 * @return { UE.uNode } 返回第一个子节点
+	 * @return {cls_uNode} 返回第一个子节点
 	 * @example
 	 * ```javascript
 	 * node.firstChild(); //返回第一个子节点
@@ -378,7 +375,7 @@ class cls_uNode {
 	/**
 	 * 获取当前节点下的最后一个子节点
 	 * @method lastChild
-	 * @return { UE.uNode } 返回最后一个子节点
+	 * @return {cls_uNode} 返回最后一个子节点
 	 * @example
 	 * ```javascript
 	 * node.lastChild(); //返回最后一个子节点
@@ -394,7 +391,7 @@ class cls_uNode {
 	/**
 	 * 获取和当前节点有相同父亲节点的前一个节点
 	 * @method previousSibling
-	 * @return { UE.uNode } 返回前一个节点
+	 * @return {cls_uNode} 返回前一个节点
 	 * @example
 	 * ```javascript
 	 * node.children[2].previousSibling(); //返回子节点node.children[1]
@@ -412,7 +409,7 @@ class cls_uNode {
 	/**
 	 * 获取和当前节点有相同父亲节点的后一个节点
 	 * @method nextSibling
-	 * @return { UE.uNode } 返回后一个节点,找不到返回null
+	 * @return {cls_uNode} 返回后一个节点,找不到返回null
 	 * @example
 	 * ```javascript
 	 * node.children[2].nextSibling(); //如果有，返回子节点node.children[3]
@@ -430,9 +427,9 @@ class cls_uNode {
 	/**
 	 * 用新的节点替换当前节点
 	 * @method replaceChild
-	 * @param { UE.uNode } target 要替换成该节点参数
-	 * @param { UE.uNode } source 要被替换掉的节点
-	 * @return { UE.uNode } 返回替换之后的节点对象
+	 * @param {cls_uNode} target 要替换成该节点参数
+	 * @param {cls_uNode} source 要被替换掉的节点
+	 * @return {cls_uNode} 返回替换之后的节点对象
 	 * @example
 	 * ```javascript
 	 * node.replaceChild(newNode, childNode); //用newNode替换childNode,childNode是node的子节点
@@ -457,8 +454,8 @@ class cls_uNode {
 	/**
 	 * 在节点的子节点列表最后位置插入一个节点
 	 * @method appendChild
-	 * @param { UE.uNode } node 要插入的节点
-	 * @return { UE.uNode } 返回刚插入的子节点
+	 * @param {cls_uNode} node 要插入的节点
+	 * @return {cls_uNode} 返回刚插入的子节点
 	 * @example
 	 * ```javascript
 	 * node.appendChild( newNode ); //在node内插入子节点newNode
@@ -490,9 +487,9 @@ class cls_uNode {
 	/**
 	 * 在传入节点的前面插入一个节点
 	 * @method insertBefore
-	 * @param { UE.uNode } target 要插入的节点
-	 * @param { UE.uNode } source 在该参数节点前面插入
-	 * @return { UE.uNode } 返回刚插入的子节点
+	 * @param {cls_uNode} target 要插入的节点
+	 * @param {cls_uNode} source 在该参数节点前面插入
+	 * @return {cls_uNode} 返回刚插入的子节点
 	 * @example
 	 * ```javascript
 	 * node.parentNode.insertBefore(newNode, node); //在node节点后面插入newNode
@@ -516,9 +513,9 @@ class cls_uNode {
 	/**
 	 * 在传入节点的后面插入一个节点
 	 * @method insertAfter
-	 * @param { UE.uNode } target 要插入的节点
-	 * @param { UE.uNode } source 在该参数节点后面插入
-	 * @return { UE.uNode } 返回刚插入的子节点
+	 * @param {cls_uNode} target 要插入的节点
+	 * @param {cls_uNode} source 在该参数节点后面插入
+	 * @return {cls_uNode} 返回刚插入的子节点
 	 * @example
 	 * ```javascript
 	 * node.parentNode.insertAfter(newNode, node); //在node节点后面插入newNode
@@ -542,7 +539,7 @@ class cls_uNode {
 	/**
 	 * 从当前节点的子节点列表中，移除节点
 	 * @method removeChild
-	 * @param { UE.uNode } node 要移除的节点引用
+	 * @param {cls_uNode} node 要移除的节点引用
 	 * @param { Boolean } keepChildren 是否保留移除节点的子节点，若传入true，自动把移除节点的子节点插入到移除的位置
 	 * @return { * } 返回刚移除的子节点
 	 * @example
@@ -641,7 +638,7 @@ class cls_uNode {
 	 * 在当前节点下，根据id查找节点
 	 * @method getNodeById
 	 * @param { String } id 要查找的id
-	 * @return { UE.uNode } 返回找到的节点
+	 * @return {cls_uNode} 返回找到的节点
 	 * @example
 	 * ```javascript
 	 * node.getNodeById('textId');

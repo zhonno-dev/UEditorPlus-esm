@@ -221,6 +221,7 @@ function htmlparser(htmlstr, ignoreBlank, cls_uNode, nodeUtils) {
 	var currentParent = root;
 
 	while ((match = re_tag.exec(htmlstr))) {
+		// console.log(match);
 		currentIndex = match.index;
 		try {
 			if (currentIndex > nextIndex) {
