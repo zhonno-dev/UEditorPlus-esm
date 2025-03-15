@@ -1,4 +1,5 @@
 import { domUtils } from "./domUtils.js";
+import UE_uNode from "./node.js";
 
 /**
  * html字符串转换成uNode节点

@@ -1,3 +1,5 @@
+import { domUtils } from "../core/domUtils.js";
+
 /**
  * 插入html字符串插件
  * @file

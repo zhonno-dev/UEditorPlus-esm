@@ -80,8 +80,8 @@
     <div id="btns" style="margin-top:20px;height:2000px;">
         <div>
 
-            <button onclick="alert(UE.getEditor('editor').getAllHtml())">获得整个html的内容</button>
-            <button onclick="alert(UE.getEditor('editor').getContent())">获得内容</button>
+            <button onclick="console.log(UE.getEditor('editor').getAllHtml())">获得整个html的内容</button>
+            <button onclick="console.log(UE.getEditor('editor').getContent())">获得内容</button>
             <button onclick="UE.getEditor('editor').setContent('<p>欢迎使用 UEditorPlus</p>', false)">写入内容</button>
             <button onclick="UE.getEditor('editor').setContent('<p>欢迎使用 UEditorPlus</p>', true)">追加内容</button>
             <button onclick="alert(UE.getEditor('editor').getContentTxt())">获得纯文本</button>
