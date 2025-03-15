@@ -22,20 +22,18 @@
     <h1>test.html</h1>
     <div>
         <script id="editor" type="text/plain" style="height:300px;">
-			abc前面的内容|<abc contenteditable="false">1212</abc>
-			<table data-sort="sortDisabled">
-				<tr>
-					<td width="273" valign="top" style="word-break: break-all;">
-						如果
-					</td>
-					<td width="273" valign="top" style="word-break: break-all;">
-						有一天
-					</td>
-					<td width="273" valign="top" style="word-break: break-all;">
-						我离开了
-					</td>
-				</tr>
-			</table>
+			1111
+			<div>
+				前<my-custom-element contenteditable="false">
+					<span contenteditable="true">in my-custom-element</span>
+				</my-custom-element>后
+			</div>
+			222
+			<div>
+				<my-abc contenteditable="false">1212</my-abc>
+			</div>
+			333
+			
         </script>
 		<script id="editor" type="text/plain" style="display: none;">
 			<table data-sort="sortDisabled">

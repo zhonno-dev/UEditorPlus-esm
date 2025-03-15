@@ -486,8 +486,9 @@ class cls_Editor extends EventBase {
 					utils.unhtml(options.iframeJsUrl) +
 					"'></script>"
 					: "") +
+				`<script src='${UE.UEDITOR_CONFIG.UEDITOR_HOME_URL}webComp.js'></script>` +
 				"</html>";
-			// console.log(html);
+			console.log(html);
 
 			container.appendChild(
 				domUtils.createElement(document, "iframe", {

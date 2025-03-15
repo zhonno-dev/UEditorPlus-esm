@@ -11,6 +11,7 @@ import './core.js';
 //plugins/
 import './plugins/basestyle.js';
 import './plugins/anchor.js';
+import './plugins/paste.js';
 
 //ui/
 import './ui.js';

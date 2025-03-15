@@ -5,10 +5,11 @@ import new_clsEditor from './adapter/new_clsEditor.func.js';
 /** 编辑器统一入口对象 */
 const UE = {
 	version: "4.3.0", //zhu:TODO 版本号待定
-	/** 编辑器配置 */
-	UEDITOR_CONFIG: {
-
-	},
+	/** 
+	 * 编辑器配置 
+	 * @type {typeof import('../ueditor.config.js').default}
+	 */
+	UEDITOR_CONFIG: {},
 	plugins: {},
 	commands: {},
 	instants: {},
