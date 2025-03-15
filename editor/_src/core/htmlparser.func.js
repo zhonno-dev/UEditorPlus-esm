@@ -88,13 +88,13 @@ function htmlparser(htmlstr, ignoreBlank, cls_uNode, nodeUtils) {
 		);
 	}
 
-	// 不需要转换的属性，直接使用原始值
+	/** 不需要转换的属性，直接使用原始值 */
 	var notTransAttrs = {
 		href: 1,
 		src: 1
 	};
 
-	// 需要父节点的标签，这些标签在解析时需要找到其父节点
+	/** 需要父节点的标签，这些标签在解析时需要找到其父节点 */
 	var needParentNode = {
 		td: "tr",
 		tr: ["tbody", "thead", "tfoot"],
@@ -109,7 +109,7 @@ function htmlparser(htmlstr, ignoreBlank, cls_uNode, nodeUtils) {
 		option: "select"
 	};
 
-	// 需要子节点的标签，这些标签在解析时需要自动创建子节点
+	/** 需要子节点的标签，这些标签在解析时需要自动创建子节点 */
 	var needChild = {
 		ol: "li",
 		ul: "li"
@@ -141,30 +141,52 @@ function htmlparser(htmlstr, ignoreBlank, cls_uNode, nodeUtils) {
 	 * @returns {UE.uNode} 返回创建的元素节点或其父节点
 	 */
 	function element(parent, tagName, htmlattr) {
+		/** 所需的父节点 */
 		var needParentTag;
+		/**
+		 * 检查当前标签是否需要特定的父节点，如果需要则查找或创建父节点
+		 * 
+		 * @param {string} tagName - 当前元素的标签名
+		 * @param {UE.uNode} parent - 当前元素的父节点
+		 */
 		if ((needParentTag = needParentNode[tagName])) {
+			// 输出调试信息，显示当前标签名
 			console.log(`if ((needParentTag = needParentNode[tagName])):tagName=${tagName}`);
+			// 临时保存当前父节点
 			var tmpParent = parent,
+				// 标记是否找到合适的父节点
 				hasParent;
+			// 从当前父节点开始向上查找，直到根节点
 			while (tmpParent.type != "root") {
+				// 判断当前父节点是否符合要求
 				if (
+					// 如果 needParentTag 是数组，检查当前父节点的标签名是否在数组中
 					utils.isArray(needParentTag)
 						? utils.indexOf(needParentTag, tmpParent.tagName) != -1
+						// 如果 needParentTag 是字符串，检查当前父节点的标签名是否等于该字符串
 						: needParentTag == tmpParent.tagName
 				) {
+					// 如果找到合适的父节点，更新父节点
 					parent = tmpParent;
+					// 标记已找到合适的父节点
 					hasParent = true;
+					// 跳出循环
 					break;
 				}
+				// 如果当前父节点不符合要求，继续向上查找
 				tmpParent = tmpParent.parentNode;
 			}
+			// 如果没有找到合适的父节点
 			if (!hasParent) {
+				// 创建一个新的父节点，并将其插入到当前父节点下
 				parent = element(
 					parent,
+					// 如果 needParentTag 是数组，取第一个元素作为新父节点的标签名
 					utils.isArray(needParentTag) ? needParentTag[0] : needParentTag
 				);
 			}
 		}
+
 		//按dtd处理嵌套
 		//        if(parent.type != 'root' && !dtd[parent.tagName][tagName])
 		//            parent = parent.parentNode;
