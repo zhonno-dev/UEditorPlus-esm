@@ -12,6 +12,7 @@ import './core.js';
 import './plugins/basestyle.js';
 import './plugins/anchor.js';
 import './plugins/paste.js';
+import './plugins/copy.js';
 
 //ui/
 import './ui.js';

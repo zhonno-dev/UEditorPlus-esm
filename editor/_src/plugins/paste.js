@@ -46,7 +46,7 @@ UE.plugins["paste"] = function () {
 
 		//zhu:下面这一句实现把剪贴板中的内容【粘贴】到 pastebin 中
 		range.selectNodeContents(pastebin).select(true);
-		// console.log(pastebin);return;
+		console.log(pastebin);return;
 
 		setTimeout(function () {
 			if (browser.webkit) {

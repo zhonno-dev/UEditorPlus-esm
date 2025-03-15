@@ -24,13 +24,22 @@
         <script id="editor" type="text/plain" style="height:300px;">
 			1111
 			<div>
-				前<my-custom-element contenteditable="false">
-					<span contenteditable="true">in my-custom-element</span>
+				前<my-custom-element contenteditable="true">
+					<slot slot="slot1" contenteditable="true">
+						<div  class="className"><b>in my-custom-element1</b></div>
+						无标签文本111
+						<div style="font-size:16px;"><i>in my-custom-element2</i></div>
+					</slot>
+					<slot slot="slot2" contenteditable="true">
+						<div style="color:red;" data-ok="OK">in my-custom-element3</div>
+						无标签文本222
+						<div style="background-color:green;display:none;" data-copy-content>in my-custom-element4</div>
+					</slot>
 				</my-custom-element>后
 			</div>
 			222
 			<div>
-				<my-abc contenteditable="false">1212</my-abc>
+				<my-abc contenteditable="false">in my-abc</my-abc>
 			</div>
 			333
 			
@@ -150,6 +159,8 @@
             var txt = UE.getEditor('editor').selection.getText();
             alert(txt)
         }
+
+		
     </script>
 </div>
 </body>
