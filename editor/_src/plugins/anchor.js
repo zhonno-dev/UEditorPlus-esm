@@ -1,5 +1,6 @@
 import UE from "../UE.js";
 import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
 
 /**
  * 锚点插件，为UEditor提供插入锚点支持
