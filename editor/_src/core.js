@@ -15,7 +15,8 @@ import api from "./core/api.js";
 import image from "./core/image.js";
 import dialog from "./core/dialog.js";
 import filterWord from "./core/filterword.js";
-import UE_uNode from "./core/node.js";
+// import UE_uNode from "./core/node.js";
+import { cls_uNode } from "./core/node.js";
 import htmlparser from "./core/htmlparser.js";
 import filterNode from "./core/filternode.js";
 import plugin from "./core/plugin.js";
@@ -41,7 +42,7 @@ UE.dialog = dialog;
 /** 根据传入html字符串过滤word */
 UE.filterWord = filterWord;
 /** 编辑器模拟的节点类 */
-UE.uNode = UE_uNode;
+UE.uNode = cls_uNode;
 /** html字符串转换成uNode节点 */
 UE.htmlparser = htmlparser;
 /** 根据传入节点和过滤规则过滤相应节点 */

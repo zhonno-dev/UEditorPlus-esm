@@ -104,7 +104,7 @@ UE.plugin.register("background", function () {
                     .match(reg);
             if (styles) {
                 root.appendChild(
-                    UE.uNode.createElement(
+                    nodeUtils.createElement(
                         '<p style="display:none;" data-background="' +
                         utils.trim(styles[1].replace(/"/g, "").replace(/[\s]+/g, " ")) +
                         '"><br/></p>'

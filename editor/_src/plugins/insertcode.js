@@ -215,7 +215,7 @@ UE.plugins["insertcode"] = function () {
                 if (c.length) {
                     pre.appendChild(UE.uNode.createText(c));
                 }
-                pre.appendChild(UE.uNode.createElement("br"));
+                pre.appendChild(nodeUtils.createElement("br"));
             });
         });
     });

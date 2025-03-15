@@ -270,7 +270,7 @@ UE.plugins["list"] = function () {
                         tmpNode.type !== "element" ||
                         tmpNode.tagName !== "br"
                     ) {
-                        var br = UE.uNode.createElement("br");
+                        var br = nodeUtils.createElement("br");
                         br.parentNode = li;
                         newChildrens.push(br);
                     }
@@ -286,14 +286,14 @@ UE.plugins["list"] = function () {
     //进入编辑器的li要套p标签
     me.addInputRule(function (root) {
         utils.each(root.getNodesByTagName("li"), function (li) {
-            var tmpP = UE.uNode.createElement("p");
+            var tmpP = nodeUtils.createElement("p");
             for (var i = 0, ci; (ci = li.children[i]);) {
                 if (ci.type === "text" || dtd.p[ci.tagName]) {
                     tmpP.appendChild(ci);
                 } else {
                     if (tmpP.firstChild()) {
                         li.insertBefore(tmpP, ci);
-                        tmpP = UE.uNode.createElement("p");
+                        tmpP = nodeUtils.createElement("p");
                         i = i + 2;
                     } else {
                         i++;
@@ -382,7 +382,7 @@ UE.plugins["list"] = function () {
                         p.removeChild(p.firstChild());
                     }
 
-                    var li = UE.uNode.createElement("li");
+                    var li = nodeUtils.createElement("li");
                     li.appendChild(p);
                     list.appendChild(li);
                 }
@@ -395,7 +395,7 @@ UE.plugins["list"] = function () {
                     node.parentNode.tagName !== "li" &&
                     (type = checkListType(node.innerText(), node))
                 ) {
-                    var list = UE.uNode.createElement(
+                    var list = nodeUtils.createElement(
                         me.options.insertorderedlist.hasOwnProperty(type) ? "ol" : "ul"
                     );
                     // if (customStyle[type]) {

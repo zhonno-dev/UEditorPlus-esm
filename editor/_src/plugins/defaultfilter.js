@@ -133,7 +133,7 @@ UE.plugins["defaultfilter"] = function () {
                             break;
                         }
                         var tmpNode,
-                            p = UE.uNode.createElement("p");
+                            p = nodeUtils.createElement("p");
                         while ((tmpNode = node.firstChild())) {
                             if (
                                 tmpNode.type == "text" ||
@@ -143,7 +143,7 @@ UE.plugins["defaultfilter"] = function () {
                             } else {
                                 if (p.firstChild()) {
                                     node.parentNode.insertBefore(p, node);
-                                    p = UE.uNode.createElement("p");
+                                    p = nodeUtils.createElement("p");
                                 } else {
                                     node.parentNode.insertBefore(tmpNode, node);
                                 }
@@ -178,7 +178,7 @@ UE.plugins["defaultfilter"] = function () {
                             node.appendChild(
                                 browser.ie11below
                                     ? UE.uNode.createText(" ")
-                                    : UE.uNode.createElement("br")
+                                    : nodeUtils.createElement("br")
                             );
                         }
                         break;
