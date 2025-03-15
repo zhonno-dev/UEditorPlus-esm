@@ -1,6 +1,8 @@
 //为解决 htmlparser() 与 uNode 的相互交叉引用死循环的问题，把 htmlparser 单独提取出来，并增加一个参数传入 cls_uNode ，让此文件不需要 import cls_uNode
 
 import { domUtils } from "./domUtils.js";
+import dtd from "./dtd.js";
+import utils from "./utils.js";
 
 /**
  * html字符串转换成uNode节点
@@ -141,6 +143,7 @@ function htmlparser(htmlstr, ignoreBlank, cls_uNode, nodeUtils) {
 	function element(parent, tagName, htmlattr) {
 		var needParentTag;
 		if ((needParentTag = needParentNode[tagName])) {
+			console.log(`if ((needParentTag = needParentNode[tagName])):tagName=${tagName}`);
 			var tmpParent = parent,
 				hasParent;
 			while (tmpParent.type != "root") {
@@ -174,6 +177,7 @@ function htmlparser(htmlstr, ignoreBlank, cls_uNode, nodeUtils) {
 		});
 		//如果属性存在，处理属性
 		if (htmlattr) {
+			// console.log(`if (htmlattr)`);
 			var attrs = {},
 				match;
 			while ((match = re_attr.exec(htmlattr))) {
@@ -191,7 +195,8 @@ function htmlparser(htmlstr, ignoreBlank, cls_uNode, nodeUtils) {
 		//        }
 		parent.children.push(elm);
 		//如果是自闭合节点返回父亲节点
-		return dtd.$empty[tagName] ? parent : elm;
+		let ret = dtd.$empty[tagName] ? parent : elm;
+		return ret;
 	}
 
 	/**
@@ -228,7 +233,8 @@ function htmlparser(htmlstr, ignoreBlank, cls_uNode, nodeUtils) {
 	 * @param {number} nextIndex - 下一次匹配的起始索引位置
 	 */
 	while ((match = re_tag.exec(htmlstr))) {
-		// console.log(match);
+		console.log(`while BEGIN`);
+		console.log(match);
 		// 记录当前匹配的起始索引
 		currentIndex = match.index;
 		try {
@@ -240,10 +246,15 @@ function htmlparser(htmlstr, ignoreBlank, cls_uNode, nodeUtils) {
 			}
 			// 如果匹配到开始标签
 			if (match[3]) {
+				console.log(`if(match[3])`);
+				console.log(`   currentParent.tagName：`, currentParent.tagName);
 				// 如果当前父节点是 CDATA 类型，将整个匹配内容作为文本处理
-				if (dtd.$cdata[currentParent.tagName]) {
+				if (currentParent.tagName && dtd.$cdata[currentParent.tagName]) {
+					console.log(`dtd.$cdata[currentParent.tagName]`);
 					text(currentParent, match[0]);
-				} else {
+				}
+				else {
+					console.log(`else`);
 					//start tag
 					// 调用 element 函数创建元素节点，并更新当前父节点
 					currentParent = element(
@@ -251,6 +262,7 @@ function htmlparser(htmlstr, ignoreBlank, cls_uNode, nodeUtils) {
 						match[3].toLowerCase(),
 						match[4]
 					);
+					console.log(`   tagStart:${match[3]}:`, currentParent);
 				}
 			}
 			// 如果匹配到结束标签
@@ -290,9 +302,14 @@ function htmlparser(htmlstr, ignoreBlank, cls_uNode, nodeUtils) {
 		// 捕获异常，不做处理
 		catch (e) {
 		}
+		console.log(`currentParent:`, currentParent);
 		// 更新下一次匹配的起始索引
 		nextIndex = re_tag.lastIndex;
+		console.log(`while NEXT`);
+		// break;
 	}
+	console.log('while END');
+	console.log(`root:`, root);
 
 	//如果结束是文本，就有可能丢掉，所以这里手动判断一下
 	//例如 <li>sdfsdfsdf<li>sdfsdfsdfsdf

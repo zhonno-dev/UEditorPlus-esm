@@ -980,9 +980,9 @@ class cls_Editor extends EventBase {
 
 		me.fireEvent("beforesetcontent", html);
 		var root = htmlparser(html);
-		console.log(root);
 		me.filterInputRule(root);
 		html = root.toHtml();
+		console.log(html);
 
 		me.body.innerHTML = (isAppendTo ? me.body.innerHTML : "") + html;
 
