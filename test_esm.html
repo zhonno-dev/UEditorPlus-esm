@@ -23,6 +23,17 @@
     <div>
         <script id="editor" type="text/plain" style="height:300px;">
 			1111
+			<my-vue-element>
+				<slot slot="">
+					<div>插槽内Div1</div>
+					<div>插槽内Div2</div>
+					<div>插槽内Div3</div>
+				</slot>
+				<slot slot="slot2">
+					<div>True slot2</div>
+				</slot>
+			</my-vue-element>
+			1111
 			<div>
 				前<my-custom-element contenteditable="true">
 					<slot slot="slot1" contenteditable="true">

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test.html</title>
+
+<style>
+html,body{height:100%;}
+</style>
+
+  </head>
+<body>
+
+
+
+
+<script type="module">
+import './vue-webComp.js';
+</script>
+11111
+<my-vue-element>
+	<slot slot="">
+		<div>插槽内Div1</div>
+		<div>插槽内Div2</div>
+		<div>插槽内Div3</div>
+	</slot>
+	<slot slot="slot2">
+		<div>True slot2</div>
+	</slot>
+</my-vue-element>
+22222
+</body>
+</html>

@@ -487,6 +487,7 @@ class cls_Editor extends EventBase {
 					"'></script>"
 					: "") +
 				`<script src='${UE.UEDITOR_CONFIG.UEDITOR_HOME_URL}webComp.js'></script>` +
+				`<script src='${UE.UEDITOR_CONFIG.UEDITOR_HOME_URL}../try_js/vue-webComp/vue-webComp.js' type='module'></script>` +
 				"</html>";
 			console.log(html);
 
