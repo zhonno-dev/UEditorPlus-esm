@@ -1,9 +1,11 @@
 import utils from "../core/utils.js";
 import { domUtils } from "../core/domUtils.js";
 import uiUtils from "./uiutils.js";
-import UIBase from "./uibase.js";
+// import UIBase from "./uibase.js";
+import cls_UIBase from "./UIBase.cls.js";
 import Popup from "./popup.js";
-import Stateful from "./stateful.js";
+// import Stateful from "./stateful.js";
+import cls_uiStateful from "./stateful.cls.js";
 import CellAlignPicker from "./cellalignpicker.js";
 
 ///import core
@@ -290,8 +292,8 @@ var UE_ui_MenuItem;
             this.subMenu.hide();
         }
     };
-    utils.inherits(MenuItem, UIBase);
-    utils.extend(MenuItem.prototype, Stateful, true);
+    utils.inherits(MenuItem, cls_UIBase);
+    utils.extend(MenuItem.prototype, cls_uiStateful, true);
 })();
 
 export { UE_ui_Menu, UE_ui_MenuItem };

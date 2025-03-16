@@ -2,13 +2,13 @@ import UE from "./UE.js";
 
 //ui/
 import UE_ui_uiUtils from "./ui/uiutils.js";
-import UE_ui_UIBase from "./ui/uibase.js";
+// import UE_ui_UIBase from "./ui/uibase.js";
 import UE_ui_Separator from "./ui/separator.js";
 import UE_ui_Mask from "./ui/mask.js";
 import UE_ui_Popup from "./ui/popup.js";
 import UE_ui_ColorPicker from "./ui/colorpicker.js";
 import UE_ui_TablePicker from "./ui/tablepicker.js";
-import UE_ui_Stateful from "./ui/stateful.js";
+// import UE_ui_Stateful from "./ui/stateful.js";
 // import UE_ui_Button from "./ui/button.js";
 import UE_ui_SplitButton from "./ui/splitbutton.js";
 import UE_ui_ColorButton from "./ui/colorbutton.js";
@@ -30,10 +30,11 @@ import UE_ui_Message from "./ui/message.js";
 
 import cls_uiButton from "./ui/button.cls.js";
 import cls_uiStateful from "./ui/stateful.cls.js";
+import cls_UIBase from "./ui/UIBase.cls.js";
 
 //ui/
 UE.ui.uiUtils = UE_ui_uiUtils;
-UE.ui.UIBase = UE_ui_UIBase;
+UE.ui.UIBase = cls_UIBase;
 UE.ui.Separator = UE_ui_Separator;
 UE.ui.Mask = UE_ui_Mask;
 UE.ui.Popup = UE_ui_Popup;
