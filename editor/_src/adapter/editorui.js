@@ -2,9 +2,10 @@ import utils from "../core/utils.js";
 import UE from "../UE.js";
 import UE_ui_Dialog from "../ui/dialog.js";
 import browser from "../core/browser.js";
+import cls_uiButton from "../ui/button.cls.js";
 
 //ui跟编辑器的适配層
-//那个按钮弹出是dialog，是下拉筐等都是在这个js中配置
+//哪个按钮弹出是dialog，还是下拉框等都是在这个js中配置
 //自己写的ui也要在这里配置，放到baidu.editor.ui下边，当编辑器实例化的时候会根据ueditor.config中的toolbars找到相应的进行实例化
 (function () {
 	// var utils = baidu.editor.utils;
@@ -13,6 +14,7 @@ import browser from "../core/browser.js";
 	// var _Dialog = editorui.Dialog;
 	var _Dialog = UE_ui_Dialog;
 	editorui.buttons = {};
+	// console.log(editorui); return;
 
 	editorui.Dialog = function (options) {
 		var dialog = new _Dialog(options);
@@ -79,8 +81,12 @@ import browser from "../core/browser.js";
 	for (var i = 0, ci; (ci = btnCmds[i++]);) {
 		ci = ci.toLowerCase();
 		editorui[ci] = (function (cmd) {
+			/**
+			 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
+			 */
 			return function (editor) {
-				var ui = new editorui.Button({
+				// var ui = new editorui.Button({
+				var ui = new cls_uiButton({
 					className: "edui-for-" + cmd,
 					title:
 						editor.options.labelMap[cmd] ||
