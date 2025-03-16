@@ -80,19 +80,53 @@ var attrFix = ie && browser.version < 9
  */
 const domUtils = {
 	//节点常量
+	/**
+	 * 元素节点类型常量
+	 */
 	NODE_ELEMENT: 1,
+	/**
+	 * 文档节点类型常量
+	 */
 	NODE_DOCUMENT: 9,
+	/**
+	 * 文本节点类型常量
+	 */
 	NODE_TEXT: 3,
+	/**
+	 * 注释节点类型常量
+	 */
 	NODE_COMMENT: 8,
+	/**
+	 * 文档片段节点类型常量
+	 */
 	NODE_DOCUMENT_FRAGMENT: 11,
 
-	//位置关系
+	// 位置关系
+	/**
+	 * 表示两个节点相同
+	 */
 	POSITION_IDENTICAL: 0,
+	/**
+	 * 表示两个节点在不同的文档中
+	 */
 	POSITION_DISCONNECTED: 1,
+	/**
+	 * 表示节点A在节点B之后
+	 */
 	POSITION_FOLLOWING: 2,
+	/**
+	 * 表示节点A在节点B之前
+	 */
 	POSITION_PRECEDING: 4,
+	/**
+	 * 表示节点A被节点B包含
+	 */
 	POSITION_IS_CONTAINED: 8,
+	/**
+	 * 表示节点A包含节点B
+	 */
 	POSITION_CONTAINS: 16,
+
 	//ie6使用其他的会有一段空白出现
 	fillChar: ie && browser.version === "6" ? "\ufeff" : "\u200B",
 	//-------------------------Node部分--------------------------------
