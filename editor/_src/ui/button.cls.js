@@ -82,7 +82,7 @@ cls_uiButton.prototype.setTitle = function (text) {
 };
 
 //zhu:这是button原本的继承关系
-// utils.inherits(Button, UIBase);
-// utils.extend(Button.prototype, Stateful);
+// utils.inherits(Button, UIBase);[X]
+// utils.extend(Button.prototype, Stateful);[X]
 
 export default cls_uiButton;

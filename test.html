@@ -3,94 +3,15 @@
 <script src="editor/webComp.js"></script>
 
 <script>
-	document.addEventListener('copy', function (event) {
-		console.log('copy:');
 
-// 		range = document.createRange();
-// range.selectNode(document.getElementsByTagName("div").item(0));
-// selectedHtml = range.cloneContents();
-// console.log(documentFragment);
-// document.body.appendChild(documentFragment);
-// return;
-    // 获取选中的内容
-    var selection = window.getSelection();
-    var selectedHtml = selection.getRangeAt(0).cloneContents();
-	// console.log(selectedHtml);
-
-
-    // 创建一个临时的 DOM 元素来解析选中的内容
-    var tempDiv = document.createElement('div');
-    tempDiv.appendChild(selectedHtml);
-
-	// console.log(tempDiv.innerHTML);return;
-    
-	// 获取最终的 HTML 内容
-    var finalHtml = tempDiv.innerHTML;
-	console.log(finalHtml);
-
-	// event.clipboardData.setData('text/html', '123123');
-	return;
-	// console.log(ret);
-
-	// 使用 Clipboard API 将内容设置到剪贴板
-	if (1) {
-		if (navigator.clipboard) {
-        // navigator.clipboard.writeText(finalHtml).then(function() {
-        //     console.log('navigator.clipboard:内容已复制到剪贴板');
-        // }).catch(function(err) {
-        //     console.error('无法复制内容: ', err);
-        // });
-		// 创建一个 Blob 对象来存储 HTML 内容
-			var htmlBlob = new Blob([finalHtml], { type: 'text/html' });
-			var textBlob = new Blob([finalHtml], { type: 'text/plain' });
-
-			// 创建 ClipboardItem 对象
-			var clipboardItem = new ClipboardItem({
-				'text/html': htmlBlob,
-				'text/plain': textBlob
-			});
-
-			// 写入剪贴板
-			navigator.clipboard.write([clipboardItem]).then(function () {
-				console.log('navigator.clipboard: 内容已复制到剪贴板');
-			}).catch(function (err) {
-				console.error('无法复制内容: ', err);
-			});
-    } else {
-        // 备用方法：使用 document.execCommand
-        var tempTextArea = document.createElement('textarea');
-        tempTextArea.value = finalHtml;
-        document.body.appendChild(tempTextArea);
-        tempTextArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(tempTextArea);
-        console.log('备用方法：使用 document.execCommand:内容已复制到剪贴板');
-    }
-	}
-    
-
-    // // 查找所有 display: none 的元素
-    // var hiddenElements = tempDiv.querySelectorAll('[style*="display: none"]');
-    
-    // // 将隐藏元素的内容添加到剪贴板数据中
-    // hiddenElements.forEach(function (element) {
-    //     // 获取隐藏元素的内容
-    //     var hiddenContent = element.innerHTML;
-        
-    //     // 将隐藏内容添加到剪贴板数据中
-    //     if (event.clipboardData) {
-    //         event.clipboardData.setData('text/html', event.clipboardData.getData('text/html') + hiddenContent);
-    //         event.clipboardData.setData('text/plain', event.clipboardData.getData('text/plain') + hiddenContent);
-    //     }
-    // });
-
-    
-    // 阻止默认的复制行为
-    event.preventDefault();
-});
 </script>
 
 <script type="module">
+import cls_uiAutoTypeSetButton from './editor/_src/ui/autotypesetbutton.new.js';
+console.log(cls_uiAutoTypeSetButton.prototype);
+var a = new cls_uiAutoTypeSetButton({});
+var html = a.getHtmlTpl();
+console.log(html);
 </script>
 
 <div>

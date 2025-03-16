@@ -1,26 +1,27 @@
-import utils from "../core/utils.js";
-import UIBase from "./uibase.js";
+// import utils from "../core/utils.js";
+// import UIBase from "./uibase.js";
+import cls_UIBase from "./UIBase.cls.js";
 
-var UE_ui_Breakline;
-(function () {
-	// var utils = baidu.editor.utils,
-	// 	UIBase = baidu.editor.ui.UIBase;
-	
-        // Breakline = (baidu.editor.ui.Breakline = function (options) {
-		var Breakline = (UE_ui_Breakline = function (options) {
-            this.initOptions(options);
-            this.initSeparator();
-        });
-    Breakline.prototype = {
-        uiName: "Breakline",
-        initSeparator: function () {
-            this.initUIBase();
-        },
-        getHtmlTpl: function () {
-            return "<br/>";
-        }
-    };
-    utils.inherits(Breakline, UIBase);
-})();
+class cls_uiBreakline extends cls_UIBase {
+	/**
+	 * 构造函数
+	 */
+	constructor(options) {
+		super(); // 调用父类的构造函数
 
-export default UE_ui_Breakline;
+		this.initOptions(options);
+		this.initSeparator();
+	}
+}
+
+cls_uiBreakline.prototype.uiName = "Breakline";
+cls_uiBreakline.prototype.initSeparator = function () {
+	this.initUIBase();
+};
+cls_uiBreakline.prototype.getHtmlTpl = function () {
+	return "<br/>";
+};
+
+// utils.inherits(Breakline, UIBase);[X]
+
+export default cls_uiBreakline;

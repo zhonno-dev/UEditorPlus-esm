@@ -7,22 +7,37 @@ import cls_UIBase from "./UIBase.cls.js";
 ///import uicore
 
 var allPopups = [];
+/**
+ * 关闭所有弹出层
+ * 
+ * 此函数遍历所有弹出层对象，检查它们是否应该被隐藏，并在符合条件时隐藏它们此外，在所有弹出层都被检查过后，
+ * 触发一个自定义事件来通知其他部分弹出层已关闭
+ * 
+ * @param {Event} evt - 可选的事件对象，用于检查触发隐藏的原因
+ * @param {HTMLElement} el - 可选的触发隐藏操作的元素
+ */
 function closeAllPopup(evt, el) {
+	// 遍历所有弹出层对象
 	for (var i = 0; i < allPopups.length; i++) {
 		var pop = allPopups[i];
+		// 检查弹出层是否当前可见
 		if (!pop.isHidden()) {
+			// 查询弹出层是否自动隐藏，除非明确返回false
 			if (pop.queryAutoHide(el) !== false) {
+				// 特殊处理某些事件和弹出层类型
 				if (
 					evt &&
 					/scroll/gi.test(evt.type) &&
 					pop.className === "edui-wordpastepop"
 				)
 					return;
+				// 隐藏符合条件的弹出层
 				pop.hide();
 			}
 		}
 	}
 
+	// 如果存在弹出层对象，触发'afterhidepop'事件
 	if (allPopups.length) pop.editor.fireEvent("afterhidepop");
 }
 

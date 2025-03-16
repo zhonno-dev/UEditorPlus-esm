@@ -1912,7 +1912,7 @@ class cls_Editor extends EventBase {
 
 }
 
-// utils.inherits(cls_Editor, EventBase);
+// utils.inherits(cls_Editor, EventBase);[X]
 
 // cls_Editor.defaultOptions = EditorDefaultOptions;
 // cls_Editor.defaultOptions = EditorDefaultOptions;

@@ -1,26 +1,27 @@
 import utils from "../core/utils.js";
-import UIBase from "./uibase.js";
+// import UIBase from "./uibase.js";
 
-var UE_ui_Separator;
+import cls_UIBase from "./UIBase.cls.js";
 
-(function () {
-	// var utils = baidu.editor.utils,
-	// 	UIBase = baidu.editor.ui.UIBase;
-        // var Separator = (baidu.editor.ui.Separator = function (options) {
-		var Separator = (UE_ui_Separator = function (options) {
-            this.initOptions(options);
-            this.initSeparator();
-        });
-    Separator.prototype = {
-        uiName: "separator",
-        initSeparator: function () {
-            this.initUIBase();
-        },
-        getHtmlTpl: function () {
-            return '<div id="##" class="edui-box %%"></div>';
-        }
-    };
-    utils.inherits(Separator, UIBase);
-})();
+class cls_uiSeparator extends cls_UIBase{
+	/**
+	 * 构造函数
+	 */
+	constructor(options) {
+		super(); // 调用父类的构造函数
+		
+		this.initOptions(options);
+		this.initSeparator();
+	}
+}
 
-export default UE_ui_Separator;
+cls_uiSeparator.prototype.uiName = "separator";
+cls_uiSeparator.prototype.initSeparator = function () {
+	this.initUIBase();
+};
+cls_uiSeparator.prototype.getHtmlTpl = function () {
+	return '<div id="##" class="edui-box %%"></div>';
+};
+
+// utils.inherits(Separator, UIBase);[X]
+export default cls_uiSeparator;

@@ -58,6 +58,7 @@ cls_UIBase.prototype.render = function (holder) {
 	this.el = el;
 	this.postRender();
 };
+cls_UIBase.prototype._UIBase_render = cls_UIBase.prototype.render;
 cls_UIBase.prototype.getDom = function (name) {
 	if (!name) {
 		return document.getElementById(this.id);

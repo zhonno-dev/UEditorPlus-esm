@@ -109,6 +109,7 @@ const utils = {
 	* @param { Object } target 目标对象， 新的属性将附加到该对象上
 	* @param { Object } source 源对象， 该对象的属性会被附加到target对象上
 	* @param { Boolean } isKeepTarget 是否保留目标对象中与源对象中属性名相同的属性
+	- false(默认)表示覆盖，true表示不覆盖
 	* @return { Object } 返回target对象
 	* @example
 	* ```javascript
@@ -123,10 +124,10 @@ const utils = {
 	*
 	* ```
 	*/
-	extend: function (t, s, b) {
+	extend: function (t, s, isKeepTarget) {
 		if (s) {
 			for (var k in s) {
-				if (!b || !t.hasOwnProperty(k)) {
+				if (!isKeepTarget || !t.hasOwnProperty(k)) {
 					t[k] = s[k];
 				}
 			}
@@ -192,7 +193,7 @@ const utils = {
 	 *     this.name = "小张";
 	 * }
 	 *
-	 * UE.utils.inherits(SubClass,SuperClass);
+	 * UE.utils.inherits(SubClass,SuperClass);[X]
 	 *
 	 * var sub = new SubClass();
 	 * //output: '小张早上好!

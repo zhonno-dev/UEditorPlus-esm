@@ -1,4 +1,4 @@
-//zhu:此文件已被 ./UIBase.cls.php 替代，如无意外可以删除了。
+//zhu:此文件已被 ./UIBase.cls.js 替代，如无意外可以删除了。
 
 import utils from "../core/utils.js";
 import uiUtils from "./uiutils.js";
