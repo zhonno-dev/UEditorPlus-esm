@@ -8,7 +8,7 @@ import UE_ui_Popup from "../ui/popup.js";
 import UE_ui_ShortCutMenu from "../ui/shortcutmenu.js";
 import UE_ui_PastePicker from "../ui/pastepicker.js";
 import browser from "../core/browser.js";
-import { domUtils } from "../core/domUtils.js";
+import { domUtils, getDomNode } from "../core/domUtils.js";
 import UE from "../UE.js";
 
 import cls_UIBase from "../ui/UIBase.cls.js";

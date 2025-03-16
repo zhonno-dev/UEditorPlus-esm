@@ -1,7 +1,7 @@
 import utils from "../core/utils.js";
 import uiUtils from "./uiutils.js";
 import { domUtils } from "../core/domUtils.js";
-import UIBase from "./uibase.js";
+import UIBase from "./UIBase.cls.js";
 
 var UE_ui_Popup;
 

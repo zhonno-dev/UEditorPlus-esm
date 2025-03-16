@@ -2578,4 +2578,4 @@ const domUtils = {
 };
 const fillCharReg = new RegExp(domUtils.fillChar, "g");
 
-export { domUtils, fillCharReg };
+export { domUtils, fillCharReg, getDomNode };

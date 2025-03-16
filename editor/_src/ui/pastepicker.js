@@ -1,7 +1,7 @@
 import utils from "../core/utils.js";
 import Stateful from "./stateful.js";
 import uiUtils from "./uiutils.js";
-import UIBase from "./uibase.js";
+import UIBase from "./UIBase.cls.js";
 
 
 ///import core

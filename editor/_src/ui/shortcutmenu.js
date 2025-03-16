@@ -1,6 +1,6 @@
 import utils from "../core/utils.js";
 import { domUtils } from "../core/domUtils.js";
-import UIBase from "./uibase.js";
+import UIBase from "./UIBase.cls.js";
 import uiUtils from "./uiutils.js";
 
 var UE_ui_ShortCutMenu;

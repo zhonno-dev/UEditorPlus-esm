@@ -1,4 +1,8 @@
 import { domUtils } from "../core/domUtils.js";
+import UE from "../UE.js";
+import utils from "../core/utils.js";
+import dtd from "../core/dtd.js";
+import browser from "../core/browser.js";
 
 /**
  * 插入html字符串插件

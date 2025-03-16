@@ -13,6 +13,7 @@ import './plugins/basestyle.js';
 import './plugins/anchor.js';
 import './plugins/paste.js';
 import './plugins/copy.js';
+import './plugins/inserthtml.js';
 
 //ui/
 import './ui.js';
