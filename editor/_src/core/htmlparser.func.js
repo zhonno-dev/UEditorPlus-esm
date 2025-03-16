@@ -4,6 +4,8 @@ import { domUtils } from "./domUtils.js";
 import dtd from "./dtd.js";
 import utils from "./utils.js";
 
+var is_log = false;
+
 /**
  * html字符串转换成uNode节点
  * 
@@ -151,7 +153,7 @@ function htmlparser(htmlstr, ignoreBlank, cls_uNode, nodeUtils) {
 		 */
 		if ((needParentTag = needParentNode[tagName])) {
 			// 输出调试信息，显示当前标签名
-			console.log(`if ((needParentTag = needParentNode[tagName])):tagName=${tagName}`);
+			is_log && console.log(`if ((needParentTag = needParentNode[tagName])):tagName=${tagName}`);
 			// 临时保存当前父节点
 			var tmpParent = parent,
 				// 标记是否找到合适的父节点
@@ -199,7 +201,7 @@ function htmlparser(htmlstr, ignoreBlank, cls_uNode, nodeUtils) {
 		});
 		//如果属性存在，处理属性
 		if (htmlattr) {
-			// console.log(`if (htmlattr)`);
+			// is_log && console.log(`if (htmlattr)`);
 			var attrs = {},
 				match;
 			while ((match = re_attr.exec(htmlattr))) {
@@ -255,8 +257,8 @@ function htmlparser(htmlstr, ignoreBlank, cls_uNode, nodeUtils) {
 	 * @param {number} nextIndex - 下一次匹配的起始索引位置
 	 */
 	while ((match = re_tag.exec(htmlstr))) {
-		console.log(`while BEGIN`);
-		console.log(match);
+		is_log && console.log(`while BEGIN`);
+		is_log && console.log(match);
 		// 记录当前匹配的起始索引
 		currentIndex = match.index;
 		try {
@@ -268,15 +270,15 @@ function htmlparser(htmlstr, ignoreBlank, cls_uNode, nodeUtils) {
 			}
 			// 如果匹配到开始标签
 			if (match[3]) {
-				console.log(`if(match[3])`);
-				console.log(`   currentParent.tagName：`, currentParent.tagName);
+				is_log && console.log(`if(match[3])`);
+				is_log && console.log(`   currentParent.tagName：`, currentParent.tagName);
 				// 如果当前父节点是 CDATA 类型，将整个匹配内容作为文本处理
 				if (currentParent.tagName && dtd.$cdata[currentParent.tagName]) {
-					console.log(`dtd.$cdata[currentParent.tagName]`);
+					is_log && console.log(`dtd.$cdata[currentParent.tagName]`);
 					text(currentParent, match[0]);
 				}
 				else {
-					console.log(`else`);
+					is_log && console.log(`else`);
 					//start tag
 					// 调用 element 函数创建元素节点，并更新当前父节点
 					currentParent = element(
@@ -284,7 +286,7 @@ function htmlparser(htmlstr, ignoreBlank, cls_uNode, nodeUtils) {
 						match[3].toLowerCase(),
 						match[4]
 					);
-					console.log(`   tagStart:${match[3]}:`, currentParent);
+					is_log && console.log(`   tagStart:${match[3]}:`, currentParent);
 				}
 			}
 			// 如果匹配到结束标签
@@ -324,14 +326,14 @@ function htmlparser(htmlstr, ignoreBlank, cls_uNode, nodeUtils) {
 		// 捕获异常，不做处理
 		catch (e) {
 		}
-		console.log(`currentParent:`, currentParent);
+		is_log && console.log(`currentParent:`, currentParent);
 		// 更新下一次匹配的起始索引
 		nextIndex = re_tag.lastIndex;
-		console.log(`while NEXT`);
+		is_log && console.log(`while NEXT`);
 		// break;
 	}
-	console.log('while END');
-	console.log(`root:`, root);
+	is_log && console.log('while END');
+	is_log && console.log(`root:`, root);
 
 	//如果结束是文本，就有可能丢掉，所以这里手动判断一下
 	//例如 <li>sdfsdfsdf<li>sdfsdfsdfsdf

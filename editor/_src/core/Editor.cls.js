@@ -489,7 +489,7 @@ class cls_Editor extends EventBase {
 				`<script src='${UE.UEDITOR_CONFIG.UEDITOR_HOME_URL}webComp.js'></script>` +
 				`<script src='${UE.UEDITOR_CONFIG.UEDITOR_HOME_URL}../try_js/vue-webComp/vue-webComp.js' type='module'></script>` +
 				"</html>";
-			console.log(html);
+			// console.log(html);
 
 			container.appendChild(
 				domUtils.createElement(document, "iframe", {
@@ -977,14 +977,14 @@ class cls_Editor extends EventBase {
 	 * ```
 	 */
 	setContent(html, isAppendTo, notFireSelectionchange) {
-		console.log(html);
+		// console.log(html);
 		var me = this;
 
 		me.fireEvent("beforesetcontent", html);
 		var root = htmlparser(html);
 		me.filterInputRule(root);
 		html = root.toHtml();
-		console.log(html);
+		// console.log(html);
 
 		me.body.innerHTML = (isAppendTo ? me.body.innerHTML : "") + html;
 
