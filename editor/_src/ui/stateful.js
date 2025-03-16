@@ -1,3 +1,5 @@
+//zhu:这个文件已被 ./ststeful.cls.js 替代，如无意外可以删除
+
 import browser from "../core/browser.js";
 import { domUtils } from "../core/domUtils.js";
 import uiUtils from "./uiutils.js";

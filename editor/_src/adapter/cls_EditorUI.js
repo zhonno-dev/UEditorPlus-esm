@@ -2,7 +2,6 @@
 
 
 import utils from "../core/utils.js";
-// import UIBase from "../ui/uibase.js";
 import UE_ui_Toolbar from "../ui/toolbar.js";
 import UE_ui_Popup from "../ui/popup.js";
 import UE_ui_ShortCutMenu from "../ui/shortcutmenu.js";
@@ -868,8 +867,5 @@ class cls_EditorUI extends cls_UIBase{
 		}
 	}
 }
-
-
-// utils.inherits(cls_EditorUI, UIBase);
 
 export default cls_EditorUI;
