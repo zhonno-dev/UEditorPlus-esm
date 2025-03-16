@@ -15,6 +15,11 @@ const UE = {
 	instants: {},
 	I18N: {},
 	_customizeUI: {},
+
+	/**
+	 * @type {typeof import("./core/plugin.js").default}
+	 */
+	plugin: null,
 	plus: {
 		fileExt: function (filename) {
 			if (!filename) {

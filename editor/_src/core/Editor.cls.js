@@ -19,8 +19,7 @@ var uid = 0,
 /**
 * 获取编辑器的html内容，赋值到编辑器所在表单的textarea文本域里面
 * @private
-* @method setValue
-* @param { UE.Editor } editor 编辑器事例
+* @param { cls_Editor } editor 编辑器事例
 */
 function setValue(form, editor) {
 	if (!editor.options.textarea) {
