@@ -2,7 +2,8 @@ import utils from "../core/utils.js";
 import { domUtils } from "../core/domUtils.js";
 import Mask from "./mask.js";
 import UIBase from "./uibase.js";
-import Button from "./button.js";
+// import Button from "./button.js";
+import Button from "./button.cls.js";
 import uiUtils from "./uiutils.js";
 
 ///import core

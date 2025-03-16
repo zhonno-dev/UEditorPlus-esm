@@ -1,3 +1,5 @@
+//zhu:这个文件已被 ./button.cls.js 替代，如无意外可以删除
+
 import utils from "../core/utils.js";
 import UIBase from "./uibase.js";
 import Stateful from "./stateful.js";

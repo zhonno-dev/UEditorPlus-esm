@@ -9,7 +9,7 @@ import UE_ui_Popup from "./ui/popup.js";
 import UE_ui_ColorPicker from "./ui/colorpicker.js";
 import UE_ui_TablePicker from "./ui/tablepicker.js";
 import UE_ui_Stateful from "./ui/stateful.js";
-import UE_ui_Button from "./ui/button.js";
+// import UE_ui_Button from "./ui/button.js";
 import UE_ui_SplitButton from "./ui/splitbutton.js";
 import UE_ui_ColorButton from "./ui/colorbutton.js";
 import UE_ui_TableButton from "./ui/tablebutton.js";
