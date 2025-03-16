@@ -1,7 +1,7 @@
 
 
 import utils from "./utils.js";
-import domSelection from "./Selection.js";
+import cls_Selection from "./Selection.js";
 import { domUtils } from "./domUtils.js";
 import dtd from "./dtd.js";
 import EventBase from "./EventBase.js";
@@ -548,7 +548,7 @@ class cls_Editor extends EventBase {
 		me.iframe = me.window.frameElement;
 		me.body = doc.body;
 		//     me.selection = new dom.Selection(doc);
-		me.selection = new domSelection(doc);
+		me.selection = new cls_Selection(doc);
 		//gecko初始化就能得到range,无法判断isFocus了
 		var geckoSel;
 		if (browser.gecko && (geckoSel = this.selection.getNative())) {

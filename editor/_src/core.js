@@ -7,7 +7,7 @@ import EventBase from "./core/EventBase.js";
 import dtd from "./core/dtd.js";
 import { domUtils, fillCharReg } from "./core/domUtils.js";
 import domRange from "./core/Range.js";
-import domSelection from "./core/Selection.js";
+// import cls_Selection from "./core/Selection.js";
 import cls_Editor from "./core/Editor.cls.js";
 // import './core/loadconfig.js';
 import ajax from "./core/ajax.js";
@@ -66,5 +66,4 @@ UE.dom.fillCharReg = fillCharReg;
 /** Range封装 */
 UE.dom.Range = domRange;
 /** 选集 */
-UE.dom.Selection = domSelection;
-
+// UE.dom.Selection = cls_Selection;
