@@ -1,4 +1,4 @@
-import domRange from "./Range.js";
+import cls_Range from "./Range.js";
 import { domUtils } from "./domUtils.js";
 import dtd from "./dtd.js";
 import browser from "./browser.js";
@@ -287,7 +287,7 @@ class cls_Selection {
 			return this._cachedRange;
 		}
 		//     var range = new baidu.editor.dom.Range(me.document);
-		var range = new domRange(me.document);
+		var range = new cls_Range(me.document);
 
 		if (browser.ie9below) {
 			var nativeRange = me.getIERange();
