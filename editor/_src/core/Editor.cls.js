@@ -237,11 +237,18 @@ var ROOT_KEY = "UEditorPlusPref";
 class cls_Editor extends EventBase {
 	key = '';
 	langIsReady = false;
+	/** 
+	 * 编辑器配置项
+	 * @type {typeof import('../../ueditor.config.js').default}
+	 */
+	options = {};
 	/**
 	 * cls_EditorUI
 	 * @type {typeof import('../adapter/cls_EditorUI.js').default.prototype}
 	 */
 	ui;
+	/** @type { Document } */
+	document;
 
 	/**
 	 * 构造函数

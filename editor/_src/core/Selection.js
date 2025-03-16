@@ -259,7 +259,7 @@ class cls_Selection {
 	/**
 	 * 获取选区对应的Range
 	 * @method getRange
-	 * @return { Object } 得到Range对象
+	 * @return { cls_Range } 得到Range对象
 	 * @example
 	 * ```javascript
 	 * editor.selection.getRange();

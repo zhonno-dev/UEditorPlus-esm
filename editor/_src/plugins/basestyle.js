@@ -79,19 +79,20 @@ UE.plugins["basestyle"] = function () {
      * editor.execCommand( 'superscript' );
      * ```
      */
-    var basestyles = {
-            bold: ["strong", "b"],
-            italic: ["em", "i"],
-            subscript: ["sub"],
-            superscript: ["sup"]
-        },
-        getObj = function (editor, tagNames) {
-            return domUtils.filterNodeList(
-                editor.selection.getStartElementPath(),
-                tagNames
-            );
-        },
-        me = this;
+	var basestyles = {
+		bold: ["strong", "b"],
+		italic: ["em", "i"],
+		subscript: ["sub"],
+		superscript: ["sup"]
+	};
+		var getObj = function (editor, tagNames) {
+			return domUtils.filterNodeList(
+				editor.selection.getStartElementPath(),
+				tagNames
+			);
+		};
+	/** @type {typeof import('../core/Editor.cls.js').default.prototype} */
+        var me = this;
     //添加快捷键
     me.addshortcutkey({
         Bold: "ctrl+66", //^B

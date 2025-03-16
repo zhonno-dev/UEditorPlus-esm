@@ -246,35 +246,35 @@ function mergeSibling(node, dir) {
  */
 class cls_Range {
 	/**
-	 * @property { Node } startContainer 当前Range的开始边界的容器节点, 可以是一个元素节点或者是文本节点
+	 * @type { Node } startContainer 当前Range的开始边界的容器节点, 可以是一个元素节点或者是文本节点
 	 */
 	startContainer = null;
 
 	/**
-	 * @property { Node } startOffset 当前Range的开始边界容器节点的偏移量, 如果是元素节点，\
+	 * @type { Node } startOffset 当前Range的开始边界容器节点的偏移量, 如果是元素节点，\
 	 * 该值就是childNodes中的第几个节点， 如果是文本节点就是文本内容的第几个字符
 	 */
 	startOffset = null;
 
 	/**
-	 * @property { Node } endContainer 当前Range的结束边界的容器节点, 可以是一个元素节点或者是文本节点
+	 * @type { Node } endContainer 当前Range的结束边界的容器节点, 可以是一个元素节点或者是文本节点
 	 */
 	endContainer = null;
 
 	/**
-	 * @property { Node } endOffset 当前Range的结束边界容器节点的偏移量, 如果是元素节点，
+	 * @type { Node } endOffset 当前Range的结束边界容器节点的偏移量, 如果是元素节点，
 	 *                              该值就是childNodes中的第几个节点， 如果是文本节点就是文本内容的第几个字符
 	 */
 	endOffset = null;
 
 	/**
-	 * @property { Boolean } collapsed 当前Range是否闭合
+	 * @type { Boolean } collapsed 当前Range是否闭合
 	 * @default true
 	 * @remind Range是闭合的时候， startContainer === endContainer && startOffset === endOffset
 	 */
 	collapsed = true;
 	/**
-	 * @property { Document } document 当前Range所属的Document对象
+	 * @type { Document } document 当前Range所属的Document对象
 	 * @remind 不同range的的document属性可以是不同的
 	 */
 	document = null;
@@ -324,7 +324,7 @@ class cls_Range {
 	 * 删除当前选区范围中的所有内容
 	 * @method deleteContents
 	 * @remind 执行完该操作后， 当前Range对象变成了闭合状态
-	 * @return { UE.dom.Range } 当前操作的Range对象
+	 * @return { cls_Range } 当前操作的Range对象
 	 * @example
 	 * ```html
 	 * <body>
@@ -427,7 +427,7 @@ class cls_Range {
 	 *          中的索引
 	 * @param { Node } node 将被设为当前选区开始边界容器的节点对象
 	 * @param { int } offset 选区的开始位置偏移量
-	 * @return { UE.dom.Range } 当前range对象
+	 * @return { cls_Range } 当前range对象
 	 * @example
 	 * ```html
 	 * <!-- 选区 -->
@@ -481,7 +481,7 @@ class cls_Range {
 	 * @method  setStartAfter
 	 * @remind 该操作将会把给定节点的父节点作为range的开始容器， 且偏移量是该节点在其父节点中的位置索引+1
 	 * @param { Node } node 选区的开始边界将紧接着该节点之后
-	 * @return { UE.dom.Range } 当前range对象
+	 * @return { cls_Range } 当前range对象
 	 * @example
 	 * ```html
 	 * <!-- 选区示例 -->
@@ -506,8 +506,8 @@ class cls_Range {
 	 * @method  setStartBefore
 	 * @remind 该操作将会把给定节点的父节点作为range的开始容器， 且偏移量是该节点在其父节点中的位置索引
 	 * @param { Node } node 新的选区开始位置在该节点之前
-	 * @see UE.dom.Range:setStartAfter(Node)
-	 * @return { UE.dom.Range } 当前range对象
+	 * @see cls_Range:setStartAfter(Node)
+	 * @return { cls_Range } 当前range对象
 	 */
 	setStartBefore(node) {
 		return this.setStart(node.parentNode, domUtils.getNodeIndex(node));
@@ -517,8 +517,8 @@ class cls_Range {
 	 * @method  setEndAfter
 	 * @remind 该操作将会把给定节点的父节点作为range的结束容器， 且偏移量是该节点在其父节点中的位置索引+1
 	 * @param { Node } node 目标节点
-	 * @see UE.dom.Range:setStartAfter(Node)
-	 * @return { UE.dom.Range } 当前range对象
+	 * @see cls_Range:setStartAfter(Node)
+	 * @return { cls_Range } 当前range对象
 	 * @example
 	 * ```html
 	 * <!-- 选区示例 -->
@@ -543,8 +543,8 @@ class cls_Range {
 	 * @method  setEndBefore
 	 * @remind 该操作将会把给定节点的父节点作为range的结束容器， 且偏移量是该节点在其父节点中的位置索引
 	 * @param { Node } node 目标节点
-	 * @see UE.dom.Range:setEndAfter(Node)
-	 * @return { UE.dom.Range } 当前range对象
+	 * @see cls_Range:setEndAfter(Node)
+	 * @return { cls_Range } 当前range对象
 	 */
 	setEndBefore(node) {
 		return this.setEnd(node.parentNode, domUtils.getNodeIndex(node));
@@ -555,8 +555,8 @@ class cls_Range {
 	 * @remind 选区的开始容器将变成给定的节点， 且偏移量为0
 	 * @remind 如果给定的节点是元素节点， 则该节点必须是允许包含子节点的元素。
 	 * @param { Node } node 目标节点
-	 * @see UE.dom.Range:setStartBefore(Node)
-	 * @return { UE.dom.Range } 当前range对象
+	 * @see cls_Range:setStartBefore(Node)
+	 * @return { cls_Range } 当前range对象
 	 * @example
 	 * ```html
 	 * <!-- 选区示例 -->
@@ -582,8 +582,8 @@ class cls_Range {
 	 * @remind 选区的开始容器将变成给定的节点， 且偏移量为该节点的子节点数
 	 * @remind 如果给定的节点是元素节点， 则该节点必须是允许包含子节点的元素。
 	 * @param { Node } node 目标节点
-	 * @see UE.dom.Range:setStartAtFirst(Node)
-	 * @return { UE.dom.Range } 当前range对象
+	 * @see cls_Range:setStartAtFirst(Node)
+	 * @return { cls_Range } 当前range对象
 	 */
 	setStartAtLast(node) {
 		return this.setStart(
@@ -597,8 +597,8 @@ class cls_Range {
 	 * @param { Node } node 目标节点
 	 * @remind 选区的结束容器将变成给定的节点， 且偏移量为0
 	 * @remind node必须是一个元素节点， 且必须是允许包含子节点的元素。
-	 * @see UE.dom.Range:setStartAtFirst(Node)
-	 * @return { UE.dom.Range } 当前range对象
+	 * @see cls_Range:setStartAtFirst(Node)
+	 * @return { cls_Range } 当前range对象
 	 */
 	setEndAtFirst(node) {
 		return this.setEnd(node, 0);
@@ -609,8 +609,8 @@ class cls_Range {
 	 * @param { Node } node 目标节点
 	 * @remind 选区的结束容器将变成给定的节点， 且偏移量为该节点的子节点数量
 	 * @remind node必须是一个元素节点， 且必须是允许包含子节点的元素。
-	 * @see UE.dom.Range:setStartAtFirst(Node)
-	 * @return { UE.dom.Range } 当前range对象
+	 * @see cls_Range:setStartAtFirst(Node)
+	 * @return { cls_Range } 当前range对象
 	 */
 	setEndAtLast(node) {
 		return this.setEnd(
@@ -624,7 +624,7 @@ class cls_Range {
 	 * @remind 此时， 选区的开始容器和结束容器都是该节点的父节点， 其startOffset是该节点在父节点中的位置索引，
 	 *          而endOffset为startOffset+1
 	 * @param { Node } node 需要选中的节点
-	 * @return { UE.dom.Range } 当前range对象，此时的range仅包含当前给定的节点对象
+	 * @return { cls_Range } 当前range对象，此时的range仅包含当前给定的节点对象
 	 * @example
 	 * ```html
 	 * <!-- 选区示例 -->
@@ -650,7 +650,7 @@ class cls_Range {
 	 * @remind 此时， 选区的开始容器和结束容器都是该节点， 其startOffset为0，
 	 *          而endOffset是该节点的子节点数。
 	 * @param { Node } node 目标节点， 当前range将包含该节点内的所有节点
-	 * @return { UE.dom.Range } 当前range对象， 此时range仅包含给定节点的所有子节点
+	 * @return { cls_Range } 当前range对象， 此时range仅包含给定节点的所有子节点
 	 * @example
 	 * ```html
 	 * <!-- 选区示例 -->
@@ -685,7 +685,7 @@ class cls_Range {
 	/**
 	 * 向当前选区的结束处闭合选区
 	 * @method  collapse
-	 * @return { UE.dom.Range } 当前range对象
+	 * @return { cls_Range } 当前range对象
 	 * @example
 	 * ```html
 	 * <!-- 选区示例 -->
@@ -709,8 +709,8 @@ class cls_Range {
 	 * 如果toStart的值为true，则向开始位置闭合， 反之，向结束位置闭合。
 	 * @method  collapse
 	 * @param { Boolean } toStart 是否向选区开始处闭合
-	 * @return { UE.dom.Range } 当前range对象，此时range对象处于闭合状态
-	 * @see UE.dom.Range:collapse()
+	 * @return { cls_Range } 当前range对象，此时range对象处于闭合状态
+	 * @see cls_Range:collapse()
 	 * @example
 	 * ```html
 	 * <!-- 选区示例 -->
@@ -744,7 +744,7 @@ class cls_Range {
 	/**
 	 * 调整range的开始位置和结束位置，使其"收缩"到最小的位置
 	 * @method  shrinkBoundary
-	 * @return { UE.dom.Range } 当前range对象
+	 * @return { cls_Range } 当前range对象
 	 * @example
 	 * ```html
 	 * <span>xx<b>xx[</b>xxxxx]</span> => <span>xx<b>xx</b>[xxxxx]</span>
@@ -776,7 +776,7 @@ class cls_Range {
 	 * 如果ignoreEnd的值为true，则忽略对结束位置的调整
 	 * @method  shrinkBoundary
 	 * @param { Boolean } ignoreEnd 是否忽略对结束位置的调整
-	 * @return { UE.dom.Range } 当前range对象
+	 * @return { cls_Range } 当前range对象
 	 * @see UE.dom.domUtils.Range:shrinkBoundary()
 	 */
 	shrinkBoundary(ignoreEnd) {
@@ -843,7 +843,7 @@ class cls_Range {
 	 * @method  getCommonAncestor
 	 * @param { Boolean } includeSelf 是否允许获取到的公共祖先节点是当前range对象的容器节点
 	 * @return { Node } 当前range对象内所有节点的公共祖先节点
-	 * @see UE.dom.Range:getCommonAncestor()
+	 * @see cls_Range:getCommonAncestor()
 	 * @example
 	 * ```html
 	 * <body>
@@ -874,8 +874,8 @@ class cls_Range {
 	 * @param { Boolean } includeSelf 是否允许获取到的公共祖先节点是当前range对象的容器节点
 	 * @param { Boolean } ignoreTextNode 获取祖先节点的过程中是否忽略类型为文本节点的祖先节点
 	 * @return { Node } 当前range对象内所有节点的公共祖先节点
-	 * @see UE.dom.Range:getCommonAncestor()
-	 * @see UE.dom.Range:getCommonAncestor(Boolean)
+	 * @see cls_Range:getCommonAncestor()
+	 * @see cls_Range:getCommonAncestor(Boolean)
 	 * @example
 	 * ```html
 	 * <body>
@@ -913,7 +913,7 @@ class cls_Range {
 	 * 调整当前Range的开始和结束边界容器，如果是容器节点是文本节点,就调整到包含该文本节点的父节点上
 	 * @method trimBoundary
 	 * @remind 该操作有可能会引起文本节点被切开
-	 * @return { UE.dom.Range } 当前range对象
+	 * @return { cls_Range } 当前range对象
 	 * @example
 	 * ```html
 	 *
@@ -936,7 +936,7 @@ class cls_Range {
 	 * 可以根据 ignoreEnd 参数的值决定是否调整对结束边界的调整
 	 * @method trimBoundary
 	 * @param { Boolean } ignoreEnd 是否忽略对结束边界的调整
-	 * @return { UE.dom.Range } 当前range对象
+	 * @return { cls_Range } 当前range对象
 	 * @example
 	 * ```html
 	 *
@@ -999,7 +999,7 @@ class cls_Range {
 	 * 如果选区在文本的边界上，就扩展选区到文本的父节点上, 如果当前选区是闭合的， 则什么也不做
 	 * @method txtToElmBoundary
 	 * @remind 该操作不会修改dom节点
-	 * @return { UE.dom.Range } 当前range对象
+	 * @return { cls_Range } 当前range对象
 	 */
 
 	/**
@@ -1008,7 +1008,7 @@ class cls_Range {
 	 * @method txtToElmBoundary
 	 * @param { Boolean } ignoreCollapsed 是否忽略选区的闭合状态， 如果该参数取值为true， 则
 	 *                      不论选区是否闭合， 都会执行该操作， 反之， 则不会对闭合的选区执行该操作
-	 * @return { UE.dom.Range } 当前range对象
+	 * @return { cls_Range } 当前range对象
 	 */
 	txtToElmBoundary(ignoreCollapsed) {
 		function adjust(r, c) {
@@ -1046,7 +1046,7 @@ class cls_Range {
 	 * @method  insertNode
 	 * @param { Node } node 需要插入的节点
 	 * @remind 插入的节点可以是一个DocumentFragment依次插入多个节点
-	 * @return { UE.dom.Range } 当前range对象
+	 * @return { cls_Range } 当前range对象
 	 */
 	insertNode(node) {
 		var first = node,
@@ -1072,8 +1072,8 @@ class cls_Range {
 	/**
 	 * 闭合选区到当前选区的开始位置， 并且定位光标到闭合后的位置
 	 * @method  setCursor
-	 * @return { UE.dom.Range } 当前range对象
-	 * @see UE.dom.Range:collapse()
+	 * @return { cls_Range } 当前range对象
+	 * @see cls_Range:collapse()
 	 */
 
 	/**
@@ -1081,8 +1081,8 @@ class cls_Range {
 	 * @method  setCursor
 	 * @param { Boolean } toEnd 是否向后闭合， 如果为true， 则闭合选区时， 将向结束容器方向闭合，
 	 *                      反之，则向开始容器方向闭合
-	 * @return { UE.dom.Range } 当前range对象
-	 * @see UE.dom.Range:collapse(Boolean)
+	 * @return { cls_Range } 当前range对象
+	 * @see cls_Range:collapse(Boolean)
 	 */
 	setCursor(toEnd, noFillData) {
 		return this.collapse(!toEnd).select(noFillData);
@@ -1123,8 +1123,8 @@ class cls_Range {
 	 *  调整当前range的边界到书签位置，并删除该书签对象所标记的位置内的节点
 	 *  @method  moveToBookmark
 	 *  @param { BookMark } bookmark createBookmark所创建的标签对象
-	 *  @return { UE.dom.Range } 当前range对象
-	 *  @see UE.dom.Range:createBookmark(Boolean)
+	 *  @return { cls_Range } 当前range对象
+	 *  @see cls_Range:createBookmark(Boolean)
 	 */
 	moveToBookmark(bookmark) {
 		var start = bookmark.id
@@ -1148,7 +1148,7 @@ class cls_Range {
 	 * 调整range的边界，使其"放大"到最近的父节点
 	 * @method  enlarge
 	 * @remind 会引起选区的变化
-	 * @return { UE.dom.Range } 当前range对象
+	 * @return { cls_Range } 当前range对象
 	 */
 
 	/**
@@ -1156,7 +1156,7 @@ class cls_Range {
 	 * 要求扩大之后的父节点是block节点
 	 * @method  enlarge
 	 * @param { Boolean } toBlock 是否要求扩大之后的父节点必须是block节点
-	 * @return { UE.dom.Range } 当前range对象
+	 * @return { cls_Range } 当前range对象
 	 */
 	enlarge(toBlock, stopFn) {
 		var isBody = domUtils.isBody,
@@ -1258,8 +1258,8 @@ class cls_Range {
 	/**
 	 * 调整Range的边界，使其"缩小"到最合适的位置
 	 * @method adjustmentBoundary
-	 * @return { UE.dom.Range } 当前range对象
-	 * @see UE.dom.Range:shrinkBoundary()
+	 * @return { cls_Range } 当前range对象
+	 * @see cls_Range:shrinkBoundary()
 	 */
 	adjustmentBoundary() {
 		if (!this.collapsed) {
@@ -1303,7 +1303,7 @@ class cls_Range {
 	 * @method applyInlineStyle
 	 * @param { String } tagName 需要添加的标签名
 	 * @param { Object } attrs 跟随新添加的标签的属性
-	 * @return { UE.dom.Range } 当前选区
+	 * @return { cls_Range } 当前选区
 	 * @example
 	 * ```html
 	 * <p>xxxx[xxxx]x</p>
@@ -1415,7 +1415,7 @@ class cls_Range {
 	 * 移除当前选区内指定的inline标签，但保留其中的内容
 	 * @method removeInlineStyle
 	 * @param { String } tagName 需要移除的标签名
-	 * @return { UE.dom.Range } 当前的range对象
+	 * @return { cls_Range } 当前的range对象
 	 * @example
 	 * ```html
 	 * xx[x<span>xxx<em>yyy</em>zz]z</span>  => range.removeInlineStyle(["em"])  => xx[x<span>xxxyyyzz]z</span>
@@ -1426,8 +1426,8 @@ class cls_Range {
 	 * 移除当前选区内指定的一组inline标签，但保留其中的内容
 	 * @method removeInlineStyle
 	 * @param { Array } tagNameArr 需要移除的标签名的数组
-	 * @return { UE.dom.Range } 当前的range对象
-	 * @see UE.dom.Range:removeInlineStyle(String)
+	 * @return { cls_Range } 当前的range对象
+	 * @see cls_Range:removeInlineStyle(String)
 	 */
 	removeInlineStyle(tagNames) {
 		if (this.collapsed) return this;
@@ -1525,7 +1525,7 @@ class cls_Range {
 	 * 滚动到当前range开始的位置
 	 * @method scrollToView
 	 * @param { Window } win 当前range对象所属的window对象
-	 * @return { UE.dom.Range } 当前Range对象
+	 * @return { cls_Range } 当前Range对象
 	 */
 
 	/**
@@ -1533,7 +1533,7 @@ class cls_Range {
 	 * @method scrollToView
 	 * @param { Window } win 当前range对象所属的window对象
 	 * @param { Number } offset 距离range开始位置处的偏移量， 如果为正数， 则向下偏移， 反之， 则向上偏移
-	 * @return { UE.dom.Range } 当前Range对象
+	 * @return { cls_Range } 当前Range对象
 	 */
 	scrollToView(win, offset) {
 		win = win ? window : domUtils.getWindow(this.document);
@@ -1727,7 +1727,7 @@ class cls_Range {
 	/**
 	 * 判断给定的Range对象是否和当前Range对象表示的是同一个选区
 	 * @method equals
-	 * @param { UE.dom.Range } 需要判断的Range对象
+	 * @param { cls_Range } 需要判断的Range对象
 	 * @return { Boolean } 如果给定的Range对象与当前Range对象表示的是同一个选区， 则返回true， 否则返回false
 	 */
 	equals(rng) {
@@ -1743,7 +1743,7 @@ class cls_Range {
 	 * 作为其参数。
 	 * @method traversal
 	 * @param { Function }  doFn 对每个遍历的节点要执行的方法， 该方法接受当前遍历的节点作为其参数
-	 * @return { UE.dom.Range } 当前range对象
+	 * @return { cls_Range } 当前range对象
 	 * @example
 	 * ```html
 	 *
@@ -1786,8 +1786,8 @@ class cls_Range {
 	 * @param { Function } filterFn 过滤器， 该函数接受当前遍历的节点作为参数， 如果该节点满足过滤
 	 *                      规则， 请返回true， 该节点会触发doFn， 否则， 请返回false， 则该节点不
 	 *                      会触发doFn。
-	 * @return { UE.dom.Range } 当前range对象
-	 * @see UE.dom.Range:traversal(Function)
+	 * @return { cls_Range } 当前range对象
+	 * @see cls_Range:traversal(Function)
 	 * @example
 	 * ```html
 	 *
@@ -1839,7 +1839,7 @@ class cls_Range {
 /**
  * 在页面上高亮range所表示的选区
  * @method select
- * @return { UE.dom.Range } 返回当前Range对象
+ * @return { cls_Range } 返回当前Range对象
  */
 //这里不区分ie9以上，trace:3824
 cls_Range.prototype.select = browser.ie

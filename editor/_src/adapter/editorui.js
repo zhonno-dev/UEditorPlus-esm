@@ -3,6 +3,12 @@ import UE from "../UE.js";
 import UE_ui_Dialog from "../ui/dialog.js";
 import browser from "../core/browser.js";
 import cls_uiButton from "../ui/button.cls.js";
+import UE_ui_ColorButton from "../ui/colorbutton.js";
+import UE_ui_Combox from "../ui/combox.js";
+import UE_ui_TableButton from "../ui/tablebutton.js";
+import UE_ui_MenuButton from "../ui/menubutton.js";
+import UE_ui_MultiMenuPop from "../ui/multiMenu.js";
+import UE_ui_AutoTypeSetButton from "../ui/autotypesetbutton.js";
 
 //ui跟编辑器的适配層
 //哪个按钮弹出是dialog，还是下拉框等都是在这个js中配置
@@ -39,43 +45,44 @@ import cls_uiButton from "../ui/button.cls.js";
 
 	//为工具栏添加按钮，以下都是统一的按钮触发命令，所以写在一起
 	var btnCmds = [
-		"undo",
-		"redo",
-		"formatmatch",
-		"bold",
-		"italic",
-		"underline",
-		"fontborder",
-		"touppercase",
-		"tolowercase",
-		"strikethrough",
-		"subscript",
-		"superscript",
-		"source",
-		"indent",
-		"outdent",
-		"blockquote",
-		"pasteplain",
-		"pagebreak",
-		"selectall",
-		"print",
-		"horizontal",
-		"removeformat",
-		"time",
-		"date",
-		"unlink",
-		"insertparagraphbeforetable",
-		"insertrow",
-		"insertcol",
-		"mergeright",
-		"mergedown",
-		"deleterow",
-		"deletecol",
-		"splittorows",
-		"splittocols",
-		"splittocells",
-		"mergecells",
-		"deletetable",
+		"undo", // 撤销操作
+		"redo", // 重做操作
+		"formatmatch", // 格式刷，用于匹配格式
+		"bold", // 加粗
+		"italic", // 倾斜
+		"underline", // 下划线
+		"fontborder", // 字体边框
+		"touppercase", // 转换为大写
+		"tolowercase", // 转换为小写
+		"strikethrough", // 删除线
+		"subscript", // 下标
+		"superscript", // 上标
+		"source", // 切换到源码模式
+		"indent", // 增加缩进
+		"outdent", // 减少缩进
+		"blockquote", // 引用块
+		"pasteplain", // 纯文本粘贴
+		"pagebreak", // 分页符
+		"selectall", // 全选
+		"print", // 打印
+		"horizontal", // 插入水平线
+		"removeformat", // 清除格式
+		"time", // 插入当前时间
+		"date", // 插入当前日期
+		"unlink", // 取消链接
+		"insertparagraphbeforetable", // 在表格前插入段落
+		"insertrow", // 插入行
+		"insertcol", // 插入列
+		"mergeright", // 向右合并单元格
+		"mergedown", // 向下合并单元格
+		"deleterow", // 删除行
+		"deletecol", // 删除列
+		"splittorows", // 拆分为多行
+		"splittocols", // 拆分为多列
+		"splittocells", // 拆分为多个单元格
+		"mergecells", // 合并单元格
+		"deletetable", // 删除表格
+
 	];
 
 	for (var i = 0, ci; (ci = btnCmds[i++]);) {
@@ -85,7 +92,7 @@ import cls_uiButton from "../ui/button.cls.js";
 			 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
 			 */
 			return function (editor) {
-				// var ui = new editorui.Button({
+				// var ui = new cls_uiButton({
 				var ui = new cls_uiButton({
 					className: "edui-for-" + cmd,
 					title:
@@ -138,7 +145,7 @@ import cls_uiButton from "../ui/button.cls.js";
 
 	//清除文档
 	editorui.cleardoc = function (editor) {
-		var ui = new editorui.Button({
+		var ui = new cls_uiButton({
 			className: "edui-for-cleardoc",
 			title:
 				editor.options.labelMap.cleardoc ||
@@ -163,8 +170,9 @@ import cls_uiButton from "../ui/button.cls.js";
 	];
 	for (let value of imageTypeSet) {
 		(function (value) {
+			/** @param {typeof import('../core/Editor.cls.js').default.prototype} editor */
 			editorui['image' + value] = function (editor) {
-				var ui = new editorui.Button({
+				var ui = new cls_uiButton({
 					className: "edui-for-" + 'image' + value,
 					title:
 						editor.options.labelMap['image' + value] ||
@@ -211,7 +219,7 @@ import cls_uiButton from "../ui/button.cls.js";
 			for (var i = 0, ci; (ci = val[i++]);) {
 				(function (cmd2) {
 					editorui[cmd.replace("float", "") + cmd2] = function (editor) {
-						var ui = new editorui.Button({
+						var ui = new cls_uiButton({
 							className: "edui-for-" + cmd.replace("float", "") + cmd2,
 							title:
 								editor.options.labelMap[cmd.replace("float", "") + cmd2] ||
@@ -244,7 +252,7 @@ import cls_uiButton from "../ui/button.cls.js";
 	for (var i = 0, ci; (ci = ["backcolor", "forecolor"][i++]);) {
 		editorui[ci] = (function (cmd) {
 			return function (editor) {
-				var ui = new editorui.ColorButton({
+				var ui = new UE_ui_ColorButton({
 					className: "edui-for-" + cmd,
 					color: "default",
 					title:
@@ -332,6 +340,9 @@ import cls_uiButton from "../ui/button.cls.js";
 					continue;
 				}
 				(function (cmd) {
+					/**
+					 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
+					 */
 					editorui[cmd] = function (editor, iframeUrl, title) {
 						iframeUrl =
 							iframeUrl ||
@@ -345,7 +356,7 @@ import cls_uiButton from "../ui/button.cls.js";
 						var dialog;
 						//没有iframeUrl不创建dialog
 						if (iframeUrl) {
-							dialog = new editorui.Dialog(
+							dialog = new UE_ui_Dialog(
 								utils.extend(
 									{
 										iframeUrl: editor.ui.mapUrl(iframeUrl),
@@ -384,7 +395,7 @@ import cls_uiButton from "../ui/button.cls.js";
 							editor.ui._dialogs[cmd + "Dialog"] = dialog;
 						}
 
-						var ui = new editorui.Button({
+						var ui = new cls_uiButton({
 							className: "edui-for-" + cmd,
 							title: title,
 							onclick: function () {
@@ -457,6 +468,7 @@ import cls_uiButton from "../ui/button.cls.js";
 		})(p, dialogBtns[p]);
 	}
 
+	/** @param {typeof import('../core/Editor.cls.js').default.prototype} editor */
 	editorui.insertcode = function (editor, list, title) {
 		list = editor.options["insertcode"] || [];
 		title =
@@ -478,7 +490,7 @@ import cls_uiButton from "../ui/button.cls.js";
 			});
 		});
 
-		var ui = new editorui.Combox({
+		var ui = new UE_ui_Combox({
 			editor: editor,
 			items: items,
 			onselect: function (t, index) {
@@ -548,7 +560,7 @@ import cls_uiButton from "../ui/button.cls.js";
 				});
 			})(ci.label || langLabel, ci.val);
 		}
-		var ui = new editorui.Combox({
+		var ui = new UE_ui_Combox({
 			editor: editor,
 			items: items,
 			onselect: function (t, index) {
@@ -612,7 +624,7 @@ import cls_uiButton from "../ui/button.cls.js";
 				}
 			});
 		}
-		var ui = new editorui.Combox({
+		var ui = new UE_ui_Combox({
 			editor: editor,
 			items: items,
 			title: title,
@@ -664,7 +676,7 @@ import cls_uiButton from "../ui/button.cls.js";
 				}
 			});
 		}
-		var ui = new editorui.Combox({
+		var ui = new UE_ui_Combox({
 			editor: editor,
 			items: items,
 			title: title,
@@ -738,7 +750,7 @@ import cls_uiButton from "../ui/button.cls.js";
 			})(t);
 		}
 
-		var ui = new editorui.Combox({
+		var ui = new UE_ui_Combox({
 			editor: editor,
 			items: items,
 			title: title,
@@ -785,7 +797,7 @@ import cls_uiButton from "../ui/button.cls.js";
 			editor.options.labelMap["inserttable"] ||
 			editor.getLang("labelMap.inserttable") ||
 			"";
-		var ui = new editorui.TableButton({
+		var ui = new UE_ui_TableButton({
 			editor: editor,
 			title: title,
 			className: "edui-for-inserttable",
@@ -821,7 +833,7 @@ import cls_uiButton from "../ui/button.cls.js";
 				}
 			});
 		}
-		var ui = new editorui.MenuButton({
+		var ui = new UE_ui_MenuButton({
 			editor: editor,
 			className: "edui-for-lineheight",
 			title:
@@ -865,7 +877,7 @@ import cls_uiButton from "../ui/button.cls.js";
 						}
 					});
 				}
-				var ui = new editorui.MenuButton({
+				var ui = new UE_ui_MenuButton({
 					editor: editor,
 					className: "edui-for-rowspacing" + cmd,
 					title:
@@ -914,7 +926,7 @@ import cls_uiButton from "../ui/button.cls.js";
 						onclick: _onMenuClick
 					});
 				}
-				var ui = new editorui.MenuButton({
+				var ui = new UE_ui_MenuButton({
 					editor: editor,
 					className: "edui-for-" + cmd,
 					title: editor.getLang("labelMap." + cmd) || "",
@@ -946,7 +958,7 @@ import cls_uiButton from "../ui/button.cls.js";
 			editor.options.labelMap["fullscreen"] ||
 			editor.getLang("labelMap.fullscreen") ||
 			"";
-		var ui = new editorui.Button({
+		var ui = new cls_uiButton({
 			className: "edui-for-fullscreen",
 			title: title,
 			theme: editor.options.theme,
@@ -969,7 +981,7 @@ import cls_uiButton from "../ui/button.cls.js";
 	// 表情
 	editorui['emotion'] = function (editor, iframeUrl) {
 		var cmd = "emotion";
-		var ui = new editorui.MultiMenuPop({
+		var ui = new UE_ui_MultiMenuPop({
 			title:
 				editor.options.labelMap[cmd] ||
 				editor.getLang("labelMap." + cmd + "") ||
@@ -991,7 +1003,7 @@ import cls_uiButton from "../ui/button.cls.js";
 	};
 
 	editorui['autotypeset'] = function (editor) {
-		var ui = new editorui.AutoTypeSetButton({
+		var ui = new UE_ui_AutoTypeSetButton({
 			editor: editor,
 			title:
 				editor.options.labelMap["autotypeset"] ||
@@ -1012,7 +1024,7 @@ import cls_uiButton from "../ui/button.cls.js";
 	/* 简单上传插件 */
 	editorui['simpleupload'] = function (editor) {
 		var name = "simpleupload",
-			ui = new editorui.Button({
+			ui = new cls_uiButton({
 				className: "edui-for-" + name,
 				title:
 					editor.options.labelMap[name] ||
