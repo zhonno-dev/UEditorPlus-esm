@@ -15,6 +15,13 @@ var nodeStack = [];
 
 class cls_EditorUI extends cls_UIBase{
 	uiName = "editor";
+	/** @type {typeof import('../core/Editor.cls.js').default.prototype} */
+	editor = null;
+	/** 
+	 * 显示的工具栏，默认为 config.toolbars
+	 * @type {typeof import('../../ueditor.config.js').default.toolbars}
+	 */
+	toolbars = [];
 
 	/**
 	 * 构造函数
@@ -22,7 +29,7 @@ class cls_EditorUI extends cls_UIBase{
 	constructor(options) {
 		super(); // 调用父类的构造函数
 		// console.log(options);
-		
+
 		this.initOptions(options); //这是从 UIBase 继承的方法
 		this.initEditorUI();
 	}
@@ -417,47 +424,77 @@ class cls_EditorUI extends cls_UIBase{
 		}
 	}
 	
+	/**
+	 * 初始化工具栏
+	 */
 	_initToolbars() {
+		// 获取当前编辑器实例
 		var editor = this.editor;
+		// 获取工具栏配置，如果没有则初始化为空数组
 		var toolbars = this.toolbars || [];
+		// 如果存在第一个工具栏配置，则在其开头添加 'message' 项
 		if (toolbars[0]) {
 			toolbars[0].unshift(
 				'message'
 			);
 		}
+		// 用于存储工具栏 UI 实例的数组
 		var toolbarUis = [];
+		// 用于存储额外 UI 项的数组
 		var extraUIs = [];
+		// 遍历每个工具栏配置
 		for (var i = 0; i < toolbars.length; i++) {
+			// 获取当前工具栏配置
 			var toolbar = toolbars[i];
+			// 创建一个新的工具栏 UI 实例
 			// var toolbarUi = new baidu.editor.ui.Toolbar({
 			var toolbarUi = new UE_ui_Toolbar({
+				// 设置工具栏主题为编辑器配置的主题
 				theme: editor.options.theme
 			});
+			// 遍历当前工具栏配置中的每个项
 			for (var j = 0; j < toolbar.length; j++) {
+				// 获取当前工具栏项
 				var toolbarItem = toolbar[j];
+				// 用于存储当前工具栏项的 UI 实例
 				var toolbarItemUi = null;
+				// 如果当前工具栏项是字符串类型
 				if (typeof toolbarItem == "string") {
+					// 将工具栏项转换为小写
 					toolbarItem = toolbarItem.toLowerCase();
+					// 如果是 '|'，则替换为 'Separator'
 					if (toolbarItem === "|") {
 						toolbarItem = "Separator";
 					}
+					// 如果是 '||'，则替换为 'Breakline'
 					if (toolbarItem === "||") {
 						toolbarItem = "Breakline";
 					}
+					// 从 UE.ui 中获取对应的 UI 组件
 					var ui = UE.ui[toolbarItem];
+					// 如果存在对应的 UI 组件
 					if (ui) {
+						// 如果 UI 组件是一个函数
 						if (utils.isFunction(ui)) {
+							// 创建一个新的 UI 实例
 							toolbarItemUi = new UE.ui[toolbarItem](editor);
 						} else {
+							// 如果 UI 组件有 id 且不等于编辑器的 key，则跳过该项
 							if (ui.id && ui.id !== editor.key) {
 								continue;
 							}
+							// 调用 UI 组件的 execFn 方法，获取 UI 实例
 							var itemUI = ui.execFn.call(editor, editor, toolbarItem);
+							// 如果获取到了 UI 实例
 							if (itemUI) {
+								// 如果 UI 组件没有指定 index
 								if (ui.index === undefined) {
+									// 将 UI 实例添加到工具栏 UI 中
 									toolbarUi.add(itemUI);
+									// 继续下一项
 									continue;
 								} else {
+									// 将 UI 实例和其 index 存储到 extraUIs 数组中
 									extraUIs.push({
 										index: ui.index,
 										itemUI: itemUI
@@ -468,29 +505,39 @@ class cls_EditorUI extends cls_UIBase{
 					}
 					//fullscreen这里单独处理一下，放到首行去
 					if (toolbarItem === "fullscreen") {
+						// 如果已经存在工具栏 UI 实例
 						if (toolbarUis && toolbarUis[0]) {
+							// 将 'fullscreen' 项的 UI 实例插入到第一个工具栏 UI 实例的开头
 							toolbarUis[0].items.splice(0, 0, toolbarItemUi);
 						} else {
+							// 如果还没有工具栏 UI 实例，将 'fullscreen' 项的 UI 实例插入到当前工具栏 UI 实例的开头
 							toolbarItemUi && toolbarUi.items.splice(0, 0, toolbarItemUi);
 						}
+						// 继续下一项
 						continue;
 					}
 				} else {
+					// 如果工具栏项不是字符串类型，则直接将其作为 UI 实例
 					toolbarItemUi = toolbarItem;
 				}
+				// 如果有 UI 实例且有 id，则将其添加到工具栏 UI 中
 				if (toolbarItemUi && toolbarItemUi.id) {
 					toolbarUi.add(toolbarItemUi);
 				}
 			}
+			// 将当前工具栏 UI 实例存储到 toolbarUis 数组中
 			toolbarUis[i] = toolbarUi;
 		}
 
-		//接受外部定制的UI
+		// 处理外部定制的 UI 项
 		utils.each(extraUIs, function (obj) {
+			// 将额外的 UI 项添加到工具栏 UI 中指定的位置
 			toolbarUi.add(obj.itemUI, obj.index);
 		});
+		// 将最终的工具栏 UI 实例数组赋值给 this.toolbars
 		this.toolbars = toolbarUis;
 	}
+
 	
 	getHtmlTpl() {
 		return (
