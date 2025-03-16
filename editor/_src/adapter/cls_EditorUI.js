@@ -1,6 +1,5 @@
 //此文件是从原本的 _src/adapter/editor.js 中的 function EditorUI(options) { 独立​出来的
 
-
 import utils from "../core/utils.js";
 import UE_ui_Toolbar from "../ui/toolbar.js";
 import UE_ui_Popup from "../ui/popup.js";
@@ -487,7 +486,6 @@ class cls_EditorUI extends cls_UIBase{
 		}
 
 		//接受外部定制的UI
-
 		utils.each(extraUIs, function (obj) {
 			toolbarUi.add(obj.itemUI, obj.index);
 		});
