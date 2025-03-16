@@ -4,21 +4,39 @@ import utils from "./utils.js";
 import browser from "./browser.js";
 const { ie, webkit, gecko, opera } = browser;
 
+/**
+ * 根据指定的起始节点和遍历方向，查找符合过滤条件的节点。
+ * @param {Node} node - 起始节点。
+ * @param {string} start - 起始属性名，如 'firstChild' 或 'lastChild'。
+ * @param {string} ltr - 遍历方向属性名，如 'nextSibling' 或 'previousSibling'。
+ * @param {boolean} startFromChild - 是否从子节点开始查找。
+ * @param {Function} fn - 过滤函数，用于判断节点是否符合条件。
+ * @param {Function} guard - 守卫函数，用于判断是否继续查找。
+ * @returns {Node|null} - 符合条件的节点，如果未找到则返回 null。
+ */
 function getDomNode(node, start, ltr, startFromChild, fn, guard) {
+	// 如果 startFromChild 为 true 且节点存在指定的起始属性，则将 tmpNode 设为该起始子节点
 	var tmpNode = startFromChild && node[start],
 		parent;
+	// 如果 tmpNode 为空，则将 tmpNode 设为节点的指定遍历方向的兄弟节点
 	!tmpNode && (tmpNode = node[ltr]);
+	// 当 tmpNode 为空时，尝试从父节点的指定遍历方向查找节点
 	while (!tmpNode && (parent = (parent || node).parentNode)) {
+		// 如果父节点是 BODY 节点或者守卫函数返回 false，则停止查找
 		if (parent.tagName == "BODY" || (guard && !guard(parent))) {
 			return null;
 		}
+		// 将 tmpNode 设为父节点的指定遍历方向的兄弟节点
 		tmpNode = parent[ltr];
 	}
+	// 如果 tmpNode 存在且过滤函数存在，但 tmpNode 不符合过滤条件，则递归调用 getDomNode 继续查找
 	if (tmpNode && fn && !fn(tmpNode)) {
 		return getDomNode(tmpNode, start, ltr, false, fn);
 	}
+	// 返回符合条件的节点
 	return tmpNode;
 }
+
 
 var attrFix = ie && browser.version < 9
 	? {
