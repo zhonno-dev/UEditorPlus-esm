@@ -57,8 +57,8 @@ class cls_EditorUI extends cls_UIBase{
 			//提供编辑器实时宽高(全屏时宽高不变化)
 			editor.ui._actualFrameWidth = editor.options.initialFrameWidth;
 
-			UE.browser.ie &&
-				UE.browser.version === 6 &&
+			browser.ie &&
+				browser.version === 6 &&
 				editor.container.ownerDocument.execCommand(
 					"BackgroundImageCache",
 					false,
@@ -442,7 +442,8 @@ class cls_EditorUI extends cls_UIBase{
 		var toolbarUis = [];
 		// 用于存储额外 UI 项的数组
 		var extraUIs = [];
-		// 遍历每个工具栏配置
+		// console.log(UE.ui);
+		// 遍历每一【行】工具栏配置
 		for (var i = 0; i < toolbars.length; i++) {
 			// 获取当前工具栏配置
 			var toolbar = toolbars[i];
@@ -452,7 +453,7 @@ class cls_EditorUI extends cls_UIBase{
 				// 设置工具栏主题为编辑器配置的主题
 				theme: editor.options.theme
 			});
-			// 遍历当前工具栏配置中的每个项
+			// 遍历当前这一【行】工具栏配置中的每个项
 			for (var j = 0; j < toolbar.length; j++) {
 				// 获取当前工具栏项
 				var toolbarItem = toolbar[j];
@@ -472,6 +473,7 @@ class cls_EditorUI extends cls_UIBase{
 					}
 					// 从 UE.ui 中获取对应的 UI 组件
 					var ui = UE.ui[toolbarItem];
+					
 					// 如果存在对应的 UI 组件
 					if (ui) {
 						// 如果 UI 组件是一个函数
@@ -479,6 +481,7 @@ class cls_EditorUI extends cls_UIBase{
 							// 创建一个新的 UI 实例
 							toolbarItemUi = new UE.ui[toolbarItem](editor);
 						} else {
+							// console.log(toolbarItem);
 							// 如果 UI 组件有 id 且不等于编辑器的 key，则跳过该项
 							if (ui.id && ui.id !== editor.key) {
 								continue;

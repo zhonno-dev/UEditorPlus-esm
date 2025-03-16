@@ -23,6 +23,9 @@ import './adapter/editorui.js';
 // import './adapter/editor.js';
 import './adapter/message.js';
 
+// console.log(UE.ui);
+
+
 //lang/
 import '../lang/zh-cn/zh-cn.js';
 

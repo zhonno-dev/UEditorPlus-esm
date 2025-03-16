@@ -1,11 +1,15 @@
 import uiUtils from "./uiutils.js";
 import cls_UIBase from "./UIBase.cls.js";
 
+/**
+ * 一【行】工具栏UI
+ */
 class cls_uiToolbar extends cls_UIBase {
-	items = null;
+	items = [];
 
 	/**
-	 * 构造函数
+	 * 构造函数\
+	 * 一个此实例表示一【行】工具栏UI（每【行】工具栏中有多个按钮）
 	 */
 	constructor(options) {
 		super(); // 调用父类的构造函数
@@ -13,7 +17,7 @@ class cls_uiToolbar extends cls_UIBase {
 		this.initOptions(options);
 		this.initToolbar();
 	}
-	
+
 	initToolbar() {
 		this.items = this.items || [];
 		this.initUIBase();
