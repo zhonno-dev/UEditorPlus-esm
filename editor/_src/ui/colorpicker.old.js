@@ -74,38 +74,37 @@ class cls_uiColorPicker extends cls_UIBase {
 		this.noColorText = this.noColorText || this.editor.getLang("clearColor");
 		this.initUIBase();
 	}
-	getHtmlTpl() {
-		return genColorPicker(this.noColorText, this.editor);
-	}
-	_onTableClick(evt) {
-		var tgt = evt.target || evt.srcElement;
-		var color = tgt.getAttribute("data-color");
-		if (color) {
-			this.fireEvent("pickcolor", color);
-		}
-	}
-	_onTableOver(evt) {
-		var tgt = evt.target || evt.srcElement;
-		var color = tgt.getAttribute("data-color");
-		if (color) {
-			this.getDom("preview").style.backgroundColor = color;
-		}
-	}
-	_onTableOut() {
-		this.getDom("preview").style.backgroundColor = "";
-	}
-	_onPickNoColor() {
-		this.fireEvent("picknocolor");
-	}
-	_onColorSelect(evt) {
-		var input = evt.target || evt.srcElement;
-		var color = input.value;
-		if (color) {
-			this.fireEvent("pickcolor", color);
-		}
-	}
 }
-
+cls_uiColorPicker.prototype.getHtmlTpl = function () {
+	return genColorPicker(this.noColorText, this.editor);
+};
+cls_uiColorPicker.prototype._onTableClick = function (evt) {
+	var tgt = evt.target || evt.srcElement;
+	var color = tgt.getAttribute("data-color");
+	if (color) {
+		this.fireEvent("pickcolor", color);
+	}
+};
+cls_uiColorPicker.prototype._onTableOver = function (evt) {
+	var tgt = evt.target || evt.srcElement;
+	var color = tgt.getAttribute("data-color");
+	if (color) {
+		this.getDom("preview").style.backgroundColor = color;
+	}
+};
+cls_uiColorPicker.prototype._onTableOut = function () {
+	this.getDom("preview").style.backgroundColor = "";
+};
+cls_uiColorPicker.prototype._onPickNoColor = function () {
+	this.fireEvent("picknocolor");
+};
+cls_uiColorPicker.prototype._onColorSelect = function (evt) {
+	var input = evt.target || evt.srcElement;
+	var color = input.value;
+	if (color) {
+		this.fireEvent("pickcolor", color);
+	}
+};
 
 // utils.inherits(ColorPicker, UIBase); [X]
 

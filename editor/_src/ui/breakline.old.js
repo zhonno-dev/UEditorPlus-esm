@@ -3,7 +3,6 @@
 import cls_UIBase from "./UIBase.js";
 
 class cls_uiBreakline extends cls_UIBase {
-	uiName = "Breakline";
 	/**
 	 * 构造函数
 	 */
@@ -13,16 +12,15 @@ class cls_uiBreakline extends cls_UIBase {
 		this.initOptions(options);
 		this.initSeparator();
 	}
-
-	initSeparator() {
-		this.initUIBase();
-	}
-	getHtmlTpl() {
-		return "<br/>";
-	}
 }
 
-
+cls_uiBreakline.prototype.uiName = "Breakline";
+cls_uiBreakline.prototype.initSeparator = function () {
+	this.initUIBase();
+};
+cls_uiBreakline.prototype.getHtmlTpl = function () {
+	return "<br/>";
+};
 
 // utils.inherits(Breakline, UIBase);[X]
 

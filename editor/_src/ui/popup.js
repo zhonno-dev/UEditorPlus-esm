@@ -1,6 +1,5 @@
 import uiUtils from "./uiutils.js";
 import { domUtils } from "../core/domUtils.js";
-
 import cls_UIBase from "./UIBase.js";
 
 ///import core
@@ -77,7 +76,7 @@ class cls_uiPopup extends cls_UIBase {
 		return (
 			'<div id="##" class="edui-popup %%" onmousedown="return false;">' +
 			' <div id="##_body" class="edui-popup-body">' +
-			' <iframe style="position:absolute;z-index:-1;left:0;top:0;background-color: transparent;" frameborder="0" width="100%" height="100%" src="about:blank"></iframe>' +
+			' <iframe style="position:absolute;z-index:-1;left:0;top:0;background-color: transparent;" frameborder="0" width="100%" height="100%" src="about:blank" ></iframe>' +
 			' <div class="edui-shadow"></div>' +
 			' <div id="##_content" class="edui-popup-content">' +
 			this.getContentHtmlTpl() +
@@ -98,11 +97,12 @@ class cls_uiPopup extends cls_UIBase {
 	}
 	getContentHtmlTpl() {
 		return this._Popup_getContentHtmlTpl();
-	};
+	}
 	_Popup_postRender() {
 		if (this.content instanceof cls_UIBase) {
 			this.content.postRender();
 		}
+		// console.trace();
 
 		//捕获鼠标滚轮
 		if (this.captureWheel && !this.captured) {
@@ -151,16 +151,16 @@ class cls_uiPopup extends cls_UIBase {
 	}
 	postRender() {
 		this._Popup_postRender();
-	};
+	}
 	_doAutoRender() {
 		if (!this.getDom() && this.autoRender) {
 			this.render();
 		}
-	};
+	}
 	mesureSize() {
 		var box = this.getDom("content");
 		return uiUtils.getClientRect(box);
-	};
+	}
 	fitSize() {
 		// console.log('fitSize.popup')
 		if (this.captureWheel && this.sized) {
@@ -182,10 +182,10 @@ class cls_uiPopup extends cls_UIBase {
 		this.__size = size;
 		this.captureWheel && (this.getDom("content").style.overflow = "auto");
 		return size;
-	};
+	}
 	showAnchor(element, hoz) {
 		this.showAnchorRect(uiUtils.getClientRect(element), hoz);
-	};
+	}
 	showAnchorRect(rect, hoz, adj) {
 		this._doAutoRender();
 		var vpRect = uiUtils.getViewportRect();
@@ -237,8 +237,9 @@ class cls_uiPopup extends cls_UIBase {
 			uiUtils.getFixedLayer().style.zIndex =
 				popEl.style.zIndex - 1;
 		}
+
 		this.getDom().style.visibility = "visible";
-	};
+	}
 	showAt(offset) {
 		var left = offset.left;
 		var top = offset.top;
@@ -251,7 +252,7 @@ class cls_uiPopup extends cls_UIBase {
 			width: 0
 		};
 		this.showAnchorRect(rect, false, true);
-	};
+	}
 	_show() {
 		if (this._hidden) {
 			var box = this.getDom();
@@ -262,14 +263,14 @@ class cls_uiPopup extends cls_UIBase {
 			//                }
 			this.fireEvent("show");
 		}
-	};
+	}
 	isHidden() {
 		return this._hidden;
-	};
+	}
 	show() {
 		this._doAutoRender();
 		this._show();
-	};
+	}
 	hide(notNofity) {
 		if (!this._hidden && this.getDom()) {
 			this.getDom().style.display = "none";
@@ -278,10 +279,10 @@ class cls_uiPopup extends cls_UIBase {
 				this.fireEvent("hide");
 			}
 		}
-	};
+	}
 	queryAutoHide(el) {
 		return !el || !uiUtils.contains(this.getDom(), el);
-	};
+	}
 
 }
 

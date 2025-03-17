@@ -1,4 +1,4 @@
-import utils from "../core/utils.js";
+// import utils from "../core/utils.js";
 import uiUtils from "./uiutils.js";
 import { cls_uiMenu } from "./menu.js";
 // import SplitButton from "./splitbutton.js";
@@ -16,12 +16,13 @@ class cls_uiCombox extends cls_uiSplitButton {
 	 * 构造函数
 	 */
 	constructor(options) {
+		// console.trace();
+		// console.log(options.className);
 		super(options); // 调用父类的构造函数
+		// console.log(this.className);
 
 		this.initOptions(options);
 		this.initCombox();
-		// window.zhuLog = true;
-		// console.log(this.className);
 	}
 
 	onbuttonclick() {
@@ -44,10 +45,11 @@ class cls_uiCombox extends cls_uiSplitButton {
 			uiName: "list",
 			editor: this.editor,
 			captureWheel: true,
-			combox: this
+			combox: this,
+			className: this.className,
 		});
 
-		//     this.initSplitButton();
+		this.initSplitButton();
 	}
 
 	postRender() {

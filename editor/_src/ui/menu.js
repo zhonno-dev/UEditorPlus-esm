@@ -31,25 +31,14 @@ class cls_uiMenu extends cls_uiPopup {
 	 * 构造函数
 	 */
 	constructor(options) {
-		console.log(options.className);
-		// if (options.name) {
-		// 	var name = options.name;
-		// 	var cssRules = options.cssRules;
-		// 	if (!options.className) {
-		// 		options.className = "edui-for-" + name;
-		// 	}
-		// 	// if (cssRules) {
-		// 	// 	options.cssRules =
-		// 	// 		".edui-for-" + name + " .edui-dialog-content  {" + cssRules + "}";
-		// 	// }
-		// }
-		// console.log(options.items);
+		// console.log(options.className);
 		super(options); // 调用父类的构造函数
 		console.log(this.items);
 
 		this.initOptions(options);
+		console.log(this.items);
 		this.initMenu();
-		console.log(options.items);
+		// console.log(options.items);
 	}
 
 	initMenu() {
