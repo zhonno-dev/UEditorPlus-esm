@@ -62,6 +62,7 @@ class cls_uiPopup extends cls_UIBase {
 
 //静态方法
 cls_uiPopup.postHide = closeAllPopup;
+//属性
 cls_uiPopup.prototype.SHADOW_RADIUS = 5;
 cls_uiPopup.prototype.content = null;
 cls_uiPopup.prototype._hidden = false;
@@ -286,5 +287,4 @@ domUtils.on(window, "scroll", function (evt, el) {
 });
 
 // utils.inherits(Popup, UIBase);[X]
-
 export default cls_uiPopup;

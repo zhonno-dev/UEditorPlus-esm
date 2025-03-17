@@ -15,113 +15,112 @@ var TPL_STATEFUL =
 		' onmouseout="$$.Stateful_onMouseOut(event, this);"');
 
 class cls_uiStateful extends cls_UIBase {
-	
+	alwalysHoverable = false;
+	target = null; //目标元素和this指向dom不一样
+
+
+	Stateful_init() {
+		//改为 cls_uiStateful(class形式) 后，这种方式会导致死循环，调整一下
+		// this._Stateful_dGetHtmlTpl = this.getHtmlTpl;
+		// this.getHtmlTpl = this.Stateful_getHtmlTpl;
+	};
+	//旧的（原本的）Stateful_getHtmlTpl()
+	// Stateful_getHtmlTpl() {
+	// 	var tpl = this._Stateful_dGetHtmlTpl();
+	// 	// 使用function避免$转义
+	// 	return tpl.replace(/stateful/g, function () {
+	// 		return TPL_STATEFUL;
+	// 	});
+	// };
+	// 改成新的 Stateful_getHtmlTpl，通过参数传入 tpl
+	Stateful_getHtmlTpl(tpl) {
+		// var tpl = this._Stateful_dGetHtmlTpl();
+		// 使用function避免$转义
+		return tpl.replace(/stateful/g, function () {
+			return TPL_STATEFUL;
+		});
+	};
+	Stateful_onMouseEnter(evt, el) {
+		this.target = el;
+		if (!this.isDisabled() || this.alwalysHoverable) {
+			this.addState("hover");
+			this.fireEvent("over");
+		}
+	};
+	Stateful_onMouseLeave(evt, el) {
+		if (!this.isDisabled() || this.alwalysHoverable) {
+			this.removeState("hover");
+			this.removeState("active");
+			this.fireEvent("out");
+		}
+	};
+	Stateful_onMouseOver(evt, el) {
+		var rel = evt.relatedTarget;
+		if (!uiUtils.contains(el, rel) && el !== rel) {
+			this.Stateful_onMouseEnter(evt, el);
+		}
+	};
+	Stateful_onMouseOut(evt, el) {
+		var rel = evt.relatedTarget;
+		if (!uiUtils.contains(el, rel) && el !== rel) {
+			this.Stateful_onMouseLeave(evt, el);
+		}
+	};
+	Stateful_onMouseDown(evt, el) {
+		if (!this.isDisabled()) {
+			this.addState("active");
+		}
+	};
+	Stateful_onMouseUp(evt, el) {
+		if (!this.isDisabled()) {
+			this.removeState("active");
+		}
+	};
+	Stateful_postRender() {
+		if (this.disabled && !this.hasState("disabled")) {
+			this.addState("disabled");
+		}
+	};
+	hasState(state) {
+		return domUtils.hasClass(this.getStateDom(), "edui-state-" + state);
+	};
+	addState(state) {
+		if (!this.hasState(state)) {
+			this.getStateDom().className += " edui-state-" + state;
+		}
+	};
+	removeState(state) {
+		if (this.hasState(state)) {
+			domUtils.removeClasses(this.getStateDom(), ["edui-state-" + state]);
+		}
+	};
+	getStateDom() {
+		return this.getDom("state");
+	};
+	isChecked() {
+		return this.hasState("checked");
+	};
+	setChecked(checked) {
+		if (!this.isDisabled() && checked) {
+			this.addState("checked");
+		} else {
+			this.removeState("checked");
+		}
+	};
+	isDisabled() {
+		return this.hasState("disabled");
+	};
+	setDisabled(disabled) {
+		if (disabled) {
+			this.removeState("hover");
+			this.removeState("checked");
+			this.removeState("active");
+			this.addState("disabled");
+		} else {
+			this.removeState("disabled");
+		}
+	};
 }
 
-cls_uiStateful.prototype.alwalysHoverable = false;
-cls_uiStateful.prototype.target = null; //目标元素和this指向dom不一样
-
-
-cls_uiStateful.prototype.Stateful_init = function () {
-	//改为 cls_uiStateful(class形式) 后，这种方式会导致死循环，调整一下
-	// this._Stateful_dGetHtmlTpl = this.getHtmlTpl;
-	// this.getHtmlTpl = this.Stateful_getHtmlTpl;
-};
-//旧的（原本的）Stateful_getHtmlTpl()
-// cls_uiStateful.prototype.Stateful_getHtmlTpl = function () {
-// 	var tpl = this._Stateful_dGetHtmlTpl();
-// 	// 使用function避免$转义
-// 	return tpl.replace(/stateful/g, function () {
-// 		return TPL_STATEFUL;
-// 	});
-// };
-// 改成新的 Stateful_getHtmlTpl，通过参数传入 tpl
-cls_uiStateful.prototype.Stateful_getHtmlTpl = function (tpl) {
-	// var tpl = this._Stateful_dGetHtmlTpl();
-	// 使用function避免$转义
-	return tpl.replace(/stateful/g, function () {
-		return TPL_STATEFUL;
-	});
-};
-cls_uiStateful.prototype.Stateful_onMouseEnter = function (evt, el) {
-	this.target = el;
-	if (!this.isDisabled() || this.alwalysHoverable) {
-		this.addState("hover");
-		this.fireEvent("over");
-	}
-};
-cls_uiStateful.prototype.Stateful_onMouseLeave = function (evt, el) {
-	if (!this.isDisabled() || this.alwalysHoverable) {
-		this.removeState("hover");
-		this.removeState("active");
-		this.fireEvent("out");
-	}
-};
-cls_uiStateful.prototype.Stateful_onMouseOver = function (evt, el) {
-	var rel = evt.relatedTarget;
-	if (!uiUtils.contains(el, rel) && el !== rel) {
-		this.Stateful_onMouseEnter(evt, el);
-	}
-};
-cls_uiStateful.prototype.Stateful_onMouseOut = function (evt, el) {
-	var rel = evt.relatedTarget;
-	if (!uiUtils.contains(el, rel) && el !== rel) {
-		this.Stateful_onMouseLeave(evt, el);
-	}
-};
-cls_uiStateful.prototype.Stateful_onMouseDown = function (evt, el) {
-	if (!this.isDisabled()) {
-		this.addState("active");
-	}
-};
-cls_uiStateful.prototype.Stateful_onMouseUp = function (evt, el) {
-	if (!this.isDisabled()) {
-		this.removeState("active");
-	}
-};
-cls_uiStateful.prototype.Stateful_postRender = function () {
-	if (this.disabled && !this.hasState("disabled")) {
-		this.addState("disabled");
-	}
-};
-cls_uiStateful.prototype.hasState = function (state) {
-	return domUtils.hasClass(this.getStateDom(), "edui-state-" + state);
-};
-cls_uiStateful.prototype.addState = function (state) {
-	if (!this.hasState(state)) {
-		this.getStateDom().className += " edui-state-" + state;
-	}
-};
-cls_uiStateful.prototype.removeState = function (state) {
-	if (this.hasState(state)) {
-		domUtils.removeClasses(this.getStateDom(), ["edui-state-" + state]);
-	}
-};
-cls_uiStateful.prototype.getStateDom = function () {
-	return this.getDom("state");
-};
-cls_uiStateful.prototype.isChecked = function () {
-	return this.hasState("checked");
-};
-cls_uiStateful.prototype.setChecked = function (checked) {
-	if (!this.isDisabled() && checked) {
-		this.addState("checked");
-	} else {
-		this.removeState("checked");
-	}
-};
-cls_uiStateful.prototype.isDisabled = function () {
-	return this.hasState("disabled");
-};
-cls_uiStateful.prototype.setDisabled = function (disabled) {
-	if (disabled) {
-		this.removeState("hover");
-		this.removeState("checked");
-		this.removeState("active");
-		this.addState("disabled");
-	} else {
-		this.removeState("disabled");
-	}
-};
 
 export default cls_uiStateful;

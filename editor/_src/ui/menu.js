@@ -142,7 +142,7 @@ var UE_ui_MenuItem;
 	var MenuItem = (UE_ui_MenuItem = function (options) {
 		this.initOptions(options);
 		this.initUIBase();
-		this.Stateful_init();
+		// this.Stateful_init();
 		if (this.subMenu && !(this.subMenu instanceof Menu)) {
 			if (options.className && options.className.indexOf("aligntd") != -1) {
 				var me = this;
@@ -293,7 +293,9 @@ var UE_ui_MenuItem;
 		}
 	};
 	utils.inherits(MenuItem, cls_UIBase);
-	utils.extend(MenuItem.prototype, cls_uiStateful.prototype, true);
+	// utils.extend(MenuItem.prototype, cls_uiStateful.prototype, true);
+	utils.inherits(MenuItem, cls_uiStateful);
+	// console.log(cls_uiStateful.prototype);
 })();
 
-export { UE_ui_Menu, UE_ui_MenuItem };
+export { UE_ui_Menu as cls_uiMenu, UE_ui_MenuItem as cls_uiMenuItem };

@@ -3,37 +3,88 @@
 <script src="editor/webComp.js"></script>
 
 <script>
+class c0 {
+
+}
+c0.prototype.runC0 = function () {
+	
+}
+class c1 extends c0{
+	
+}
+c1.prototype.initOptions = function(options) {
+		var me = this;
+		for (var k in options) {
+			me[k] = options[k];
+		}
+		this.id = new Date().getTime();
+		// if (window.zhutest) {
+		// 	console.log(me.constructor.name);
+		// 	console.log(options.items);
+		// 	console.log(me.items);
+		// 	console.log(me);
+		// }
+	};
+
+class c2 extends c1{
+	/**
+	 * 构造函数
+	 */
+	constructor(options) {
+		super(); // 调用父类的构造函数
+		
+		this.initOptions(options);
+	}
+}
+
+class c3 extends c2 {
+	/**
+	 * 构造函数
+	 */
+	constructor(options) {
+		super(options); // 调用父类的构造函数
+
+		// this.initOptions(options);
+		console.log(this.items);
+	}
+}
+
+var arg = {
+	items: [1,2,3,4],
+}
+var v3 = new c3(arg);
+console.log(v3);
 
 </script>
 
 <script type="module">
-import cls_uiAutoTypeSetButton from './editor/_src/ui/autotypesetbutton.new.js';
-console.log(cls_uiAutoTypeSetButton.prototype);
-var a = new cls_uiAutoTypeSetButton({});
-var html = a.getHtmlTpl();
-console.log(html);
+	import cls_uiAutoTypeSetButton from './editor/_src/ui/autotypesetbutton.new.js';
+	console.log(cls_uiAutoTypeSetButton.prototype);
+	var a = new cls_uiAutoTypeSetButton({});
+	var html = a.getHtmlTpl();
+	console.log(html);
 </script>
 
 <div>
 	1111
 	<my-custom-element>
 		<slot slot="slot1" contenteditable="true" data-aaa="aaa">
-		<div style="display: none;">
-            隐藏内容1
-        </div>
-        <div>
-            可见内容1
-        </div>
-		无标签文本111
-	</slot>
+			<div style="display: none;">
+				隐藏内容1
+			</div>
+			<div>
+				可见内容1
+			</div>
+			无标签文本111
+		</slot>
 		<slot slot="slot2" contenteditable="true" data-bbb="bbb">
 			<div style="display: none;">
-            隐藏内容2
-        </div>
-        <div>
-            可见内容2
-        </div>
-		无标签文本222
+				隐藏内容2
+			</div>
+			<div>
+				可见内容2
+			</div>
+			无标签文本222
 		</slot>
 	</my-custom-element>
 	22222

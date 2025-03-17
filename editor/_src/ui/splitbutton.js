@@ -18,6 +18,7 @@ class cls_uiSplitButton extends cls_uiStateful {
 	constructor(options) {
 		super(); // 调用父类的构造函数
 
+		// console.log(options);
 		this.initOptions(options);
 		this.initSplitButton();
 	}
@@ -28,7 +29,7 @@ cls_uiSplitButton.prototype.uiName = "splitbutton";
 cls_uiSplitButton.prototype.title = "";
 cls_uiSplitButton.prototype.initSplitButton = function () {
 	this.initUIBase();
-	this.Stateful_init();
+	// this.Stateful_init();
 	var me = this;
 	if (this.popup != null) {
 		var popup = this.popup;

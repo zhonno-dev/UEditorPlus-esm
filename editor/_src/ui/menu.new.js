@@ -32,15 +32,20 @@ class cls_uiMenu extends cls_uiPopup {
 	 * 构造函数
 	 */
 	constructor(options) {
+		// console.log(options.items);
+		window.zhutest = 1;
 		super(options); // 调用父类的构造函数
+		window.zhutest = 0;
+		console.log(this.items);
 
 		// this.initOptions(options);
 		this.initMenu();
+		// console.log(options.items);
 	}
 
 	initMenu() {
 		this.items = this.items || [];
-		this.initPopup();
+		// this.initPopup();
 		this.initItems();
 	}
 	initItems() {
@@ -180,13 +185,14 @@ class cls_uiMenuItem extends cls_uiStateful{
 	}
 
 	getHtmlTpl() {
-		return (
+		let tpl = (
 			'<div id="##" class="%%" stateful onclick="$$._onClick(event, this);">' +
 			'<div class="%%-body">' +
 			this.renderLabelHtml() +
 			"</div>" +
 			"</div>"
 		);
+		return this.Stateful_getHtmlTpl(tpl);
 	}
 	postRender() {
 		var me = this;

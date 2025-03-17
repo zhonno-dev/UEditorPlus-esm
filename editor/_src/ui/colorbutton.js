@@ -17,7 +17,7 @@ class cls_uiColorButton extends cls_uiSplitButton {
 	 * 构造函数
 	 */
 	constructor(options) {
-		super(); // 调用父类的构造函数
+		super(options); // 调用父类的构造函数
 
 		this.initOptions(options);
 		this.initColorButton();
