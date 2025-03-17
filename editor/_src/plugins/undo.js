@@ -1,3 +1,7 @@
+import UE from "../UE.js";
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
+import cls_Range from "../core/Range.js";
 /**
  * undo redo
  * @file
@@ -123,7 +127,7 @@ UE.plugins["undo"] = function () {
             }
 
             try {
-                var rng = new dom.Range(me.document).moveToAddress(scene.address);
+                var rng = new cls_Range(me.document).moveToAddress(scene.address);
                 rng.select(
                     noNeedFillCharTags[rng.startContainer.nodeName.toLowerCase()]
                 );

@@ -1,3 +1,6 @@
+import UE from "../UE.js";
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
 /**
  * 背景插件，为UEditor提供设置背景功能
  * @file

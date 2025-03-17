@@ -1,3 +1,8 @@
+import UE from "../UE.js";
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
+import keymap from "../core/keymap.js";
+import browser from "../core/browser.js";
 /* 处理特殊键的兼容性问题 */
 UE.plugins["keystrokes"] = function () {
     var me = this;

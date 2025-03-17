@@ -1283,8 +1283,10 @@ class cls_Editor extends EventBase {
 	_callCmdFn(fnName, args) {
 		var cmdName = args[0].toLowerCase(),
 			cmd,
+			/** @type {Function} */
 			cmdFn;
 		cmd = this.commands[cmdName] || UE.commands[cmdName];
+		
 		cmdFn = cmd && cmd[fnName];
 		//没有querycommandstate或者没有command的都默认返回0
 		if ((!cmd || !cmdFn) && fnName == "queryCommandState") {

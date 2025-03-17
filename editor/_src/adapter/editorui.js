@@ -9,6 +9,7 @@ import UE_ui_TableButton from "../ui/tablebutton.js";
 import UE_ui_MenuButton from "../ui/menubutton.js";
 import UE_ui_MultiMenuPop from "../ui/multiMenu.js";
 import UE_ui_AutoTypeSetButton from "../ui/autotypesetbutton.js";
+import { domUtils } from "../core/domUtils.js";
 
 //ui跟编辑器的适配層
 //哪个按钮弹出是dialog，还是下拉框等都是在这个js中配置

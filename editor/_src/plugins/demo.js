@@ -56,7 +56,9 @@ UE.plugin.register("anchor", function () {
 
 /**
  * 旧版本的插件：UE.plugins["basestyle"] = function () {
- * 如 ./basestyle.js
+ * 如 
+ * ./basestyle.js
+ * ./link.js
  */
 UE.plugins["basestyle"] = function () {
 	/** @type {cls_Editor} */

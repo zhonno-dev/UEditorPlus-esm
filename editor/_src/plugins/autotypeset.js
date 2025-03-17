@@ -1,3 +1,7 @@
+import UE from "../UE.js";
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
+import dtd from "../core/dtd.js";
 /**
  * 自动排版
  * @file

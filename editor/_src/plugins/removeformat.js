@@ -1,3 +1,9 @@
+import UE from "../UE.js";
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
+import cls_Range from "../core/Range.js";
+import dtd from "../core/dtd.js";
+import browser from "../core/browser.js";
 /**
  * 清除格式
  * @file
@@ -36,7 +42,7 @@ UE.plugins["removeformat"] = function () {
                 removeFormatAttributes = style
                     ? []
                     : (attrs || this.options.removeFormatAttributes).split(","),
-                range = new dom.Range(this.document),
+                range = new cls_Range(this.document),
                 bookmark,
                 node,
                 parent,

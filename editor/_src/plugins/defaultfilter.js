@@ -1,3 +1,10 @@
+import UE from "../UE.js";
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
+import dtd from "../core/dtd.js";
+import { cls_uNode, nodeUtils } from "../core/node.js";
+import browser from "../core/browser.js";
+
 ///import core
 ///plugin 编辑器默认的过滤转换机制
 

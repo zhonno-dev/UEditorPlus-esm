@@ -1,3 +1,6 @@
+import UE from "../UE.js";
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
 /**
  * @description
  * 1.拖放文件到编辑区域，自动上传并插入到选区

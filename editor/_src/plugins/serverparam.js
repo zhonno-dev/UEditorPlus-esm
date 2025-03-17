@@ -1,3 +1,6 @@
+import UE from "../UE.js";
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
 /**
  * 服务器提交的额外参数列表设置插件
  * @file

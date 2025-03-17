@@ -1,3 +1,8 @@
+import UE from "../UE.js";
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
+import browser from "../core/browser.js";
+import cls_Range from "../core/Range.js";
 /**
  * Created with JetBrains PhpStorm.
  * User: taoqili
@@ -769,7 +774,7 @@ UE.plugins["table"] = function () {
             cmd = cmd.toLowerCase();
             var ut = getUETableBySelected(me),
                 tds,
-                range = new dom.Range(me.document),
+                range = new cls_Range(me.document),
                 cmdFun = me.commands[cmd] || UE.commands[cmd],
                 result;
             if (!cmdFun) return;
@@ -1534,14 +1539,14 @@ UE.plugins["table"] = function () {
                 );
             if (target && (target.tagName == "TD" || target.tagName == "TH")) {
                 if (me.fireEvent("excludetable", target) === true) return;
-                range = new dom.Range(me.document);
+                range = new cls_Range(me.document);
                 range.setStart(target, 0).setCursor(false, true);
             }
         } else {
             var ut = getUETable(startTd),
                 cell = ut ? ut.selectedTds[0] : null;
             if (cell) {
-                range = new dom.Range(me.document);
+                range = new cls_Range(me.document);
                 if (domUtils.isEmptyBlock(cell)) {
                     range.setStart(cell, 0).setCursor(false, true);
                 } else {

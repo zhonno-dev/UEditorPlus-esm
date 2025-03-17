@@ -1,3 +1,7 @@
+import UE from "../UE.js";
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
+import cls_Range from "../core/Range.js";
 ///import core
 ///commands 右键菜单
 ///commandsName  ContextMenu
@@ -515,7 +519,7 @@ UE.plugins["contextmenu"] = function () {
                 return;
             }
             if (ieRange.item) {
-                var range = new dom.Range(me.document);
+                var range = new cls_Range(me.document);
                 range.selectNode(ieRange.item(0)).select(true, true);
             }
         }

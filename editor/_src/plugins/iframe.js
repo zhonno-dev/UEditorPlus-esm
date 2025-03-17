@@ -1,3 +1,6 @@
+import UE from "../UE.js";
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
 ///import core
 ///import plugins\inserthtml.js
 ///commands 插入框架

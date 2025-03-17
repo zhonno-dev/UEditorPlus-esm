@@ -286,7 +286,6 @@ class cls_Selection {
 		if (me._cachedRange != null) {
 			return this._cachedRange;
 		}
-		//     var range = new baidu.editor.dom.Range(me.document);
 		var range = new cls_Range(me.document);
 
 		if (browser.ie9below) {

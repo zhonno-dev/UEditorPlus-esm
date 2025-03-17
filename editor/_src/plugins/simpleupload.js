@@ -1,3 +1,6 @@
+import UE from "../UE.js";
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
 /**
  * @description
  * 简单上传:点击按钮,直接选择文件上传
@@ -170,7 +173,7 @@ UE.plugin.register("simpleupload", function () {
 		btnStyle = 'display:block;width:' + w + 'px;height:' + h + 'px;overflow:hidden;border:0;margin:0;padding:0;position:absolute;top:0;left:0;filter:alpha(opacity=0);-moz-opacity:0;-khtml-opacity: 0;opacity: 0;cursor:pointer;';
 		
 		//这里直接创建DIV
-		btnIframe = document.createElement('div');
+		var btnIframe = document.createElement('div');
 		var timestrap = (+new Date()).toString(36);
 		
 		btnIframe.style.cssText = btnStyle;

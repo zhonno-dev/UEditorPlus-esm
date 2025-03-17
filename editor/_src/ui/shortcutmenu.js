@@ -1,13 +1,14 @@
 import utils from "../core/utils.js";
 import { domUtils } from "../core/domUtils.js";
 import uiUtils from "./uiutils.js";
+import UE from "../UE.js";
+import browser from "../core/browser.js";
 
 import cls_UIBase from "./UIBase.cls.js";
 
 var allMenus = [], //存储所有快捷菜单
 	timeID,
 	isSubMenuShow = false; //是否有子pop显示
-
 function hideAllMenu(e) {
 	var tgt = e.target || e.srcElement,
 		cur = domUtils.findParent(
@@ -123,8 +124,8 @@ cls_uiShortCutMenu.prototype.initItems = function () {
 			}
 			var item = this.items[i].toLowerCase();
 
-			if (UI[item]) {
-				this.items[i] = new UI[item](this.editor);
+			if (UE.ui[item]) {
+				this.items[i] = new UE.ui[item](this.editor);
 				this.items[i].className += " edui-short-cut-sub-menu ";
 			}
 		}

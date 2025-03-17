@@ -1,3 +1,8 @@
+import UE from "../UE.js";
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
+import cls_uiShortCutMenu from "../ui/shortcutmenu.js";
+import cls_Range from "../core/Range.js";
 ///import core
 ///commands       弹出菜单
 // commandsName  popupmenu
@@ -43,7 +48,8 @@ UE.plugins["shortcutmenu"] = function () {
             //     return
             // }
             if (!menu) {
-                menu = new baidu.editor.ui.ShortCutMenu({
+                // menu = new baidu.editor.ui.ShortCutMenu({
+			menu = new cls_uiShortCutMenu({
                     editor: me,
                     items: items.concat([]),
                     theme: me.options.theme,
@@ -67,7 +73,7 @@ UE.plugins["shortcutmenu"] = function () {
                     return;
                 }
                 if (ieRange.item) {
-                    var range = new dom.Range(me.document);
+                    var range = new cls_Range(me.document);
                     range.selectNode(ieRange.item(0)).select(true, true);
                 }
             }

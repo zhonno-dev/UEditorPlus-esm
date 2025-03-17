@@ -1,3 +1,8 @@
+import UE from "../UE.js";
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
+import dtd from "../core/dtd.js";
+import browser from "../core/browser.js";
 /**
  * 字体颜色,背景色,字号,字体,下划线,删除线
  * @file

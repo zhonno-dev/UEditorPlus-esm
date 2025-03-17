@@ -1,3 +1,7 @@
+import UE from "../UE.js";
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
+
 UE.plugins["audio"] = function () {
     var me = this;
 

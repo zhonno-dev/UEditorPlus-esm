@@ -1,3 +1,9 @@
+import UE from "../UE.js";
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
+import browser from "../core/browser.js";
+import cls_Range from "../core/Range.js";
+
 ///import core
 ///commands 修复chrome下图片不能点击的问题，出现八个角可改变大小
 ///commandsName  FixImgClick
@@ -381,7 +387,7 @@ UE.plugins["fiximgclick"] = (function () {
         if (browser.webkit) {
             me.addListener("click", function (type, e) {
                 if (e.target.tagName === "IMG" && me.body.contentEditable !== "false") {
-                    var range = new dom.Range(me.document);
+                    var range = new cls_Range(me.document);
                     range.selectNode(e.target).select();
                 }
             });

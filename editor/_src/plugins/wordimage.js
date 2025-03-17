@@ -1,3 +1,6 @@
+import UE from "../UE.js";
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
 ///import core
 ///commands 本地图片引导上传
 ///commandsName  WordImage

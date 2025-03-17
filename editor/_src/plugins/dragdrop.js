@@ -1,3 +1,6 @@
+import UE from "../UE.js";
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
 UE.plugins["dragdrop"] = function () {
     var me = this;
     me.ready(function () {

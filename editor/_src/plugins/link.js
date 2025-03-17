@@ -1,3 +1,6 @@
+import { domUtils } from '../core/domUtils.js';
+import utils from '../core/utils.js';
+import UE from "../UE.js";
 /**
  * 超链接
  * @file
@@ -56,6 +59,7 @@ UE.plugins["link"] = function () {
 	}
 
 	UE.commands["unlink"] = {
+		/** @this {typeof import('../core/Editor.cls.js').default.prototype} */
 		execCommand: function () {
 			var range = this.selection.getRange(),
 				bookmark;
@@ -74,6 +78,21 @@ UE.plugins["link"] = function () {
 		}
 	};
 
+	/**
+	 * opt参数说明
+	 * @typedef {Object} argOpt
+	 * @property {String} href - URL
+	 * @property {String} target - target
+	 * @property {String} title - title
+	 * @property {String} _href - _href
+	 * @property {String} textValue - textValue
+	 */
+
+	/**
+	 * @param {typeof import('../core/Range.js').default.prototype} range 
+	 * @param {argOpt} opt 
+	 * @param {typeof import('../core/Editor.cls.js').default.prototype} me 
+	 */
 	function doLink(range, opt, me) {
 		var rngClone = range.cloneRange(),
 			link = me.queryCommandValue("link");
@@ -120,7 +139,13 @@ UE.plugins["link"] = function () {
 		}
 	}
 
+	
+
 	UE.commands["link"] = {
+		/**
+		 * @this {typeof import('../core/Editor.cls.js').default.prototype}
+		 * @param {argOpt} opt
+		*/
 		execCommand: function (cmdName, opt) {
 			var range;
 			opt._href && (opt._href = utils.unhtml(opt._href, /[<">]/g));

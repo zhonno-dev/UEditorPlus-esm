@@ -1,3 +1,8 @@
+import UE from "../UE.js";
+import utils from "../core/utils.js";
+import { domUtils } from "../core/domUtils.js";
+import browser from "../core/browser.js";
+import dtd from "../core/dtd.js";
 /**
  * 源码编辑插件
  * @file
@@ -331,7 +336,7 @@
                     {
                         src:
                             opt.codeMirrorJsUrl ||
-                            opt.UEDITOR_HOME_URL + "third-party/codemirror/codemirror.js",
+                            opt.UEDITOR_HOME_URL + "../third-party/codemirror/codemirror.js",
                         tag: "script",
                         type: "text/javascript",
                         defer: "defer"
@@ -350,7 +355,7 @@
                     type: "text/css",
                     href:
                         opt.codeMirrorCssUrl ||
-                        opt.UEDITOR_HOME_URL + "third-party/codemirror/codemirror.css?221123"
+                        opt.UEDITOR_HOME_URL + "../third-party/codemirror/codemirror.css?221123"
                 });
             });
         }
