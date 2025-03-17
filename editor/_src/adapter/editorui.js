@@ -2,7 +2,7 @@ import utils from "../core/utils.js";
 import UE from "../UE.js";
 import UE_ui_Dialog from "../ui/dialog.js";
 import browser from "../core/browser.js";
-import cls_uiButton from "../ui/button.cls.js";
+import cls_uiButton from "../ui/button.js";
 import UE_ui_ColorButton from "../ui/colorbutton.js";
 import UE_ui_Combox from "../ui/combox.js";
 import UE_ui_TableButton from "../ui/tablebutton.js";
