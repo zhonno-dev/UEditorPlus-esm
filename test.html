@@ -7,10 +7,12 @@ class c0 {
 
 }
 c0.prototype.runC0 = function () {
-	
+	console.log('runC0()');
 }
 class c1 extends c0{
-	
+	runC1() {
+		console.log('runC1()');
+	}
 }
 c1.prototype.initOptions = function(options) {
 		var me = this;
@@ -35,6 +37,10 @@ class c2 extends c1{
 		
 		this.initOptions(options);
 	}
+
+	runC2() {
+		console.log('runC2()');
+	}
 }
 
 class c3 extends c2 {
@@ -46,6 +52,14 @@ class c3 extends c2 {
 
 		// this.initOptions(options);
 		console.log(this.items);
+		this.runC0();
+		this.runC1();
+		this.runC2();
+		this.runC3();
+	}
+	
+	runC3() {
+		console.log('runC2()');
 	}
 }
 
