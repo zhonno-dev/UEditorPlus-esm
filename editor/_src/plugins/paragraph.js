@@ -1,6 +1,7 @@
 import UE from "../UE.js";
 import utils from "../core/utils.js";
 import { domUtils } from "../core/domUtils.js";
+import browser from "../core/browser.js";
 /**
  * 段落样式
  * @file
@@ -182,7 +183,7 @@ UE.plugins["paragraph"] = function () {
             range = doParagraph(range, style, attrs, sourceCmdName);
             if (txt) {
                 range.setStartBefore(txt).collapse(true);
-                pN = txt.parentNode;
+                var pN = txt.parentNode;
 
                 domUtils.remove(txt);
 

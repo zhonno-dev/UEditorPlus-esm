@@ -109,7 +109,7 @@ class cls_uiSplitButton extends cls_uiStateful {
 	}
 }
 
-cls_uiSplitButton.prototype._UIBase_postRender = cls_UIBase.prototype.postRender;
+// cls_uiSplitButton.prototype._UIBase_postRender = cls_UIBase.prototype.postRender;
 
 // utils.inherits(SplitButton, UIBase);[X]
 // utils.extend(SplitButton.prototype, Stateful, true);

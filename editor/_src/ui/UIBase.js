@@ -108,5 +108,7 @@ cls_UIBase.prototype.uiShow = function (enable) {
 };
 
 cls_UIBase.prototype._UIBase_render = cls_UIBase.prototype.render;
+cls_UIBase.prototype._UIBase_postRender = cls_UIBase.prototype.postRender;
+
 
 export default cls_UIBase;
