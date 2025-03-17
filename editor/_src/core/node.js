@@ -333,7 +333,7 @@ class cls_uNode {
 			// this.appendChild(uNode.createText(textStr, noTrans));
 			let newNode = new cls_uNode({
 				type: "text",
-				data: noTrans ? data : utils.unhtml(data || "")
+				data: noTrans ? textStr : utils.unhtml(textStr || "")
 			});
 			this.appendChild(newNode);
 			return this;

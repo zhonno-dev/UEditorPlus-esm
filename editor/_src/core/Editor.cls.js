@@ -1139,16 +1139,20 @@ class cls_Editor extends EventBase {
 		domUtils.on(
 			doc,
 			[
-				"click",
-				"contextmenu",
-				"mousedown",
-				"keydown",
-				"keyup",
-				"keypress",
-				"mouseup",
-				"mouseover",
-				"mouseout",
-				"selectstart"
+				// 为文档绑定一系列鼠标和键盘事件，通过事件代理处理这些事件
+				// 当这些事件发生时，会调用 _proxyDomEvent 方法进行处理
+				// 下面是具体绑定的事件列表：
+				"click",           // 鼠标点击事件
+				"contextmenu",     // 鼠标右键菜单事件
+				"mousedown",       // 鼠标按下事件
+				"keydown",         // 键盘按键按下事件
+				"keyup",           // 键盘按键释放事件
+				"keypress",        // 键盘按键按下并释放事件
+				"mouseup",         // 鼠标释放事件
+				"mouseover",       // 鼠标移入元素事件
+				"mouseout",        // 鼠标移出元素事件
+				"selectstart"      // 文本选择开始事件
+
 			],
 			me._proxyDomEvent
 		);

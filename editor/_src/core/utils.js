@@ -209,7 +209,7 @@ const utils = {
 	},
 
 	/**
-	 * 用指定的context对象作为函数fn的上下文
+	 * 用指定的context对象作为函数fn的上下文（其实就是绑定`this`使`this`不再变）
 	 * @method bind
 	 * @param { Function } fn 需要绑定上下文的函数对象
 	 * @param { Object } content 函数fn新的上下文对象
@@ -224,9 +224,9 @@ const utils = {
 	 *     console.log( this.name );
 	 * }
 	 *
-	 * newTest = UE.utils.bind( test, { name: 'object' } );
+	 * newTest = UE.utils.bind( test, { name: 'newTestName' } );
 	 *
-	 * //output: object
+	 * //output: newTestName
 	 * newTest();
 	 *
 	 * //output: window

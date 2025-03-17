@@ -1,6 +1,7 @@
 import UE from "../UE.js";
 import utils from "../core/utils.js";
 import { domUtils } from "../core/domUtils.js";
+import browser from "../core/browser.js";
 ///import core
 ///import plugins/undo.js
 ///commands 设置回车标签p或br

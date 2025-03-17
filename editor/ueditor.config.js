@@ -538,7 +538,7 @@ const UEDITOR_CONFIG = {
 	//]
 
 	// 打开右键菜单功能
-	, enableContextMenu: true
+	, enableContextMenu: true, 
 	//右键菜单的内容，可以参考plugins/contextmenu.js里边的默认菜单的例子，label留空支持国际化，否则以此配置为准
 	//,contextMenu:[
 	//    {
@@ -552,8 +552,8 @@ const UEDITOR_CONFIG = {
 	//    }
 	//]
 
-	//快捷菜单
-	, shortcutMenu: [
+	/** 快捷菜单 */
+	shortcutMenu: [
 		// "fontfamily",   // 字体
 		// "fontsize",     // 字号
 		"bold",            // 加粗
@@ -568,7 +568,8 @@ const UEDITOR_CONFIG = {
 		"imagecenter",     // 图片居中
 		"imageright",      // 图片右浮动
 		"insertimage",     // 插入图片
-		"formula",
+		"formula",             // 公式
+
 		// "justifyleft",    // 居左对齐
 		// "justifycenter",  // 居中对齐
 		// "justifyright",   // 居右对齐
@@ -584,10 +585,10 @@ const UEDITOR_CONFIG = {
 		// "unlink",         // 取消链接
 		// "touppercase",    // 字母大写
 		// "tolowercase"     // 字母小写
-	]
+	], 
 
 	// 是否启用元素路径，默认是显示
-	, elementPathEnabled: true
+	elementPathEnabled: true
 	// 是否开启字数统计
 	, wordCount: true
 	// 允许的最大字符数
