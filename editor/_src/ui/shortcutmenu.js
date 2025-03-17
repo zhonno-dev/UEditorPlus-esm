@@ -6,7 +6,7 @@ import uiUtils from "./uiutils.js";
 import UE from "../UE.js";
 import browser from "../core/browser.js";
 
-import cls_UIBase from "./UIBase.cls.js";
+import cls_UIBase from "./UIBase.js";
 
 var allMenus = [], //存储所有快捷菜单
 	timeID,

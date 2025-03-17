@@ -1,5 +1,5 @@
 import uiUtils from "./uiutils.js";
-import cls_UIBase from "./UIBase.cls.js";
+import cls_UIBase from "./UIBase.js";
 
 /**
  * 一【行】工具栏UI

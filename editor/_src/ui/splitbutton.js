@@ -4,7 +4,7 @@ import uiUtils from "./uiutils.js";
 // import UIBase from "./uibase.js";
 // import Stateful from "./stateful.js";
 
-import cls_UIBase from "./UIBase.cls.js";
+import cls_UIBase from "./UIBase.js";
 import cls_uiStateful from "./stateful.cls.js";
 
 ///import core

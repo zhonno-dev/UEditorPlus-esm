@@ -1,6 +1,6 @@
 import uiUtils from "./uiutils.js";
 
-import cls_UIBase from "./UIBase.cls.js";
+import cls_UIBase from "./UIBase.js";
 import cls_uiStateful from "./stateful.cls.js";
 
 ///import core

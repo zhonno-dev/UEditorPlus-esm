@@ -1,7 +1,7 @@
 import utils from "../core/utils.js";
 // import UIBase from "./uibase.js";
 
-import cls_UIBase from "./UIBase.cls.js";
+import cls_UIBase from "./UIBase.js";
 
 class cls_uiSeparator extends cls_UIBase{
 	/**

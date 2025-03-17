@@ -1,7 +1,7 @@
 import uiUtils from "./uiutils.js";
 import { domUtils } from "../core/domUtils.js";
 
-import cls_UIBase from "./UIBase.cls.js";
+import cls_UIBase from "./UIBase.js";
 
 ///import core
 ///import uicore

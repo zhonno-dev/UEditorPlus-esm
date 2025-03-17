@@ -3,7 +3,7 @@
 import browser from "../core/browser.js";
 import { domUtils } from "../core/domUtils.js";
 import uiUtils from "./uiutils.js";
-import cls_UIBase from "./UIBase.cls.js";
+import cls_UIBase from "./UIBase.js";
 
 var TPL_STATEFUL =
 	'onmousedown="$$.Stateful_onMouseDown(event, this);"' +

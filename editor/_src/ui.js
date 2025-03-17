@@ -30,7 +30,7 @@ import UE_ui_Message from "./ui/message.js";
 
 import cls_uiButton from "./ui/button.cls.js";
 import cls_uiStateful from "./ui/stateful.cls.js";
-import cls_UIBase from "./ui/UIBase.cls.js";
+import cls_UIBase from "./ui/UIBase.js";
 
 //ui/
 UE.ui.uiUtils = UE_ui_uiUtils;

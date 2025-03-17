@@ -6,7 +6,7 @@ import Mask from "./mask.js";
 import Button from "./button.cls.js";
 import uiUtils from "./uiutils.js";
 
-import cls_UIBase from "./UIBase.cls.js";
+import cls_UIBase from "./UIBase.js";
 
 ///import core
 ///import uicore

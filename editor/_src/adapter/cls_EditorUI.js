@@ -9,7 +9,7 @@ import browser from "../core/browser.js";
 import { domUtils, getDomNode } from "../core/domUtils.js";
 import UE from "../UE.js";
 
-import cls_UIBase from "../ui/UIBase.cls.js";
+import cls_UIBase from "../ui/UIBase.js";
 
 var nodeStack = [];
 
