@@ -1,11 +1,9 @@
-// import utils from "../core/utils.js";
+import utils from "../core/utils.js";
 // import UIBase from "./uibase.js";
 
 import cls_UIBase from "./UIBase.js";
 
 class cls_uiSeparator extends cls_UIBase{
-	uiName = "separator";
-
 	/**
 	 * 构造函数
 	 */
@@ -15,13 +13,15 @@ class cls_uiSeparator extends cls_UIBase{
 		this.initOptions(options);
 		this.initSeparator();
 	}
-	initSeparator() {
-		this.initUIBase();
-	}
-	getHtmlTpl() {
-		return '<div id="##" class="edui-box %%"></div>';
-	}
 }
+
+cls_uiSeparator.prototype.uiName = "separator";
+cls_uiSeparator.prototype.initSeparator = function () {
+	this.initUIBase();
+};
+cls_uiSeparator.prototype.getHtmlTpl = function () {
+	return '<div id="##" class="edui-box %%"></div>';
+};
 
 // utils.inherits(Separator, UIBase);[X]
 export default cls_uiSeparator;
