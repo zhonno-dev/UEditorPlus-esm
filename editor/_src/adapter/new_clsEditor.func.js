@@ -8,9 +8,10 @@ import { domUtils } from "../core/domUtils.js";
 import __UE from "../__UE.js";
 
 var instances = __UE.instances;
-//     UE.ui.Editor = function (options) {
-// 定义一个UE.ui.Editor类，用于创建和管理编辑器实例
-// 参数options是编辑器的配置项
+/**
+ * 定义一个UE.ui.Editor类，用于创建和管理编辑器实例\
+ * @param {typeof import('../../ueditor.config.js').default} options 编辑器的配置项
+ */
 const new_clsEditor = function (options) {
 	// var editor = new UE.Editor(options);
 	var editor = new cls_Editor(options);

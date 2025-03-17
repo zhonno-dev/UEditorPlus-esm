@@ -545,8 +545,8 @@ const utils = {
 	 * ```javascript
 	 *
 	 * UE.utils.loadFile( document, {
-	 *     src:"test.js",
 	 *     tag:"script",
+	 *     src:"test.js",
 	 *     type:"text/javascript",
 	 *     defer:"defer"
 	 * } );
@@ -557,7 +557,7 @@ const utils = {
 	/**
 	 * 动态加载文件到doc中，加载成功后执行的回调函数fn
 	 * @method loadFile
-	 * @param { DomDocument } document 需要加载资源文件的文档对象
+	 * @param { Document } document 需要加载资源文件的文档对象
 	 * @param { Object } options 加载资源文件的属性集合， 该集合支持的值是script标签和style标签支持的所有属性。
 	 * @param { Function } fn 资源文件加载成功之后执行的回调
 	 * @warning 对于在同一个文档中多次加载同一URL的文件， 该方法会在第一次加载之后缓存该请求，
@@ -566,8 +566,8 @@ const utils = {
 	 * ```javascript
 	 *
 	 * UE.utils.loadFile( document, {
-	 *     src:"test.js",
 	 *     tag:"script",
+	 *     src:"test.js",
 	 *     type:"text/javascript",
 	 *     defer:"defer"
 	 * }, function () {
