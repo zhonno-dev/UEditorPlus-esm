@@ -18,6 +18,7 @@ UE.plugins["shortcutmenu"] = function () {
 	var me = this,
 		menu,
 		items = me.options.shortcutMenu || [];
+	// console.log(items);
 
 	if (!items.length) {
 		return;

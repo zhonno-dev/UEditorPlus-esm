@@ -37,6 +37,8 @@ class cls_uiShortCutMenu extends cls_UIBase {
 	static postHide = hideAllMenu;
 	isHidden = true;
 	SPACE = 5;
+	/** @type {string[]} eg. ["bold", "italic"] */
+	items;
 	
 	/**
 	 * 构造函数
@@ -50,6 +52,7 @@ class cls_uiShortCutMenu extends cls_UIBase {
 
 	initShortCutMenu() {
 		this.items = this.items || [];
+		// console.log(this.items);
 		this.initUIBase();
 		this.initItems();
 		this.initEvent();
@@ -159,7 +162,9 @@ class cls_uiShortCutMenu extends cls_UIBase {
 			fixedlayer = uiUtils.getFixedLayer();
 	
 		for (let item of this.items) {
+			// console.log(item);
 			if ('shouldUiShow' in item) {
+				// console.log(`item.uiShow(item.shouldUiShow())`);
 				item.uiShow(item.shouldUiShow());
 			}
 		}
