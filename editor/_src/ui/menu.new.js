@@ -1,8 +1,7 @@
-import utils from "../core/utils.js";
+// import utils from "../core/utils.js";
 import { domUtils } from "../core/domUtils.js";
 import uiUtils from "./uiutils.js";
 // import UIBase from "./uibase.js";
-import cls_UIBase from "./UIBase.js";
 import cls_uiPopup from "./popup.js";
 // import Stateful from "./stateful.js";
 import cls_uiStateful from "./stateful.cls.js";
@@ -33,19 +32,17 @@ class cls_uiMenu extends cls_uiPopup {
 	 */
 	constructor(options) {
 		// console.log(options.items);
-		window.zhutest = 1;
 		super(options); // 调用父类的构造函数
-		window.zhutest = 0;
 		console.log(this.items);
 
-		// this.initOptions(options);
+		this.initOptions(options);
 		this.initMenu();
-		// console.log(options.items);
+		console.log(options.items);
 	}
 
 	initMenu() {
 		this.items = this.items || [];
-		// this.initPopup();
+		this.initPopup();
 		this.initItems();
 	}
 	initItems() {
@@ -131,8 +128,8 @@ class cls_uiMenu extends cls_uiPopup {
 	}
 }
 
-cls_uiMenu.prototype._Popup_getContentHtmlTpl = cls_uiPopup.prototype.getContentHtmlTpl;
-cls_uiMenu.prototype._Popup_postRender = cls_uiPopup.prototype.postRender;
+// cls_uiMenu.prototype._Popup_getContentHtmlTpl = cls_uiPopup.prototype.getContentHtmlTpl;
+// cls_uiMenu.prototype._Popup_postRender = cls_uiPopup.prototype.postRender;
 
 // utils.inherits(Menu, cls_uiPopup);[X]
 
@@ -304,41 +301,5 @@ class cls_uiMenuItem extends cls_uiStateful{
 
 // utils.inherits(MenuItem, cls_UIBase);[X]
 // utils.extend(MenuItem.prototype, cls_uiStateful.prototype, true);[X]
-
-// var UE_ui_Menu;
-// var UE_ui_MenuItem;
-// (function () {
-// 	// var utils = baidu.editor.utils,
-// 	// 	domUtils = baidu.editor.dom.domUtils,
-// 	// 	uiUtils = baidu.editor.ui.uiUtils,
-// 	// 	UIBase = baidu.editor.ui.UIBase,
-// 	// 	cls_uiPopup = baidu.editor.ui.cls_uiPopup,
-// 	// 	Stateful = baidu.editor.ui.Stateful,
-// 	// 	CellAlignPicker = baidu.editor.ui.CellAlignPicker;
-
-// 	// Menu = (baidu.editor.ui.Menu = function (options) {
-// 	var Menu = (UE_ui_Menu = function (options) {
-// 		// this.initOptions(options);
-// 		// this.initMenu();
-// 	});
-
-// 	Menu.prototype = {
-
-// 	};
-// 	utils.inherits(Menu, cls_uiPopup);
-
-// 	/**
-// 	 * @update 2013/04/03 hancong03 新增一个参数menu, 该参数存储了menuItem所对应的menu引用
-// 	 * @type {Function}
-// 	 */
-
-// 	//     var MenuItem = (baidu.editor.ui.MenuItem = function (options) {
-// 	var MenuItem = (UE_ui_MenuItem = function (options) {
-		
-// 	});
-// 	MenuItem.prototype = {
-		
-// 	};
-// })();
 
 export { cls_uiMenu, cls_uiMenuItem };

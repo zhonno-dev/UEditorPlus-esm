@@ -22,50 +22,55 @@ class cls_uiColorButton extends cls_uiSplitButton {
 		this.initOptions(options);
 		this.initColorButton();
 	}
+
+	initColorButton() {
+		var me = this;
+		this.popup = new Popup({
+			content: new ColorPicker({
+				noColorText: me.editor.getLang("clearColor"),
+				editor: me.editor,
+				onpickcolor: function (t, color) {
+					me._onPickColor(color);
+				},
+				onpicknocolor: function (t, color) {
+					me._onPickNoColor(color);
+				}
+			}),
+			editor: me.editor
+		});
+		// this.initSplitButton();
+	}
+	postRender() {
+		this._SplitButton_postRender();
+		this.getDom("button_body").appendChild(
+			uiUtils.createElementByHtml(
+				'<div id="' + this.id + '_colorlump" class="edui-colorlump"></div>'
+			)
+		);
+		this.getDom().className += " edui-colorbutton";
+	}
+	setColor(color) {
+		this.getDom("colorlump").style.backgroundColor = color;
+		this.color = color;
+	}
+	_onPickColor(color) {
+		if (this.fireEvent("pickcolor", color) !== false) {
+			this.setColor(color);
+			this.popup.hide();
+		}
+	}
+	_onPickNoColor(color) {
+		if (this.fireEvent("picknocolor") !== false) {
+			this.popup.hide();
+		}
+	}
+
 }
 
-cls_uiColorButton.prototype.initColorButton = function () {
-	var me = this;
-	this.popup = new Popup({
-		content: new ColorPicker({
-			noColorText: me.editor.getLang("clearColor"),
-			editor: me.editor,
-			onpickcolor: function (t, color) {
-				me._onPickColor(color);
-			},
-			onpicknocolor: function (t, color) {
-				me._onPickNoColor(color);
-			}
-		}),
-		editor: me.editor
-	});
-	// this.initSplitButton();
-};
-cls_uiColorButton.prototype._SplitButton_postRender = cls_uiSplitButton.prototype.postRender;
-cls_uiColorButton.prototype.postRender = function () {
-	this._SplitButton_postRender();
-	this.getDom("button_body").appendChild(
-		uiUtils.createElementByHtml(
-			'<div id="' + this.id + '_colorlump" class="edui-colorlump"></div>'
-		)
-	);
-	this.getDom().className += " edui-colorbutton";
-};
-cls_uiColorButton.prototype.setColor = function (color) {
-	this.getDom("colorlump").style.backgroundColor = color;
-	this.color = color;
-};
-cls_uiColorButton.prototype._onPickColor = function (color) {
-	if (this.fireEvent("pickcolor", color) !== false) {
-		this.setColor(color);
-		this.popup.hide();
-	}
-};
-cls_uiColorButton.prototype._onPickNoColor = function (color) {
-	if (this.fireEvent("picknocolor") !== false) {
-		this.popup.hide();
-	}
-};
+
+
+// cls_uiColorButton.prototype._SplitButton_postRender = cls_uiSplitButton.prototype.postRender;
+
 
 // utils.inherits(ColorButton, SplitButton);[X]
 export default cls_uiColorButton;

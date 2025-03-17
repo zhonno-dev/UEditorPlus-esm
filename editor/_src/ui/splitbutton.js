@@ -4,7 +4,6 @@ import uiUtils from "./uiutils.js";
 // import UIBase from "./uibase.js";
 // import Stateful from "./stateful.js";
 
-import cls_UIBase from "./UIBase.js";
 import cls_uiStateful from "./stateful.cls.js";
 
 ///import core
@@ -39,6 +38,9 @@ class cls_uiSplitButton extends cls_uiStateful {
 		}
 	}
 	postRender() {
+		this._SplitButton_postRender();
+	}
+	_SplitButton_postRender() {
 		this.Stateful_postRender();
 		this._UIBase_postRender();
 	}

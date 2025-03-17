@@ -6,109 +6,134 @@ import EventBase from "../core/EventBase.js";
 import { domUtils } from "../core/domUtils.js";
 
 class cls_UIBase extends EventBase {
+	//属性：
+	id = null;
+	el = null;
+	className = "";
+	uiName = "";
+	uiIsShow = true;
+	uiShowStyleBackupValue = null;
+
+	/**
+	 * 构造函数
+	 */
+	constructor() {
+		super(); // 调用父类的构造函数
+		
+	}
+
+	//方法：
+	initOptions(options) {
+		var me = this;
+		for (var k in options) {
+			me[k] = options[k];
+		}
+		this.id = this.id || "edui" + uiUtils.uid();
+		// if (window.zhutest) {
+		// 	console.log(me.constructor.name);
+		// 	console.log(options.items);
+		// 	console.log(me.items);
+		// 	console.log(me);
+		// }
+		// console.log(this);
+		// console.log(me);
+		// console.log('---------------');
+	}
+	initUIBase() {
+		this._globalKey = utils.unhtml(uiUtils.setGlobal(this.id, this));
+	}
+	_UIBase_render(holder) {
+		var html = this.renderHtml();
+		var el = uiUtils.createElementByHtml(html);
+
+		//by xuheng 给每个node添加class
+		var list = domUtils.getElementsByTagName(el, "*");
+		var theme = "edui-" + (this.theme || this.editor.options.theme);
+		var layer = document.getElementById("edui_fixedlayer");
+		// if (window.zhuLog) {
+		// 	// console.log(this.constructor.name);
+		// 	// console.log(this.className);
+		// }
+		for (var i = 0, node; (node = list[i++]);) {
+			domUtils.addClass(node, theme);
+		}
+		domUtils.addClass(el, theme);
+		if (layer) {
+			layer.className = "";
+			domUtils.addClass(layer, theme);
+		}
+
+		var seatEl = this.getDom();
+		if (seatEl != null) {
+			seatEl.parentNode.replaceChild(el, seatEl);
+			uiUtils.copyAttributes(el, seatEl);
+		} else {
+			if (typeof holder == "string") {
+				holder = document.getElementById(holder);
+			}
+			holder = holder || uiUtils.getFixedLayer();
+			// console.log('Uibase.render',holder,el);
+			domUtils.addClass(holder, theme);
+			holder.appendChild(el);
+		}
+		this.el = el;
+		this.postRender();
+	}
+	render(holder) {
+		this._UIBase_render(holder);
+	}
+
+	getDom(name) {
+		if (!name) {
+			return document.getElementById(this.id);
+		} else {
+			return document.getElementById(this.id + "_" + name);
+		}
+	}
+	_UIBase_postRender() {
+		this.fireEvent("postrender");
+	}
+	postRender() {
+		this._UIBase_postRender();
+	}
+	getHtmlTpl() {
+		return "";
+	}
+	formatHtml(tpl) {
+		var prefix = "edui-" + this.uiName;
+		return tpl
+			.replace(/##/g, this.id)
+			.replace(/%%-/g, this.uiName ? prefix + "-" : "")
+			.replace(/%%/g, (this.uiName ? prefix : "") + " " + this.className)
+			.replace(/\$\$/g, this._globalKey);
+	}
+	renderHtml() {
+		return this.formatHtml(this.getHtmlTpl());
+	}
+	dispose() {
+		var box = this.getDom();
+		if (box) domUtils.remove(box);
+		uiUtils.unsetGlobal(this.id);
+	}
+
+	uiShow(enable) {
+		if (enable) {
+			if (this.uiIsShow) {
+				return;
+			}
+			this.getDom().style.display = this.uiShowStyleBackupValue;
+			this.uiIsShow = true;
+		} else {
+			if (!this.uiIsShow) {
+				return;
+			}
+			this.uiShowStyleBackupValue = this.getDom().style.display;
+			this.getDom().style.display = 'none';
+			this.uiIsShow = false;
+		}
+	}
 }
 
-//属性：
-cls_UIBase.prototype.id = null;
-cls_UIBase.prototype.el = null;
-cls_UIBase.prototype.className = "";
-cls_UIBase.prototype.uiName = "";
-
-//方法：
-cls_UIBase.prototype.initOptions = function (options) {
-	var me = this;
-	for (var k in options) {
-		me[k] = options[k];
-	}
-	this.id = this.id || "edui" + uiUtils.uid();
-};
-cls_UIBase.prototype.initUIBase = function () {
-	this._globalKey = utils.unhtml(uiUtils.setGlobal(this.id, this));
-};
-cls_UIBase.prototype.render = function (holder) {
-	var html = this.renderHtml();
-	var el = uiUtils.createElementByHtml(html);
-
-	//by xuheng 给每个node添加class
-	var list = domUtils.getElementsByTagName(el, "*");
-	var theme = "edui-" + (this.theme || this.editor.options.theme);
-	var layer = document.getElementById("edui_fixedlayer");
-	for (var i = 0, node; (node = list[i++]);) {
-		domUtils.addClass(node, theme);
-	}
-	domUtils.addClass(el, theme);
-	if (layer) {
-		layer.className = "";
-		domUtils.addClass(layer, theme);
-	}
-
-	var seatEl = this.getDom();
-	if (seatEl != null) {
-		seatEl.parentNode.replaceChild(el, seatEl);
-		uiUtils.copyAttributes(el, seatEl);
-	} else {
-		if (typeof holder == "string") {
-			holder = document.getElementById(holder);
-		}
-		holder = holder || uiUtils.getFixedLayer();
-		// console.log('Uibase.render',holder,el);
-		domUtils.addClass(holder, theme);
-		holder.appendChild(el);
-	}
-	this.el = el;
-	this.postRender();
-};
-cls_UIBase.prototype.getDom = function (name) {
-	if (!name) {
-		return document.getElementById(this.id);
-	} else {
-		return document.getElementById(this.id + "_" + name);
-	}
-};
-cls_UIBase.prototype.postRender = function () {
-	this.fireEvent("postrender");
-};
-cls_UIBase.prototype.getHtmlTpl = function () {
-	return "";
-};
-cls_UIBase.prototype.formatHtml = function (tpl) {
-	var prefix = "edui-" + this.uiName;
-	return tpl
-		.replace(/##/g, this.id)
-		.replace(/%%-/g, this.uiName ? prefix + "-" : "")
-		.replace(/%%/g, (this.uiName ? prefix : "") + " " + this.className)
-		.replace(/\$\$/g, this._globalKey);
-};
-cls_UIBase.prototype.renderHtml = function () {
-	return this.formatHtml(this.getHtmlTpl());
-};
-cls_UIBase.prototype.dispose = function () {
-	var box = this.getDom();
-	if (box) domUtils.remove(box);
-	uiUtils.unsetGlobal(this.id);
-};
-
-cls_UIBase.prototype.uiIsShow = true;
-cls_UIBase.prototype.uiShowStyleBackupValue = null;
-cls_UIBase.prototype.uiShow = function (enable) {
-	if (enable) {
-		if (this.uiIsShow) {
-			return;
-		}
-		this.getDom().style.display = this.uiShowStyleBackupValue;
-		this.uiIsShow = true;
-	} else {
-		if (!this.uiIsShow) {
-			return;
-		}
-		this.uiShowStyleBackupValue = this.getDom().style.display;
-		this.getDom().style.display = 'none';
-		this.uiIsShow = false;
-	}
-};
-
-cls_UIBase.prototype._UIBase_render = cls_UIBase.prototype.render;
-cls_UIBase.prototype._UIBase_postRender = cls_UIBase.prototype.postRender;
-
+// cls_UIBase.prototype._UIBase_render = cls_UIBase.prototype.render;
 
 export default cls_UIBase;

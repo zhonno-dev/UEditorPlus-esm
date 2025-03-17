@@ -1,6 +1,6 @@
 import utils from "../core/utils.js";
 import uiUtils from "./uiutils.js";
-import { UE_ui_Menu as Menu } from "./menu.js";
+import { cls_uiMenu } from "./menu.js";
 // import SplitButton from "./splitbutton.js";
 import cls_uiSplitButton from "./splitbutton.js";
 
@@ -39,7 +39,7 @@ class cls_uiCombox extends cls_uiSplitButton {
 			};
 		}
 		// console.log(this.items);
-		this.popup = new Menu({
+		this.popup = new cls_uiMenu({
 			items: this.items,
 			uiName: "list",
 			editor: this.editor,

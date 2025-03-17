@@ -16,17 +16,16 @@ cls_UIBase.prototype.uiName = "";
 
 //方法：
 cls_UIBase.prototype.initOptions = function (options) {
+	// var me = this;
+	// for (var k in options) {
+	// 	me[k] = options[k];
+	// }
+	// this.id = this.id || "edui" + uiUtils.uid();
 	var me = this;
 	for (var k in options) {
 		me[k] = options[k];
 	}
-	this.id = this.id || "edui" + uiUtils.uid();
-	if (window.zhutest) {
-		console.log(me.constructor.name);
-		console.log(options.items);
-		console.log(me.items);
-		console.log(me);
-	}
+	me.id = me.id || "edui" + uiUtils.uid();
 };
 cls_UIBase.prototype.initUIBase = function () {
 	this._globalKey = utils.unhtml(uiUtils.setGlobal(this.id, this));
@@ -39,10 +38,6 @@ cls_UIBase.prototype.render = function (holder) {
 	var list = domUtils.getElementsByTagName(el, "*");
 	var theme = "edui-" + (this.theme || this.editor.options.theme);
 	var layer = document.getElementById("edui_fixedlayer");
-	// if (window.zhuLog) {
-	// 	// console.log(this.constructor.name);
-	// 	// console.log(this.className);
-	// }
 	for (var i = 0, node; (node = list[i++]);) {
 		domUtils.addClass(node, theme);
 	}
@@ -68,7 +63,6 @@ cls_UIBase.prototype.render = function (holder) {
 	this.el = el;
 	this.postRender();
 };
-cls_UIBase.prototype._UIBase_render = cls_UIBase.prototype.render;
 cls_UIBase.prototype.getDom = function (name) {
 	if (!name) {
 		return document.getElementById(this.id);
@@ -117,5 +111,9 @@ cls_UIBase.prototype.uiShow = function (enable) {
 		this.uiIsShow = false;
 	}
 };
+
+cls_UIBase.prototype._UIBase_render = cls_UIBase.prototype.render;
+
+cls_UIBase.prototype._UIBase_postRender = cls_UIBase.prototype.postRender;
 
 export default cls_UIBase;

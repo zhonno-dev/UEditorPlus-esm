@@ -29,20 +29,20 @@ class cls_UIBase extends EventBase {
 			me[k] = options[k];
 		}
 		this.id = this.id || "edui" + uiUtils.uid();
-		if (window.zhutest) {
-			console.log(me.constructor.name);
-			console.log(options.items);
-			console.log(me.items);
-			console.log(me);
-		}
-		console.log(this);
-		console.log(me);
-		console.log('---------------');
-	};
+		// if (window.zhutest) {
+		// 	console.log(me.constructor.name);
+		// 	console.log(options.items);
+		// 	console.log(me.items);
+		// 	console.log(me);
+		// }
+		// console.log(this);
+		// console.log(me);
+		// console.log('---------------');
+	}
 	initUIBase() {
 		this._globalKey = utils.unhtml(uiUtils.setGlobal(this.id, this));
-	};
-	render(holder) {
+	}
+	_UIBase_render(holder) {
 		var html = this.renderHtml();
 		var el = uiUtils.createElementByHtml(html);
 
@@ -78,7 +78,10 @@ class cls_UIBase extends EventBase {
 		}
 		this.el = el;
 		this.postRender();
-	};
+	}
+	render(holder) {
+		this._UIBase_render(holder);
+	}
 
 	getDom(name) {
 		if (!name) {
@@ -86,13 +89,16 @@ class cls_UIBase extends EventBase {
 		} else {
 			return document.getElementById(this.id + "_" + name);
 		}
-	};
-	postRender() {
+	}
+	_UIBase_postRender() {
 		this.fireEvent("postrender");
-	};
+	}
+	postRender() {
+		this._UIBase_postRender();
+	}
 	getHtmlTpl() {
 		return "";
-	};
+	}
 	formatHtml(tpl) {
 		var prefix = "edui-" + this.uiName;
 		return tpl
@@ -100,15 +106,15 @@ class cls_UIBase extends EventBase {
 			.replace(/%%-/g, this.uiName ? prefix + "-" : "")
 			.replace(/%%/g, (this.uiName ? prefix : "") + " " + this.className)
 			.replace(/\$\$/g, this._globalKey);
-	};
+	}
 	renderHtml() {
 		return this.formatHtml(this.getHtmlTpl());
-	};
+	}
 	dispose() {
 		var box = this.getDom();
 		if (box) domUtils.remove(box);
 		uiUtils.unsetGlobal(this.id);
-	};
+	}
 
 	uiShow(enable) {
 		if (enable) {
@@ -125,9 +131,9 @@ class cls_UIBase extends EventBase {
 			this.getDom().style.display = 'none';
 			this.uiIsShow = false;
 		}
-	};
+	}
 }
 
-cls_UIBase.prototype._UIBase_render = cls_UIBase.prototype.render;
+// cls_UIBase.prototype._UIBase_render = cls_UIBase.prototype.render;
 
 export default cls_UIBase;

@@ -72,7 +72,7 @@ class cls_uiPopup extends cls_UIBase {
 	initPopup() {
 		this.initUIBase();
 		allPopups.push(this);
-	};
+	}
 	getHtmlTpl() {
 		return (
 			'<div id="##" class="edui-popup %%" onmousedown="return false;">' +
@@ -85,8 +85,8 @@ class cls_uiPopup extends cls_UIBase {
 			" </div>" +
 			"</div>"
 		);
-	};
-	getContentHtmlTpl() {
+	}
+	_Popup_getContentHtmlTpl() {
 		if (this.content) {
 			if (typeof this.content == "string") {
 				return this.content;
@@ -95,8 +95,11 @@ class cls_uiPopup extends cls_UIBase {
 		} else {
 			return "";
 		}
+	}
+	getContentHtmlTpl() {
+		return this._Popup_getContentHtmlTpl();
 	};
-	postRender() {
+	_Popup_postRender() {
 		if (this.content instanceof cls_UIBase) {
 			this.content.postRender();
 		}
@@ -145,6 +148,9 @@ class cls_uiPopup extends cls_UIBase {
 		this.fireEvent("postRenderAfter");
 		this.hide(true);
 		this._UIBase_postRender();
+	}
+	postRender() {
+		this._Popup_postRender();
 	};
 	_doAutoRender() {
 		if (!this.getDom() && this.autoRender) {
