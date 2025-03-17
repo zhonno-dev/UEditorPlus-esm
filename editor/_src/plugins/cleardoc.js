@@ -1,6 +1,9 @@
 import UE from "../UE.js";
 import utils from "../core/utils.js";
-import { domUtils } from "../core/domUtils.js";
+// import { domUtils } from "../core/domUtils.js";
+import browser from "../core/browser.js";
+const {ie, webkit, gecko, opera} = browser;
+
 /**
  * 清空文档插件
  * @file

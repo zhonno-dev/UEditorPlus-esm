@@ -23,11 +23,21 @@ cls_uiStateful.prototype.target = null; //目标元素和this指向dom不一样
 
 
 cls_uiStateful.prototype.Stateful_init = function () {
-	this._Stateful_dGetHtmlTpl = this.getHtmlTpl;
-	this.getHtmlTpl = this.Stateful_getHtmlTpl;
+	//改为 cls_uiStateful(class形式) 后，这种方式会导致死循环，调整一下
+	// this._Stateful_dGetHtmlTpl = this.getHtmlTpl;
+	// this.getHtmlTpl = this.Stateful_getHtmlTpl;
 };
-cls_uiStateful.prototype.Stateful_getHtmlTpl = function () {
-	var tpl = this._Stateful_dGetHtmlTpl();
+//旧的（原本的）Stateful_getHtmlTpl()
+// cls_uiStateful.prototype.Stateful_getHtmlTpl = function () {
+// 	var tpl = this._Stateful_dGetHtmlTpl();
+// 	// 使用function避免$转义
+// 	return tpl.replace(/stateful/g, function () {
+// 		return TPL_STATEFUL;
+// 	});
+// };
+// 改成新的 Stateful_getHtmlTpl，通过参数传入 tpl
+cls_uiStateful.prototype.Stateful_getHtmlTpl = function (tpl) {
+	// var tpl = this._Stateful_dGetHtmlTpl();
 	// 使用function避免$转义
 	return tpl.replace(/stateful/g, function () {
 		return TPL_STATEFUL;

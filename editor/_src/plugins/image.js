@@ -1,6 +1,7 @@
 import UE from "../UE.js";
 import utils from "../core/utils.js";
 import { domUtils } from "../core/domUtils.js";
+import dtd from "../core/dtd.js";
 /**
  * 图片插入、排版插件
  * @file

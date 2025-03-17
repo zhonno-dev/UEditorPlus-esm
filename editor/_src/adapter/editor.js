@@ -863,7 +863,6 @@ let baidu = {
 	//             }
 	//         }
 	//     };
-	//     utils.inherits(EditorUI, UIBase);[X]
 	//#endregion 原EditorUI
 
 	var instances = __UE.instances;

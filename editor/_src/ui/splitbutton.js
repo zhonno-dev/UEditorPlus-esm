@@ -74,7 +74,7 @@ cls_uiSplitButton.prototype._onPopupHide = function () {
 	this.removeState("opened");
 };
 cls_uiSplitButton.prototype.getHtmlTpl = function () {
-	return (
+	let tpl = (
 		'<div id="##" class="edui-box %%">' +
 		"<div " +
 		(this.title ? 'title="' + this.title + '"' : "") +
@@ -86,6 +86,8 @@ cls_uiSplitButton.prototype.getHtmlTpl = function () {
 		'<div class="edui-box edui-arrow" onclick="$$._onArrowClick();"></div>' +
 		"</div></div></div>"
 	);
+	// return tpl;
+	return this.Stateful_getHtmlTpl(tpl);
 };
 cls_uiSplitButton.prototype.showPopup = function () {
 	// 当popup往上弹出的时候，做特殊处理

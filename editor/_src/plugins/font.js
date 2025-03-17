@@ -1,8 +1,10 @@
 import UE from "../UE.js";
 import utils from "../core/utils.js";
-import { domUtils } from "../core/domUtils.js";
+import { domUtils, fillCharReg } from "../core/domUtils.js";
 import dtd from "../core/dtd.js";
 import browser from "../core/browser.js";
+const {ie, webkit, gecko, opera} = browser;
+
 /**
  * 字体颜色,背景色,字号,字体,下划线,删除线
  * @file

@@ -4,7 +4,7 @@ import utils from "../core/utils.js";
 import { domUtils } from "../core/domUtils.js";
 import uiUtils from "./uiutils.js";
 import UE from "../UE.js";
-import browser from "../core/browser.js";
+import browser from "../core/browseqr.js";
 
 import cls_UIBase from "./UIBase.cls.js";
 
