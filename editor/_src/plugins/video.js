@@ -104,7 +104,7 @@ UE.plugins["video"] = function () {
                         className,
                         img2video ? "embed" : "image"
                     );
-                    node.parentNode.replaceChild(nodeUtils.createElement(html), node);
+                    node.parentNode.replaceChild(cls_uNode.createElement(html), node);
                 }
                 if (className && className.indexOf("edui-upload-video") != -1) {
                     var html = creatInsertStr(
@@ -116,7 +116,7 @@ UE.plugins["video"] = function () {
                         className,
                         img2video ? "video" : "image"
                     );
-                    node.parentNode.replaceChild(nodeUtils.createElement(html), node);
+                    node.parentNode.replaceChild(cls_uNode.createElement(html), node);
                 }
             }
         );

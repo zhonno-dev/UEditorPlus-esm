@@ -28,14 +28,14 @@ UE.plugins["pasteplain"] = function () {
                 br: {$: {}},
                 div: function (node) {
                     var tmpNode,
-                        p = nodeUtils.createElement("p");
+                        p = cls_uNode.createElement("p");
                     while ((tmpNode = node.firstChild())) {
                         if (tmpNode.type == "text" || !UE.dom.dtd.$block[tmpNode.tagName]) {
                             p.appendChild(tmpNode);
                         } else {
                             if (p.firstChild()) {
                                 node.parentNode.insertBefore(p, node);
-                                p = nodeUtils.createElement("p");
+                                p = cls_uNode.createElement("p");
                             } else {
                                 node.parentNode.insertBefore(tmpNode, node);
                             }

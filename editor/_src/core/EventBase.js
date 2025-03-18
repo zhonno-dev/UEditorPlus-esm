@@ -1,6 +1,132 @@
 
 import utils from "./utils.js";
 
+
+/**
+ * 编辑器准备就绪后会触发该事件
+ * @module UE
+ * @class Editor
+ * @event ready
+ * @remind render方法执行完成之后,会触发该事件
+ * @remind
+ * @example
+ * ```javascript
+ * editor.addListener( 'ready', function( editor ) {
+ *     editor.execCommand( 'focus' ); //编辑器家在完成后，让编辑器拿到焦点
+ * } );
+ * ```
+ */
+/**
+ * 执行destroy方法,会触发该事件
+ * @module UE
+ * @class Editor
+ * @event destroy
+ * @see UE.Editor:destroy()
+ */
+/**
+ * 执行reset方法,会触发该事件
+ * @module UE
+ * @class Editor
+ * @event reset
+ * @see UE.Editor:reset()
+ */
+/**
+ * 执行focus方法,会触发该事件
+ * @module UE
+ * @class Editor
+ * @event focus
+ * @see UE.Editor:focus(Boolean)
+ */
+/**
+ * 语言加载完成会触发该事件
+ * @module UE
+ * @class Editor
+ * @event langReady
+ */
+/**
+ * 运行命令之后会触发该命令
+ * @module UE
+ * @class Editor
+ * @event beforeExecCommand
+ */
+/**
+ * 运行命令之后会触发该命令
+ * @module UE
+ * @class Editor
+ * @event afterExecCommand
+ */
+/**
+ * 运行命令之前会触发该命令
+ * @module UE
+ * @class Editor
+ * @event firstBeforeExecCommand
+ */
+/**
+ * 在getContent方法执行之前会触发该事件
+ * @module UE
+ * @class Editor
+ * @event beforeGetContent
+ * @see UE.Editor:getContent()
+ */
+/**
+ * 在getContent方法执行之后会触发该事件
+ * @module UE
+ * @class Editor
+ * @event afterGetContent
+ * @see UE.Editor:getContent()
+ */
+/**
+ * 在getAllHtml方法执行时会触发该事件
+ * @module UE
+ * @class Editor
+ * @event getAllHtml
+ * @see UE.Editor:getAllHtml()
+ */
+/**
+ * 在setContent方法执行之前会触发该事件
+ * @module UE
+ * @class Editor
+ * @event beforeSetContent
+ * @see UE.Editor:setContent(String)
+ */
+/**
+ * 在setContent方法执行之后会触发该事件
+ * @module UE
+ * @class Editor
+ * @event afterSetContent
+ * @see UE.Editor:setContent(String)
+ */
+/**
+ * 每当编辑器内部选区发生改变时，将触发该事件
+ * @event selectionchange
+ * @warning 该事件的触发非常频繁，不建议在该事件的处理过程中做重量级的处理
+ * @example
+ * ```javascript
+ * editor.addListener( 'selectionchange', function( editor ) {
+ *     console.log('选区发生改变');
+ * }
+ */
+/**
+ * 在所有selectionchange的监听函数执行之前，会触发该事件
+ * @module UE
+ * @class Editor
+ * @event beforeSelectionChange
+ * @see UE.Editor:selectionchange
+ */
+/**
+ * 在所有selectionchange的监听函数执行完之后，会触发该事件
+ * @module UE
+ * @class Editor
+ * @event afterSelectionChange
+ * @see UE.Editor:selectionchange
+ */
+/**
+ * 编辑器内容发生改变时会触发该事件
+ * @module UE
+ * @class Editor
+ * @event contentChange
+ */
+
 /**
  * 获得对象所拥有监听类型的所有监听器
  * @unfile

@@ -222,6 +222,27 @@ class cls_uNode {
 		this.children = obj.children;
 	}
 
+	//创建uNode的静态方法
+	//操作 uNode(模拟节点) 的工具函数
+	//支持标签和html
+	static createElement(html) {
+		if (/[<>]/.test(html)) {
+			return htmlparser(html, false, cls_uNode, this).children[0];
+		} else {
+			return new cls_uNode({
+				type: "element",
+				children: [],
+				tagName: html
+			});
+		}
+	}
+	static createText(data, noTrans) {
+		return new cls_uNode({
+			type: "text",
+			data: noTrans ? data : utils.unhtml(data || "")
+		});
+	}
+
 	/**
 	 * 当前节点对象，转换成html文本
 	 * @method toHtml
@@ -281,7 +302,7 @@ class cls_uNode {
 				}
 			}
 			this.children = [];
-			var tmpRoot = htmlparser(htmlstr, false, cls_uNode, nodeUtils);
+			var tmpRoot = htmlparser(htmlstr, false, cls_uNode);
 			for (var i = 0, ci; (ci = tmpRoot.children[i++]);) {
 				this.children.push(ci);
 				ci.parentNode = this;
@@ -329,7 +350,7 @@ class cls_uNode {
 				}
 			}
 			this.children = [];
-			//zhu:这里改为自己实现 uNode.createText() 的功能，这样就不需要 import 新的 nodeUtils.createText
+			//zhu:这里改为自己实现 uNode.createText() 的功能，这样就不需要 import 新的 cls_uNode.createText
 			// this.appendChild(uNode.createText(textStr, noTrans));
 			let newNode = new cls_uNode({
 				type: "text",
@@ -754,30 +775,5 @@ class cls_uNode {
 	}
 }
 
-/**
- * 创建uNode的静态方法
- * 操作 uNode(模拟节点) 的工具函数
- */
-const nodeUtils = {
-	//创建uNode的静态方法
-	//支持标签和html
-	createElement: function (html) {
-		if (/[<>]/.test(html)) {
-			return htmlparser(html, false, cls_uNode, this).children[0];
-		} else {
-			return new cls_uNode({
-				type: "element",
-				children: [],
-				tagName: html
-			});
-		}
-	},
-	createText: function (data, noTrans) {
-		return new cls_uNode({
-			type: "text",
-			data: noTrans ? data : utils.unhtml(data || "")
-		});
-	},
-}
-
-export { cls_uNode, nodeUtils };
+// export { cls_uNode, nodeUtils };
+export default cls_uNode;

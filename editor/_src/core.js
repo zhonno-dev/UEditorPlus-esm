@@ -16,7 +16,7 @@ import image from "./core/image.js";
 import dialog from "./core/dialog.js";
 import filterWord from "./core/filterword.js";
 // import UE_uNode from "./core/node.js";
-import { cls_uNode } from "./core/node.js";
+import cls_uNode from "./core/node.js";
 import htmlparser from "./core/htmlparser.js";
 import filterNode from "./core/filternode.js";
 import plugin from "./core/plugin.js";

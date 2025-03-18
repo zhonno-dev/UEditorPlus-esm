@@ -33,7 +33,7 @@ UE.plugins["audio"] = function () {
         //                 className,
         //                 img2audio ? "embed" : "image"
         //             );
-        //             node.parentNode.replaceChild(nodeUtils.createElement(html), node);
+        //             node.parentNode.replaceChild(cls_uNode.createElement(html), node);
         //         }
         //         if (className && className.indexOf("edui-upload-audio") != -1) {
         //             var html = createAudioHtml(
@@ -45,7 +45,7 @@ UE.plugins["audio"] = function () {
         //                 className,
         //                 img2audio ? "audio" : "image"
         //             );
-        //             node.parentNode.replaceChild(nodeUtils.createElement(html), node);
+        //             node.parentNode.replaceChild(cls_uNode.createElement(html), node);
         //         }
         //     }
         // );

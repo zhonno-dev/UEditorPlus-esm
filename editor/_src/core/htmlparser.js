@@ -1,7 +1,7 @@
 //这个文件是原本的 htmlparser.js，已被改成入口，实际调用新的 htmlparser.func.php
 
 import htmlparser_new from "./htmlparser.func.js";
-import { cls_uNode, nodeUtils } from "./node.js";
+import cls_uNode from "./node.js";
 
 /**
  * html字符串转换成uNode节点
@@ -19,7 +19,7 @@ import { cls_uNode, nodeUtils } from "./node.js";
  * ```
  */
 function htmlparser(htmlstr, ignoreBlank) {
-	return htmlparser_new(htmlstr, ignoreBlank, cls_uNode, nodeUtils);
+	return htmlparser_new(htmlstr, ignoreBlank, cls_uNode);
 }
 
 export default htmlparser;

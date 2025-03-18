@@ -14,16 +14,15 @@ var is_log = false;
  * 
  * @param {string} htmlstr - 需要解析的HTML字符串
  * @param {boolean} ignoreBlank - 是否忽略空白字符，包括空格、换行符等；若设置为true，转换的时候忽略\n\r\t等空白字符
- * @param {typeof import('./node.js').cls_uNode.prototype} cls_uNode - cls_uNode
- * @param {typeof import('./node.js').nodeUtils} nodeUtils - nodeUtils
- * @returns {typeof import('./node.js').cls_uNode.prototype} 给定的html片段转换形成的uNode对象
+ * @param {typeof import('./node.js').default.prototype} cls_uNode - cls_uNode
+ * @returns {typeof import('./node.js').default.prototype} 给定的html片段转换形成的uNode对象
  * @since 1.2.6.1
  * @example
  * ```javascript
  * var root = UE.htmlparser('<p><b>htmlparser</b></p>', true);
  * ```
  */
-function htmlparser(htmlstr, ignoreBlank, cls_uNode, nodeUtils) {
+function htmlparser(htmlstr, ignoreBlank, cls_uNode) {
 	// 正则表达式，用于匹配HTML标签和属性
 	// 这里的正则表达式经过多次修改，以适应不同的HTML格式和需求
 	//todo 原来的方式  [^"'<>\/] 有\/就不能配对上 <TD vAlign=top background=../AAA.JPG> 这样的标签了
@@ -125,12 +124,12 @@ function htmlparser(htmlstr, ignoreBlank, cls_uNode, nodeUtils) {
 	 */
 	function text(parent, data) {
 		if (needChild[parent.tagName]) {
-			var tmpNode = nodeUtils.createElement(needChild[parent.tagName]);
+			var tmpNode = cls_uNode.createElement(needChild[parent.tagName]);
 			parent.appendChild(tmpNode);
-			tmpNode.appendChild(nodeUtils.createText(data));
+			tmpNode.appendChild(cls_uNode.createText(data));
 			parent = tmpNode;
 		} else {
-			parent.appendChild(nodeUtils.createText(data));
+			parent.appendChild(cls_uNode.createText(data));
 		}
 	}
 

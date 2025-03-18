@@ -19,12 +19,12 @@ import { domUtils } from "../core/domUtils.js";
 	// var editorui = baidu.editor.ui;
 	var editorui = UE.ui;
 	// var _Dialog = editorui.Dialog;
-	var _Dialog = UE_ui_Dialog;
+	// var _Dialog = UE_ui_Dialog;
 	editorui.buttons = {};
 	// console.log(editorui); return;
 
 	editorui.Dialog = function (options) {
-		var dialog = new _Dialog(options);
+		var dialog = new UE_ui_Dialog(options);
 		dialog.addListener("hide", function () {
 			if (dialog.editor) {
 				var editor = dialog.editor;
@@ -535,6 +535,9 @@ import { domUtils } from "../core/domUtils.js";
 		return ui;
 	};
 
+	/**
+	 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
+	 */
 	editorui.fontfamily = function (editor, list, title) {
 		list = editor.options["fontfamily"] || [];
 		title =
@@ -600,6 +603,9 @@ import { domUtils } from "../core/domUtils.js";
 		return ui;
 	};
 
+	/**
+	 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
+	 */
 	editorui.fontsize = function (editor, list, title) {
 		title =
 			editor.options.labelMap["fontsize"] ||
@@ -653,6 +659,9 @@ import { domUtils } from "../core/domUtils.js";
 		return ui;
 	};
 
+	/**
+	 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
+	 */
 	editorui.paragraph = function (editor, list, title) {
 		title =
 			editor.options.labelMap["paragraph"] ||
@@ -711,7 +720,10 @@ import { domUtils } from "../core/domUtils.js";
 		return ui;
 	};
 
-	//自定义标题
+	/**
+	 * 自定义标题
+	 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
+	 */
 	editorui.customstyle = function (editor) {
 		var list = editor.options["customstyle"] || [],
 			title =
@@ -793,6 +805,9 @@ import { domUtils } from "../core/domUtils.js";
 		return ui;
 	};
 
+	/**
+	 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
+	 */
 	editorui.inserttable = function (editor, iframeUrl, title) {
 		title =
 			editor.options.labelMap["inserttable"] ||
@@ -820,6 +835,9 @@ import { domUtils } from "../core/domUtils.js";
 		return ui;
 	};
 
+	/**
+	 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
+	 */
 	editorui.lineheight = function (editor) {
 		var val = editor.options.lineheight || [];
 		if (!val.length) return;
@@ -954,6 +972,9 @@ import { domUtils } from "../core/domUtils.js";
 		})(cl);
 	}
 
+	/**
+	 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
+	 */
 	editorui.fullscreen = function (editor, title) {
 		title =
 			editor.options.labelMap["fullscreen"] ||
@@ -979,7 +1000,10 @@ import { domUtils } from "../core/domUtils.js";
 		return ui;
 	};
 
-	// 表情
+	/**
+	 * 表情
+	 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
+	 */
 	editorui['emotion'] = function (editor, iframeUrl) {
 		var cmd = "emotion";
 		var ui = new UE_ui_MultiMenuPop({
@@ -1003,6 +1027,9 @@ import { domUtils } from "../core/domUtils.js";
 		return ui;
 	};
 
+	/**
+	 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
+	 */
 	editorui['autotypeset'] = function (editor) {
 		var ui = new UE_ui_AutoTypeSetButton({
 			editor: editor,
@@ -1022,7 +1049,10 @@ import { domUtils } from "../core/domUtils.js";
 		return ui;
 	};
 
-	/* 简单上传插件 */
+	/**
+	 * 简单上传插件
+	 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
+	 */
 	editorui['simpleupload'] = function (editor) {
 		var name = "simpleupload",
 			ui = new cls_uiButton({

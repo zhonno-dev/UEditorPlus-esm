@@ -2,7 +2,7 @@ import UE from "../UE.js";
 import utils from "../core/utils.js";
 import { domUtils } from "../core/domUtils.js";
 import dtd from "../core/dtd.js";
-import { cls_uNode, nodeUtils } from "../core/node.js";
+import cls_uNode from "../core/node.js";
 import browser from "../core/browser.js";
 
 ///import core
@@ -140,7 +140,7 @@ UE.plugins["defaultfilter"] = function () {
                             break;
                         }
                         var tmpNode,
-                            p = nodeUtils.createElement("p");
+                            p = cls_uNode.createElement("p");
                         while ((tmpNode = node.firstChild())) {
                             if (
                                 tmpNode.type == "text" ||
@@ -150,7 +150,7 @@ UE.plugins["defaultfilter"] = function () {
                             } else {
                                 if (p.firstChild()) {
                                     node.parentNode.insertBefore(p, node);
-                                    p = nodeUtils.createElement("p");
+                                    p = cls_uNode.createElement("p");
                                 } else {
                                     node.parentNode.insertBefore(tmpNode, node);
                                 }
@@ -185,7 +185,7 @@ UE.plugins["defaultfilter"] = function () {
                             node.appendChild(
                                 browser.ie11below
                                     ? UE.uNode.createText(" ")
-                                    : nodeUtils.createElement("br")
+                                    : cls_uNode.createElement("br")
                             );
                         }
                         break;
