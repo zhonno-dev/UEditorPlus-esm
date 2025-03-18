@@ -77,8 +77,6 @@ var btnCmds = [
 	"mergecells", // 合并单元格
 	"deletetable", // 删除表格
 ];
-
-
 //zhu:以下是在原本的代码取消了【即时执行的匿名函数】后的for循环
 for (var i = 0, ci; (ci = btnCmds[i++]);) {
 	ci = ci.toLowerCase();
@@ -169,6 +167,7 @@ UE.ui.cleardoc = function (editor) {
 	return ui;
 };
 
+//图片的 左/中/右 浮动 工具栏按钮
 var imageTypeSet = [
 	'none', 'left', 'center', 'right'
 ];
@@ -478,7 +477,10 @@ for (var p in dialogBtns) {
 	})(p, dialogBtns[p]);
 }
 
-/** @param {typeof import('../core/Editor.cls.js').default.prototype} editor */
+/** 
+ * 插入代码块
+ * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
+ */
 UE.ui.insertcode = function (editor, list, title) {
 	list = editor.options["insertcode"] || [];
 	title =
@@ -545,6 +547,7 @@ UE.ui.insertcode = function (editor, list, title) {
 };
 
 /**
+ * 字体
  * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
  */
 UE.ui.fontfamily = function (editor, list, title) {
@@ -613,6 +616,7 @@ UE.ui.fontfamily = function (editor, list, title) {
 };
 
 /**
+ * 字号
  * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
  */
 UE.ui.fontsize = function (editor, list, title) {
@@ -669,6 +673,7 @@ UE.ui.fontsize = function (editor, list, title) {
 };
 
 /**
+ * 段落
  * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
  */
 UE.ui.paragraph = function (editor, list, title) {
@@ -730,7 +735,7 @@ UE.ui.paragraph = function (editor, list, title) {
 };
 
 /**
- * 自定义标题
+ * 自定义样式
  * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
  */
 UE.ui.customstyle = function (editor) {
@@ -815,6 +820,7 @@ UE.ui.customstyle = function (editor) {
 };
 
 /**
+ * 插入表格
  * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
  */
 UE.ui.inserttable = function (editor, iframeUrl, title) {
@@ -845,6 +851,7 @@ UE.ui.inserttable = function (editor, iframeUrl, title) {
 };
 
 /**
+ * 行间距
  * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
  */
 UE.ui.lineheight = function (editor) {
@@ -988,6 +995,7 @@ for (var l = 0, cl; (cl = lists[l++]);) {
 }
 
 /**
+ * 全屏
  * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
  */
 UE.ui.fullscreen = function (editor, title) {

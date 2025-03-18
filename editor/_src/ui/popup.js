@@ -1,3 +1,5 @@
+//弹出层UI类
+
 import uiUtils from "./uiutils.js";
 import { domUtils } from "../core/domUtils.js";
 import cls_UIBase from "./UIBase.js";

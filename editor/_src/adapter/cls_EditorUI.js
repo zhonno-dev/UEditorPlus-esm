@@ -204,12 +204,14 @@ class cls_EditorUI extends cls_UIBase{
 
 		editor.addListener("selectionchange", function () {
 			if (editor.options.elementPathEnabled) {
+				//this.enableElementPath() 或 this.disableElementPath()
 				me[
 					(editor.queryCommandState("elementpath") == -1 ? "dis" : "en") +
 					"ableElementPath"
 				]();
 			}
 			if (editor.options.scaleEnabled) {
+				//this.enableScale = 或 this.disableScale = 
 				me[
 					(editor.queryCommandState("scale") == -1 ? "dis" : "en") +
 					"ableScale"
@@ -380,6 +382,7 @@ class cls_EditorUI extends cls_UIBase{
 				}
 				// 链接选中处理
 				if (editor.ui._dialogs.linkDialog) {
+					// console.log(editor.ui._dialogs.linkDialog);
 					var link = editor.queryCommandValue("link");
 					var url;
 					if (
@@ -707,6 +710,7 @@ class cls_EditorUI extends cls_UIBase{
 		}
 	}
 	_updateElementPath() {
+		// console.trace();
 		var bottom = this.getDom("elementpath"),
 			list;
 		if (

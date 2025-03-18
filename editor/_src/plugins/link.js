@@ -156,6 +156,10 @@ UE.plugins["link"] = function () {
 			//闭合都不加占位符，如果加了会在a后边多个占位符节点，导致a是图片背景组成的列表，出现空白问题
 			range.collapse().select(true);
 		},
+		/**
+		 * @this {typeof import('../core/Editor.cls.js').default.prototype}
+		 * @param {Node}
+		*/
 		queryCommandValue: function () {
 			var range = this.selection.getRange(),
 				node;
