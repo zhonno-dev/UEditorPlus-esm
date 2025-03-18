@@ -179,7 +179,7 @@ class cls_Editor extends EventBase {
 
 	registerCommand(name, obj) {
 		this.commands[name] = obj;
-	};
+	}
 	/**
 	 * 编辑器对外提供的监听ready事件的接口， 通过调用该方法，达到的效果与监听ready事件是一致的
 	 * @method ready
@@ -199,7 +199,7 @@ class cls_Editor extends EventBase {
 		if (fn) {
 			me.isReady ? fn.apply(me) : me.addListener("ready", fn);
 		}
-	};
+	}
 
 	/**
 	 * 该方法是提供给插件里面使用，设置配置项默认值
@@ -235,10 +235,10 @@ class cls_Editor extends EventBase {
 			obj = key;
 		}
 		utils.extend(this.options, obj, true);
-	};
+	}
 	getOpt(key) {
 		return this.options[key];
-	};
+	}
 	/**
 	 * 销毁编辑器实例，使用textarea代替
 	 * @method destroy
@@ -273,7 +273,7 @@ class cls_Editor extends EventBase {
 			}
 		}
 		UE.delEditor(key);
-	};
+	}
 
 	/**
 	 * 渲染编辑器的DOM到指定容器
@@ -406,7 +406,7 @@ class cls_Editor extends EventBase {
 				}
 			});
 		}
-	};
+	}
 
 	/**
 	 * 编辑器初始化
@@ -543,7 +543,7 @@ class cls_Editor extends EventBase {
 
 		!options.isShow && me.setHide();
 		options.readonly && me.setDisabled();
-	};
+	}
 
 	/**
 	 * 同步数据到编辑器所在的form
@@ -575,14 +575,14 @@ class cls_Editor extends EventBase {
 					true
 				);
 		form && setValue(form, me);
-	};
+	}
 
 	/**
 	 * 手动触发更新按钮栏状态
 	 */
 	syncCommandState() {
 		this.fireEvent("selectionchange");
-	};
+	}
 
 	/**
 	 * 设置编辑器宽度
@@ -592,7 +592,7 @@ class cls_Editor extends EventBase {
 		if (width !== parseInt(this.iframe.parentNode.parentNode.style.width)) {
 			this.iframe.parentNode.parentNode.style.width = width + "px";
 		}
-	};
+	}
 
 	/**
 	 * 设置编辑器高度
@@ -612,7 +612,7 @@ class cls_Editor extends EventBase {
 			(this.options.minFrameHeight = this.options.initialFrameHeight = height);
 		this.body.style.height = height + "px";
 		!notSetHeight && this.trigger("setHeight");
-	};
+	}
 
 	/**
 	 * 为编辑器的编辑命令提供快捷键
@@ -645,7 +645,7 @@ class cls_Editor extends EventBase {
 			obj = cmd;
 		}
 		utils.extend(this.shortcutkeys, obj);
-	};
+	}
 
 	/**
 	 * 对编辑器设置keydown事件监听，绑定快捷键和命令，当快捷键组合触发成功，会响应对应的命令
@@ -694,7 +694,7 @@ class cls_Editor extends EventBase {
 				}
 			}
 		});
-	};
+	}
 
 	/**
 	 * 获取编辑器的内容
@@ -740,7 +740,7 @@ class cls_Editor extends EventBase {
 		me.filterOutputRule(root);
 		me.fireEvent("aftergetcontent", cmd, root);
 		return root.toHtml(formatter);
-	};
+	}
 
 	/**
 	 * 取得完整的html代码，可以直接显示成完整的html文档
@@ -784,7 +784,7 @@ class cls_Editor extends EventBase {
 			me.getContent(null, null, true) +
 			"</body></html>"
 		);
-	};
+	}
 
 	/**
 	 * 得到编辑器的纯文本内容，但会保留段落格式
@@ -811,7 +811,7 @@ class cls_Editor extends EventBase {
 			.replace(reg, "")
 			.replace(/\u00a0/g, " ")
 			.replace(/&nbsp;/g, " ");
-	};
+	}
 
 	/**
 	 * 获取编辑器中的纯文本内容,没有段落格式
@@ -829,7 +829,7 @@ class cls_Editor extends EventBase {
 		return this.body[browser.ie ? "innerText" : "textContent"]
 			.replace(reg, "")
 			.replace(/\u00a0/g, " ");
-	};
+	}
 
 	/**
 	 * 设置编辑器的内容，可修改编辑器当前的html内容
@@ -931,7 +931,7 @@ class cls_Editor extends EventBase {
 		if (me.options.autoSyncData) {
 			me.form && setValue(me.form, me);
 		}
-	};
+	}
 
 	/**
 	 * 让编辑器获得焦点，默认focus到编辑器头部
@@ -983,10 +983,10 @@ class cls_Editor extends EventBase {
 			this.fireEvent("focus selectionchange");
 		} catch (e) {
 		}
-	};
+	}
 	isFocus() {
 		return this.selection.isFocus();
-	};
+	}
 	blur() {
 		var sel = this.selection.getNative();
 		if (sel.empty && browser.ie) {
@@ -1000,7 +1000,7 @@ class cls_Editor extends EventBase {
 		}
 
 		//this.fireEvent('blur selectionchange');
-	};
+	}
 	/**
 	 * 初始化UE事件及部分事件代理
 	 * @method _initEvents
@@ -1070,7 +1070,7 @@ class cls_Editor extends EventBase {
 			if (evt.button === 2) return;
 			me._selectionChange(250, evt);
 		});
-	};
+	}
 	/**
 	 * 触发事件代理
 	 * @method _proxyDomEvent
@@ -1091,7 +1091,7 @@ class cls_Editor extends EventBase {
 		return this.fireEvent(
 			"after" + evt.type.replace(/^on/, "").toLowerCase()
 		);
-	};
+	}
 	/**
 	 * 变化选区
 	 * @method _selectionChange
@@ -1149,7 +1149,7 @@ class cls_Editor extends EventBase {
 				me.selection.clear();
 			}
 		}, delay || 50);
-	};
+	}
 
 	/**
 	 * 执行编辑命令
@@ -1165,7 +1165,7 @@ class cls_Editor extends EventBase {
 			/** @type {Function} */
 			cmdFn;
 		cmd = this.commands[cmdName] || UE.commands[cmdName];
-		
+
 		cmdFn = cmd && cmd[fnName];
 		//没有querycommandstate或者没有command的都默认返回0
 		if ((!cmd || !cmdFn) && fnName == "queryCommandState") {
@@ -1173,7 +1173,7 @@ class cls_Editor extends EventBase {
 		} else if (cmdFn) {
 			return cmdFn.apply(this, args);
 		}
-	};
+	}
 
 	/**
 	 * 执行编辑命令cmdName，完成富文本编辑效果
@@ -1224,7 +1224,7 @@ class cls_Editor extends EventBase {
 			!me._ignoreContentChange &&
 			me._selectionChange();
 		return result;
-	};
+	}
 
 	/**
 	 * 根据传入的command命令，查选编辑器当前的选区，返回命令的状态
@@ -1240,7 +1240,7 @@ class cls_Editor extends EventBase {
 	 */
 	queryCommandState(cmdName) {
 		return this._callCmdFn("queryCommandState", arguments);
-	};
+	}
 
 	/**
 	 * 根据传入的command命令，查选编辑器当前的选区，根据命令返回相关的值
@@ -1254,7 +1254,7 @@ class cls_Editor extends EventBase {
 	 */
 	queryCommandValue(cmdName) {
 		return this._callCmdFn("queryCommandValue", arguments);
-	};
+	}
 
 	/**
 	 * 检查编辑区域中是否有内容
@@ -1308,7 +1308,7 @@ class cls_Editor extends EventBase {
 			}
 		}
 		return false;
-	};
+	}
 
 	/**
 	 * 重置编辑器，可用来做多个tab 使用同一个编辑器实例
@@ -1322,7 +1322,7 @@ class cls_Editor extends EventBase {
 	reset() {
 		this.clear();
 		this.fireEvent("reset");
-	};
+	}
 	/**
 	 * 清空编辑器内容
 	 * @method clear
@@ -1334,7 +1334,7 @@ class cls_Editor extends EventBase {
 	 */
 	clear() {
 		this.setContent("");
-	};
+	}
 
 	/**
 	 * 设置当前编辑区域可以编辑
@@ -1368,10 +1368,10 @@ class cls_Editor extends EventBase {
 			}
 			me.fireEvent("selectionchange");
 		}
-	};
+	}
 	enable() {
 		return this.setEnabled();
-	};
+	}
 
 	/** 设置当前编辑区域不可编辑
 	 * @method setDisabled
@@ -1420,10 +1420,10 @@ class cls_Editor extends EventBase {
 			};
 			me.fireEvent("selectionchange");
 		}
-	};
+	}
 	disable(except) {
 		return this.setDisabled(except);
-	};
+	}
 
 	/**
 	 * 设置默认内容
@@ -1757,7 +1757,7 @@ class cls_Editor extends EventBase {
 		}
 	}
 
-	
+
 	////////////////////////////////////
 	//	以下方法原本在 /_src/core/localstorage.js 中，移到此处
 	////////////////////////////////////
@@ -1765,37 +1765,37 @@ class cls_Editor extends EventBase {
 		// console.log('setPreferences', key, value);
 		var obj = {};
 		if (utils.isString(key)) {
-		    obj[key] = value;
+			obj[key] = value;
 		} else {
-		    obj = key;
+			obj = key;
 		}
 		var data = LocalStorage.getLocalData(ROOT_KEY);
 		if (data && (data = utils.str2json(data))) {
-		    utils.extend(data, obj);
+			utils.extend(data, obj);
 		} else {
-		    data = obj;
+			data = obj;
 		}
 		data && LocalStorage.saveLocalData(ROOT_KEY, utils.json2str(data));
-	    };
-	
-	    getPreferences(key) {
+	}
+
+	getPreferences(key) {
 		// console.log('getPreferences', key);
 		var data = LocalStorage.getLocalData(ROOT_KEY);
 		if (data && (data = utils.str2json(data))) {
-		    return key ? data[key] : data;
+			return key ? data[key] : data;
 		}
 		return null;
-	    };
-	
-	    removePreferences(key) {
+	}
+
+	removePreferences(key) {
 		// console.log('removePreferences', key);
 		var data = LocalStorage.getLocalData(ROOT_KEY);
 		if (data && (data = utils.str2json(data))) {
-		    data[key] = undefined;
-		    delete data[key];
+			data[key] = undefined;
+			delete data[key];
 		}
 		data && LocalStorage.saveLocalData(ROOT_KEY, utils.json2str(data));
-	    };
+	}
 
 }
 

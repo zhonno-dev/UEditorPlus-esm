@@ -26,46 +26,7 @@ const LocalStorage = {
 
 export default LocalStorage;
 
-/*
-//zhu:以下方法已移到 _src/core/Editor.cls.js 本身
-(function () {
-
-    var ROOT_KEY = "UEditorPlusPref";
-
-    cls_Editor.prototype.setPreferences = function (key, value) {
-	// console.log('setPreferences', key, value);
-	var obj = {};
-	if (utils.isString(key)) {
-	    obj[key] = value;
-	} else {
-	    obj = key;
-	}
-	var data = LocalStorage.getLocalData(ROOT_KEY);
-	if (data && (data = utils.str2json(data))) {
-	    utils.extend(data, obj);
-	} else {
-	    data = obj;
-	}
-	data && LocalStorage.saveLocalData(ROOT_KEY, utils.json2str(data));
-    };
-
-    cls_Editor.prototype.getPreferences = function (key) {
-	// console.log('getPreferences', key);
-	var data = LocalStorage.getLocalData(ROOT_KEY);
-	if (data && (data = utils.str2json(data))) {
-	    return key ? data[key] : data;
-	}
-	return null;
-    };
-
-    cls_Editor.prototype.removePreferences = function (key) {
-	// console.log('removePreferences', key);
-	var data = LocalStorage.getLocalData(ROOT_KEY);
-	if (data && (data = utils.str2json(data))) {
-	    data[key] = undefined;
-	    delete data[key];
-	}
-	data && LocalStorage.saveLocalData(ROOT_KEY, utils.json2str(data));
-    };
-})();
-*/
+//zhu:以下方法已移到 _src/core/Editor.cls.js 本身，包括：
+//	cls_Editor.setPreferences()
+//	cls_Editor.getPreferences()
+//	cls_Editor.removePreferences()
