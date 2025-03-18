@@ -2,6 +2,7 @@ import UE from "../UE.js";
 import utils from "../core/utils.js";
 import { domUtils } from "../core/domUtils.js";
 import cls_Range from "../core/Range.js";
+import browser from "../core/browser.js";
 /**
  * undo redo
  * @file

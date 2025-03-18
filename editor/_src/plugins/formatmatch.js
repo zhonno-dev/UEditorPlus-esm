@@ -1,6 +1,6 @@
 import UE from "../UE.js";
-import utils from "../core/utils.js";
 import { domUtils } from "../core/domUtils.js";
+import browser from "../core/browser.js";
 /**
  * 格式刷，只格式inline的
  * @file

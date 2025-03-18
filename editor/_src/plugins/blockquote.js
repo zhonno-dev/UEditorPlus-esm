@@ -1,6 +1,6 @@
 import UE from "../UE.js";
-import utils from "../core/utils.js";
 import { domUtils } from "../core/domUtils.js";
+import dtd from "../core/dtd.js";
 /**
  * 添加引用
  * @file

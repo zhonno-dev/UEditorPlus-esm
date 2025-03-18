@@ -2,6 +2,7 @@ import UE from "../UE.js";
 import utils from "../core/utils.js";
 import { domUtils } from "../core/domUtils.js";
 import browser from "../core/browser.js";
+import dtd from "../core/dtd.js";
 /**
  * 有序列表,无序列表插件
  * @file

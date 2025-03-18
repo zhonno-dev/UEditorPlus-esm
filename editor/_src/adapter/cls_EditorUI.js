@@ -8,6 +8,7 @@ import UE_ui_PastePicker from "../ui/pastepicker.js";
 import browser from "../core/browser.js";
 import { domUtils, getDomNode } from "../core/domUtils.js";
 import UE from "../UE.js";
+import uiUtils from "../ui/uiutils.js";
 
 import cls_UIBase from "../ui/UIBase.js";
 
