@@ -33,10 +33,10 @@ class cls_uiMenu extends cls_uiPopup {
 	constructor(options) {
 		// console.log(options.className);
 		super(options); // 调用父类的构造函数
-		console.log(this.items);
+		// console.log(this.items);
 
 		this.initOptions(options);
-		console.log(this.items);
+		// console.log(this.items);
 		this.initMenu();
 		// console.log(options.items);
 	}

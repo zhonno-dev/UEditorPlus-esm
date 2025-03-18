@@ -57,7 +57,9 @@ const UE = {
 	 */
 	ui: {
 		/** UE.ui.buttons = {} */
-		buttons: {}
+		buttons: {},
+		/** 清除文档 */
+		cleardoc: null,
 	},
 
 	//原本在 editor/_src/adapter/editor.js 中的 var instances = {};
