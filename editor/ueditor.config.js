@@ -106,7 +106,7 @@ const UEDITOR_CONFIG = {
 	debug: false,
 
 	// 服务器统一请求接口路径
-	serverUrl: "/ueditor-plus/_demo_server/handle.php",
+	serverUrl: `${URL}../_demo_server/handle.php`,
 
 	//zhu:act:20240701160138|粘贴图片/拖入（上传）图片文件 改用base64保存图片
 	//zhu:把一些原本在后端的配置项移到前端这里来

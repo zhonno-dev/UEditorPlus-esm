@@ -123,7 +123,6 @@ UE.plugins["paste"] = function () {
 
 	function filter(div) {
 		var html;
-		console.log(`zhuzhuzhu1213`);
 		if (div.firstChild) {
 			//去掉cut中添加的边界值
 			var nodes = domUtils.getElementsByTagName(div, "span");
@@ -340,7 +339,7 @@ UE.plugins["paste"] = function () {
 			me.body,
 			browser.ie || browser.opera ? "keydown" : "paste",
 			function (e) {
-				console.log('on:paste');
+				// console.log('on:paste');
 				if (
 					(browser.ie || browser.opera) &&
 					((!e.ctrlKey && !e.metaKey) || e.keyCode != "86")
