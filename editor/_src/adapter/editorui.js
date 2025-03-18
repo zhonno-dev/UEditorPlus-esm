@@ -111,14 +111,26 @@ import { domUtils } from "../core/domUtils.js";
 					case 'underline':
 					case 'strikethrough':
 					case 'fontborder':
+						// 定义一个立即执行函数，用于创建一个闭包，将 cmd 作为局部变量 cmdInternal 保存
+						// 这样可以确保在返回的函数中使用正确的命令名称
 						ui.shouldUiShow = (function (cmdInternal) {
+							/**
+							 * 检查按钮是否应该显示的函数。
+							 * @returns {boolean} 如果按钮应该显示则返回 true，否则返回 false。
+							 */
 							return function () {
+								// 检查当前编辑器中是否有选中的文本
+								// 如果没有选中的文本，则按钮不应该显示，返回 false
 								if (!editor.selection.getText()) {
 									return false;
 								}
+								// 检查当前命令的状态是否为禁用状态
+								// 如果命令状态不是禁用状态，则按钮应该显示，返回 true
 								return editor.queryCommandState(cmdInternal) !== UE.constants.STATEFUL.DISABLED;
 							};
+							// 将当前的命令名称 cmd 作为参数传递给立即执行函数
 						})(cmd);
+
 						break;
 				}
 				UE.ui.buttons[cmd] = ui;

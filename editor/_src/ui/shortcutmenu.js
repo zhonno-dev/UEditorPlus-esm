@@ -37,7 +37,7 @@ class cls_uiShortCutMenu extends cls_UIBase {
 	static postHide = hideAllMenu;
 	isHidden = true;
 	SPACE = 5;
-	/** @type {string[]} eg. ["bold", "italic"] */
+	/** @type {cls_UIBase[]} eg. ["bold", "italic"] */
 	items;
 	
 	/**
