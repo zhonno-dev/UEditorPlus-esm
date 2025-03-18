@@ -7,7 +7,8 @@
 
     UE = parent.UE;
 
-    domUtils = UE.dom.domUtils;
+	domUtils = UE.dom.domUtils;
+	
 
     utils = UE.utils;
 

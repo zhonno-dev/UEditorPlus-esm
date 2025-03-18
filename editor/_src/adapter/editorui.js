@@ -16,14 +16,14 @@ import { domUtils } from "../core/domUtils.js";
 //自己写的ui也要在这里配置，放到baidu.editor.ui下边，当编辑器实例化的时候会根据ueditor.config中的toolbars找到相应的进行实例化
 (function () {
 	// var utils = baidu.editor.utils;
-	// var editorui = baidu.editor.ui;
-	var editorui = UE.ui;
-	// var _Dialog = editorui.Dialog;
+	// var UE.ui = baidu.editor.ui;
+	// var UE.ui = UE.ui;
+	// var _Dialog = UE.ui.Dialog;
 	// var _Dialog = UE_ui_Dialog;
-	editorui.buttons = {};
-	// console.log(editorui); return;
+	UE.ui.buttons = {};
+	// console.log(UE.ui); return;
 
-	editorui.Dialog = function (options) {
+	UE.ui.Dialog = function (options) {
 		var dialog = new UE_ui_Dialog(options);
 		dialog.addListener("hide", function () {
 			if (dialog.editor) {
@@ -83,12 +83,11 @@ import { domUtils } from "../core/domUtils.js";
 		"splittocells", // 拆分为多个单元格
 		"mergecells", // 合并单元格
 		"deletetable", // 删除表格
-
 	];
 
 	for (var i = 0, ci; (ci = btnCmds[i++]);) {
 		ci = ci.toLowerCase();
-		editorui[ci] = (function (cmd) {
+		UE.ui[ci] = (function (cmd) {
 			/**
 			 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
 			 */
@@ -122,7 +121,7 @@ import { domUtils } from "../core/domUtils.js";
 						})(cmd);
 						break;
 				}
-				editorui.buttons[cmd] = ui;
+				UE.ui.buttons[cmd] = ui;
 				editor.addListener("selectionchange", function (
 					type,
 					causeByUi,
@@ -145,7 +144,7 @@ import { domUtils } from "../core/domUtils.js";
 	}
 
 	//清除文档
-	editorui.cleardoc = function (editor) {
+	UE.ui.cleardoc = function (editor) {
 		var ui = new cls_uiButton({
 			className: "edui-for-cleardoc",
 			title:
@@ -159,7 +158,7 @@ import { domUtils } from "../core/domUtils.js";
 				}
 			}
 		});
-		editorui.buttons["cleardoc"] = ui;
+		UE.ui.buttons["cleardoc"] = ui;
 		editor.addListener("selectionchange", function () {
 			ui.setDisabled(editor.queryCommandState("cleardoc") == -1);
 		});
@@ -172,7 +171,7 @@ import { domUtils } from "../core/domUtils.js";
 	for (let value of imageTypeSet) {
 		(function (value) {
 			/** @param {typeof import('../core/Editor.cls.js').default.prototype} editor */
-			editorui['image' + value] = function (editor) {
+			UE.ui['image' + value] = function (editor) {
 				var ui = new cls_uiButton({
 					className: "edui-for-" + 'image' + value,
 					title:
@@ -196,7 +195,7 @@ import { domUtils } from "../core/domUtils.js";
 						return editor.queryCommandState('imagefloat') !== UE.constants.STATEFUL.DISABLED;
 					}
 				});
-				editorui.buttons['image' + value] = ui;
+				UE.ui.buttons['image' + value] = ui;
 				editor.addListener("selectionchange", function (
 					type,
 					causeByUi,
@@ -219,7 +218,7 @@ import { domUtils } from "../core/domUtils.js";
 		(function (cmd, val) {
 			for (var i = 0, ci; (ci = val[i++]);) {
 				(function (cmd2) {
-					editorui[cmd.replace("float", "") + cmd2] = function (editor) {
+					UE.ui[cmd.replace("float", "") + cmd2] = function (editor) {
 						var ui = new cls_uiButton({
 							className: "edui-for-" + cmd.replace("float", "") + cmd2,
 							title:
@@ -233,7 +232,7 @@ import { domUtils } from "../core/domUtils.js";
 								editor.execCommand(cmd, cmd2);
 							}
 						});
-						editorui.buttons[cmd] = ui;
+						UE.ui.buttons[cmd] = ui;
 						editor.addListener("selectionchange", function (
 							type,
 							causeByUi,
@@ -251,7 +250,7 @@ import { domUtils } from "../core/domUtils.js";
 
 	//字体颜色和背景颜色
 	for (var i = 0, ci; (ci = ["backcolor", "forecolor"][i++]);) {
-		editorui[ci] = (function (cmd) {
+		UE.ui[ci] = (function (cmd) {
 			return function (editor) {
 				var ui = new UE_ui_ColorButton({
 					className: "edui-for-" + cmd,
@@ -280,7 +279,7 @@ import { domUtils } from "../core/domUtils.js";
 					}
 				});
 
-				editorui.buttons[cmd] = ui;
+				UE.ui.buttons[cmd] = ui;
 				editor.addListener("selectionchange", function () {
 					ui.setDisabled(editor.queryCommandState(cmd) == -1);
 				});
@@ -344,7 +343,7 @@ import { domUtils } from "../core/domUtils.js";
 					/**
 					 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
 					 */
-					editorui[cmd] = function (editor, iframeUrl, title) {
+					UE.ui[cmd] = function (editor, iframeUrl, title) {
 						iframeUrl =
 							iframeUrl ||
 							(editor.options.dialogIframeUrlMap || {})[cmd] ||
@@ -449,7 +448,7 @@ import { domUtils } from "../core/domUtils.js";
 								})(cmd);
 								break;
 						}
-						editorui.buttons[cmd] = ui;
+						UE.ui.buttons[cmd] = ui;
 						editor.addListener("selectionchange", function () {
 							//只存在于右键菜单而无工具栏按钮的ui不需要检测状态
 							var unNeedCheckState = { edittable: 1 };
@@ -470,7 +469,7 @@ import { domUtils } from "../core/domUtils.js";
 	}
 
 	/** @param {typeof import('../core/Editor.cls.js').default.prototype} editor */
-	editorui.insertcode = function (editor, list, title) {
+	UE.ui.insertcode = function (editor, list, title) {
 		list = editor.options["insertcode"] || [];
 		title =
 			editor.options.labelMap["insertcode"] ||
@@ -513,7 +512,7 @@ import { domUtils } from "../core/domUtils.js";
 				return -1;
 			}
 		});
-		editorui.buttons["insertcode"] = ui;
+		UE.ui.buttons["insertcode"] = ui;
 		editor.addListener("selectionchange", function (type, causeByUi, uiReady) {
 			if (!uiReady) {
 				var state = editor.queryCommandState("insertcode");
@@ -538,7 +537,7 @@ import { domUtils } from "../core/domUtils.js";
 	/**
 	 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
 	 */
-	editorui.fontfamily = function (editor, list, title) {
+	UE.ui.fontfamily = function (editor, list, title) {
 		list = editor.options["fontfamily"] || [];
 		title =
 			editor.options.labelMap["fontfamily"] ||
@@ -585,7 +584,7 @@ import { domUtils } from "../core/domUtils.js";
 				return -1;
 			}
 		});
-		editorui.buttons["fontfamily"] = ui;
+		UE.ui.buttons["fontfamily"] = ui;
 		editor.addListener("selectionchange", function (type, causeByUi, uiReady) {
 			if (!uiReady) {
 				var state = editor.queryCommandState("FontFamily");
@@ -606,7 +605,7 @@ import { domUtils } from "../core/domUtils.js";
 	/**
 	 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
 	 */
-	editorui.fontsize = function (editor, list, title) {
+	UE.ui.fontsize = function (editor, list, title) {
 		title =
 			editor.options.labelMap["fontsize"] ||
 			editor.getLang("labelMap.fontsize") ||
@@ -644,7 +643,7 @@ import { domUtils } from "../core/domUtils.js";
 			},
 			className: "edui-for-fontsize"
 		});
-		editorui.buttons["fontsize"] = ui;
+		UE.ui.buttons["fontsize"] = ui;
 		editor.addListener("selectionchange", function (type, causeByUi, uiReady) {
 			if (!uiReady) {
 				var state = editor.queryCommandState("FontSize");
@@ -662,7 +661,7 @@ import { domUtils } from "../core/domUtils.js";
 	/**
 	 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
 	 */
-	editorui.paragraph = function (editor, list, title) {
+	UE.ui.paragraph = function (editor, list, title) {
 		title =
 			editor.options.labelMap["paragraph"] ||
 			editor.getLang("labelMap.paragraph") ||
@@ -699,7 +698,7 @@ import { domUtils } from "../core/domUtils.js";
 				this.showPopup();
 			}
 		});
-		editorui.buttons["paragraph"] = ui;
+		UE.ui.buttons["paragraph"] = ui;
 		editor.addListener("selectionchange", function (type, causeByUi, uiReady) {
 			if (!uiReady) {
 				var state = editor.queryCommandState("Paragraph");
@@ -724,7 +723,7 @@ import { domUtils } from "../core/domUtils.js";
 	 * 自定义标题
 	 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
 	 */
-	editorui.customstyle = function (editor) {
+	UE.ui.customstyle = function (editor) {
 		var list = editor.options["customstyle"] || [],
 			title =
 				editor.options.labelMap["customstyle"] ||
@@ -784,7 +783,7 @@ import { domUtils } from "../core/domUtils.js";
 				return -1;
 			}
 		});
-		editorui.buttons["customstyle"] = ui;
+		UE.ui.buttons["customstyle"] = ui;
 		editor.addListener("selectionchange", function (type, causeByUi, uiReady) {
 			if (!uiReady) {
 				var state = editor.queryCommandState("customstyle");
@@ -808,7 +807,7 @@ import { domUtils } from "../core/domUtils.js";
 	/**
 	 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
 	 */
-	editorui.inserttable = function (editor, iframeUrl, title) {
+	UE.ui.inserttable = function (editor, iframeUrl, title) {
 		title =
 			editor.options.labelMap["inserttable"] ||
 			editor.getLang("labelMap.inserttable") ||
@@ -828,7 +827,7 @@ import { domUtils } from "../core/domUtils.js";
 				this.showPopup();
 			}
 		});
-		editorui.buttons["inserttable"] = ui;
+		UE.ui.buttons["inserttable"] = ui;
 		editor.addListener("selectionchange", function () {
 			ui.setDisabled(editor.queryCommandState("inserttable") == -1);
 		});
@@ -838,7 +837,7 @@ import { domUtils } from "../core/domUtils.js";
 	/**
 	 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
 	 */
-	editorui.lineheight = function (editor) {
+	UE.ui.lineheight = function (editor) {
 		var val = editor.options.lineheight || [];
 		if (!val.length) return;
 		for (var i = 0, ci, items = []; (ci = val[i++]);) {
@@ -865,7 +864,7 @@ import { domUtils } from "../core/domUtils.js";
 				editor.execCommand("LineHeight", value);
 			}
 		});
-		editorui.buttons["lineheight"] = ui;
+		UE.ui.buttons["lineheight"] = ui;
 		editor.addListener("selectionchange", function () {
 			var state = editor.queryCommandState("LineHeight");
 			if (state == -1) {
@@ -883,7 +882,7 @@ import { domUtils } from "../core/domUtils.js";
 	var rowspacings = ["top", "bottom"];
 	for (var r = 0, ri; (ri = rowspacings[r++]);) {
 		(function (cmd) {
-			editorui["rowspacing" + cmd] = function (editor) {
+			UE.ui["rowspacing" + cmd] = function (editor) {
 				var val = editor.options["rowspacing" + cmd] || [];
 				if (!val.length) return null;
 				for (var i = 0, ci, items = []; (ci = val[i++]);) {
@@ -910,7 +909,7 @@ import { domUtils } from "../core/domUtils.js";
 						editor.execCommand("rowspacing", value, cmd);
 					}
 				});
-				editorui.buttons[cmd] = ui;
+				UE.ui.buttons[cmd] = ui;
 				editor.addListener("selectionchange", function () {
 					var state = editor.queryCommandState("rowspacing", cmd);
 					if (state == -1) {
@@ -931,7 +930,7 @@ import { domUtils } from "../core/domUtils.js";
 	var lists = ["insertorderedlist", "insertunorderedlist"];
 	for (var l = 0, cl; (cl = lists[l++]);) {
 		(function (cmd) {
-			editorui[cmd] = function (editor) {
+			UE.ui[cmd] = function (editor) {
 				var vals = editor.options[cmd],
 					_onMenuClick = function () {
 						editor.execCommand(cmd, this.value);
@@ -955,7 +954,7 @@ import { domUtils } from "../core/domUtils.js";
 						editor.execCommand(cmd, value);
 					}
 				});
-				editorui.buttons[cmd] = ui;
+				UE.ui.buttons[cmd] = ui;
 				editor.addListener("selectionchange", function () {
 					var state = editor.queryCommandState(cmd);
 					if (state == -1) {
@@ -975,7 +974,7 @@ import { domUtils } from "../core/domUtils.js";
 	/**
 	 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
 	 */
-	editorui.fullscreen = function (editor, title) {
+	UE.ui.fullscreen = function (editor, title) {
 		title =
 			editor.options.labelMap["fullscreen"] ||
 			editor.getLang("labelMap.fullscreen") ||
@@ -991,7 +990,7 @@ import { domUtils } from "../core/domUtils.js";
 				this.setChecked(editor.ui.isFullScreen());
 			}
 		});
-		editorui.buttons["fullscreen"] = ui;
+		UE.ui.buttons["fullscreen"] = ui;
 		editor.addListener("selectionchange", function () {
 			var state = editor.queryCommandState("fullscreen");
 			ui.setDisabled(state == -1);
@@ -1004,7 +1003,7 @@ import { domUtils } from "../core/domUtils.js";
 	 * 表情
 	 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
 	 */
-	editorui['emotion'] = function (editor, iframeUrl) {
+	UE.ui['emotion'] = function (editor, iframeUrl) {
 		var cmd = "emotion";
 		var ui = new UE_ui_MultiMenuPop({
 			title:
@@ -1019,7 +1018,7 @@ import { domUtils } from "../core/domUtils.js";
 				dialogIframeUrlMap[cmd]
 			)
 		});
-		editorui.buttons[cmd] = ui;
+		UE.ui.buttons[cmd] = ui;
 
 		editor.addListener("selectionchange", function () {
 			ui.setDisabled(editor.queryCommandState(cmd) == -1);
@@ -1030,7 +1029,7 @@ import { domUtils } from "../core/domUtils.js";
 	/**
 	 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
 	 */
-	editorui['autotypeset'] = function (editor) {
+	UE.ui['autotypeset'] = function (editor) {
 		var ui = new UE_ui_AutoTypeSetButton({
 			editor: editor,
 			title:
@@ -1042,7 +1041,7 @@ import { domUtils } from "../core/domUtils.js";
 				editor.execCommand("autotypeset");
 			}
 		});
-		editorui.buttons["autotypeset"] = ui;
+		UE.ui.buttons["autotypeset"] = ui;
 		editor.addListener("selectionchange", function () {
 			ui.setDisabled(editor.queryCommandState("autotypeset") == -1);
 		});
@@ -1053,7 +1052,7 @@ import { domUtils } from "../core/domUtils.js";
 	 * 简单上传插件
 	 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
 	 */
-	editorui['simpleupload'] = function (editor) {
+	UE.ui['simpleupload'] = function (editor) {
 		var name = "simpleupload",
 			ui = new cls_uiButton({
 				className: "edui-for-" + name,
@@ -1066,7 +1065,7 @@ import { domUtils } from "../core/domUtils.js";
 				theme: editor.options.theme,
 				showText: false
 			});
-		editorui.buttons[name] = ui;
+		UE.ui.buttons[name] = ui;
 		editor.addListener("ready", function () {
 			var b = ui.getDom("body"),
 				iconSpan = b.children[0];

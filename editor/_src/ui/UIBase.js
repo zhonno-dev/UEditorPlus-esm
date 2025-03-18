@@ -13,6 +13,8 @@ class cls_UIBase extends EventBase {
 	uiName = "";
 	uiIsShow = true;
 	uiShowStyleBackupValue = null;
+	/** 本UI的全局键名，即 window.$EDITORUI[_globalKey] 中的键名，值为本UI实例 */
+	_globalKey = '';
 
 	/**
 	 * 构造函数

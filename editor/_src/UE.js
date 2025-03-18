@@ -52,8 +52,12 @@ const UE = {
 		domUtils: null,
 	},
 
+	/** 
+	 * UE.ui
+	 */
 	ui: {
-
+		/** UE.ui.buttons = {} */
+		buttons: {}
 	},
 
 	//原本在 editor/_src/adapter/editor.js 中的 var instances = {};
