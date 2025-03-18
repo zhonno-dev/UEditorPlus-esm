@@ -1,7 +1,7 @@
 import uiUtils from "./uiutils.js";
 
 // import cls_UIBase from "./UIBase.js";
-import cls_uiStateful from "./stateful.cls.js";
+import cls_uiStateful from "./stateful.js";
 
 ///import core
 ///import uicore

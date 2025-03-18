@@ -26,7 +26,7 @@ UE.plugins["shortcutmenu"] = function () {
 
 	// contextmenu
 	me.addListener("mouseup", function (type, e) {
-		console.trace();
+		// console.trace();
 		/** @type {typeof import('../core/Editor.cls.js').default.prototype} */
 		var me = this,
 			customEvt = {

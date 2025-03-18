@@ -3,7 +3,7 @@
 import utils from "../core/utils.js";
 // import UIBase from "./uibase.js";
 // import Stateful from "./stateful.js";
-import cls_uiStateful from "./stateful.cls.js";
+import cls_uiStateful from "./stateful.js";
 
 class cls_uiButton extends cls_uiStateful {
 	uiName = "button";

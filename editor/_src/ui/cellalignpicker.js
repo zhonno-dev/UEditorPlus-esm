@@ -3,7 +3,7 @@ import Popup from "./popup.js";
 // import Stateful from "./stateful.js";
 // import UIBase from "./uibase.js";
 import cls_UIBase from "./UIBase.js";
-import cls_uiStateful from "./stateful.cls.js";
+import cls_uiStateful from "./stateful.js";
 
 ///import core
 ///import uicore

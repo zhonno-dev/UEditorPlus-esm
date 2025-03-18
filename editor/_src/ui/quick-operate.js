@@ -6,7 +6,7 @@ import { domUtils } from "../core/domUtils.js";
 // import Stateful from "./stateful.js";
 // import CellAlignPicker from "./cellalignpicker.js";
 
-// import cls_uiStateful from "./stateful.cls.js";
+// import cls_uiStateful from "./stateful.js";
 // import cls_UIBase from "./UIBase.js";
 import cls_uiPopup from "./popup.js";
 

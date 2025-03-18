@@ -4,7 +4,7 @@ import uiUtils from "./uiutils.js";
 // import UIBase from "./uibase.js";
 import cls_uiPopup from "./popup.js";
 // import Stateful from "./stateful.js";
-import cls_uiStateful from "./stateful.cls.js";
+import cls_uiStateful from "./stateful.js";
 import CellAlignPicker from "./cellalignpicker.js";
 
 ///import core

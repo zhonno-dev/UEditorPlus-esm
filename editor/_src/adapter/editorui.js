@@ -87,7 +87,6 @@ for (var i = 0, ci; (ci = btnCmds[i++]);) {
 	 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
 	 */
 	UE.ui[ci] = function (editor) {
-		// var ui = new cls_uiButton({
 		var ui = new cls_uiButton({
 			className: "edui-for-" + cmd,
 			title:

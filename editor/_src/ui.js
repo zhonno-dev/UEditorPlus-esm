@@ -29,7 +29,7 @@ import UE_ui_Breakline from "./ui/breakline.js";
 import UE_ui_Message from "./ui/message.js";
 
 import cls_uiButton from "./ui/button.js";
-import cls_uiStateful from "./ui/stateful.cls.js";
+import cls_uiStateful from "./ui/stateful.js";
 import cls_UIBase from "./ui/UIBase.js";
 
 //ui/

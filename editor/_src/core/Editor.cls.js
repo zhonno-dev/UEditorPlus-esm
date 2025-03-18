@@ -1079,6 +1079,7 @@ class cls_Editor extends EventBase {
 	 * @see UE.EventBase:fireEvent(String)
 	 */
 	_proxyDomEvent(evt) {
+		// console.log(this.__allListeners);
 		if (
 			this.fireEvent("before" + evt.type.replace(/^on/, "").toLowerCase()) ===
 			false

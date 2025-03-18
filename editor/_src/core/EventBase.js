@@ -165,6 +165,9 @@ function getListener(obj, type, force) {
  * @since 1.2.6.1
  */
 class EventBase {
+	/** 保存的有注册的事件回调 */
+	__allListeners = {};
+
 	/**
 	 * 注册事件监听器
 	 * @method addListener
