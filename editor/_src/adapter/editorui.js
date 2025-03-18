@@ -78,143 +78,70 @@ var btnCmds = [
 	"deletetable", // 删除表格
 ];
 
-//zhu:以下是原本的for循环（使用了即时执行的匿名函数）
-if (0) {
-	for (var i = 0, ci; (ci = btnCmds[i++]);) {
-		ci = ci.toLowerCase();
-		UE.ui[ci] = (function (cmd) {
-			/**
-			 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
-			 */
-			return function (editor) {
-				// var ui = new cls_uiButton({
-				var ui = new cls_uiButton({
-					className: "edui-for-" + cmd,
-					title:
-						editor.options.labelMap[cmd] ||
-						editor.getLang("labelMap." + cmd) ||
-						"",
-					onclick: function () {
-						editor.execCommand(cmd);
-					},
-					theme: editor.options.theme,
-					showText: false
-				});
-				switch (cmd) {
-					case 'bold':
-					case 'italic':
-					case 'underline':
-					case 'strikethrough':
-					case 'fontborder':
-						// 定义一个立即执行函数，用于创建一个闭包，将 cmd 作为局部变量 cmdInternal 保存
-						// 这样可以确保在返回的函数中使用正确的命令名称
-						ui.shouldUiShow = (function (cmdInternal) {
-							/**
-							 * 检查按钮是否应该显示的函数。
-							 * @returns {boolean} 如果按钮应该显示则返回 true，否则返回 false。
-							 */
-							return function () {
-								// 检查当前编辑器中是否有选中的文本
-								// 如果没有选中的文本，则按钮不应该显示，返回 false
-								if (!editor.selection.getText()) {
-									return false;
-								}
-								// 检查当前命令的状态是否为禁用状态
-								// 如果命令状态不是禁用状态，则按钮应该显示，返回 true
-								return editor.queryCommandState(cmdInternal) !== UE.constants.STATEFUL.DISABLED;
-							};
-							// 将当前的命令名称 cmd 作为参数传递给立即执行函数
-						})(cmd);
-	
-						break;
-				}
-				UE.ui.buttons[cmd] = ui;
-				editor.addListener("selectionchange", function (
-					type,
-					causeByUi,
-					uiReady
-				) {
-					var state = editor.queryCommandState(cmd);
-					if (state === -1) {
-						ui.setDisabled(true);
-						ui.setChecked(false);
-					} else {
-						if (!uiReady) {
-							ui.setDisabled(false);
-							ui.setChecked(state);
-						}
+
+//zhu:以下是在原本的代码取消了【即时执行的匿名函数】后的for循环
+for (var i = 0, ci; (ci = btnCmds[i++]);) {
+	ci = ci.toLowerCase();
+	let cmd = ci;
+	/**
+	 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
+	 */
+	UE.ui[ci] = function (editor) {
+		// var ui = new cls_uiButton({
+		var ui = new cls_uiButton({
+			className: "edui-for-" + cmd,
+			title:
+				editor.options.labelMap[cmd] ||
+				editor.getLang("labelMap." + cmd) ||
+				"",
+			onclick: function () {
+				editor.execCommand(cmd);
+			},
+			theme: editor.options.theme,
+			showText: false
+		});
+		// console.log(cmd);
+		switch (cmd) {
+			case 'bold':
+			case 'italic':
+			case 'underline':
+			case 'strikethrough':
+			case 'fontborder':
+				/**
+				 * 检查按钮是否应该显示的函数。
+				 * @returns {boolean} 如果按钮应该显示则返回 true，否则返回 false。
+				 */
+				ui.shouldUiShow = function () {
+					// 检查当前编辑器中是否有选中的文本
+					// 如果没有选中的文本，则按钮不应该显示，返回 false
+					if (!editor.selection.getText()) {
+						return false;
 					}
-				});
-				return ui;
-			};
-		})(ci);
-	}
-}
-//zhu:以下是取消了【即时执行的匿名函数】后的for循环
-else {
-	for (var i = 0, ci; (ci = btnCmds[i++]);) {
-		ci = ci.toLowerCase();
-		let cmd = ci;
-		/**
-		 * @param {typeof import('../core/Editor.cls.js').default.prototype} editor
-		 */
-		UE.ui[ci] = function (editor) {
-			// var ui = new cls_uiButton({
-			var ui = new cls_uiButton({
-				className: "edui-for-" + cmd,
-				title:
-					editor.options.labelMap[cmd] ||
-					editor.getLang("labelMap." + cmd) ||
-					"",
-				onclick: function () {
-					editor.execCommand(cmd);
-				},
-				theme: editor.options.theme,
-				showText: false
-			});
-			// console.log(cmd);
-			switch (cmd) {
-				case 'bold':
-				case 'italic':
-				case 'underline':
-				case 'strikethrough':
-				case 'fontborder':
-					/**
-					 * 检查按钮是否应该显示的函数。
-					 * @returns {boolean} 如果按钮应该显示则返回 true，否则返回 false。
-					 */
-					ui.shouldUiShow = function () {
-						// 检查当前编辑器中是否有选中的文本
-						// 如果没有选中的文本，则按钮不应该显示，返回 false
-						if (!editor.selection.getText()) {
-							return false;
-						}
-						// 检查当前命令的状态是否为禁用状态
-						// 如果命令状态不是禁用状态，则按钮应该显示，返回 true
-						return editor.queryCommandState(cmd) !== UE.constants.STATEFUL.DISABLED;
-					};
-					break;
+					// 检查当前命令的状态是否为禁用状态
+					// 如果命令状态不是禁用状态，则按钮应该显示，返回 true
+					return editor.queryCommandState(cmd) !== UE.constants.STATEFUL.DISABLED;
+				};
+				break;
+		}
+		UE.ui.buttons[cmd] = ui;
+		editor.addListener("selectionchange", function (
+			type,
+			causeByUi,
+			uiReady
+		) {
+			var state = editor.queryCommandState(cmd);
+			if (state === -1) {
+				ui.setDisabled(true);
+				ui.setChecked(false);
+			} else {
+				if (!uiReady) {
+					ui.setDisabled(false);
+					ui.setChecked(state);
+				}
 			}
-			UE.ui.buttons[cmd] = ui;
-			editor.addListener("selectionchange", function (
-				type,
-				causeByUi,
-				uiReady
-			) {
-				var state = editor.queryCommandState(cmd);
-				if (state === -1) {
-					ui.setDisabled(true);
-					ui.setChecked(false);
-				} else {
-					if (!uiReady) {
-						ui.setDisabled(false);
-						ui.setChecked(state);
-					}
-				}
-			});
-			return ui;
-		};
-	}
+		});
+		return ui;
+	};
 }
 
 
