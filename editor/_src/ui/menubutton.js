@@ -44,22 +44,6 @@ class cls_uiMenuButton extends cls_uiSplitButton{
 	}
 }
 
-var UE_ui_MenuButton;
-(function () {
-	// var utils = baidu.editor.utils,
-	// 	Menu = baidu.editor.ui.Menu,
-	// 	SplitButton = baidu.editor.ui.SplitButton;
-
-	// var MenuButton = (baidu.editor.ui.MenuButton = function (options) {
-	var MenuButton = (UE_ui_MenuButton = function () {
-		this.initOptions(options);
-		this.initMenuButton();
-	});
-	MenuButton.prototype = {
-		
-	};
-})();
-
 // utils.inherits(MenuButton, SplitButton);[X]
 
 export default cls_uiMenuButton;

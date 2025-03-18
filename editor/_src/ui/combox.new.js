@@ -21,9 +21,8 @@ class cls_uiCombox extends cls_uiSplitButton {
 		super(options); // 调用父类的构造函数
 		// console.log(this.className);
 
-		// this.initOptions(options);
+		this.initOptions(options);
 		this.initCombox();
-		// window.zhuLog = true;
 	}
 
 	onbuttonclick() {
@@ -50,7 +49,7 @@ class cls_uiCombox extends cls_uiSplitButton {
 			className: this.className,
 		});
 
-		//     this.initSplitButton();
+		this.initSplitButton();
 	}
 
 	postRender() {
@@ -114,22 +113,6 @@ class cls_uiCombox extends cls_uiSplitButton {
 }
 
 // cls_uiCombox.prototype._SplitButton_postRender = cls_uiSplitButton.prototype.postRender;
-
-// var UE_ui_Combox;
-// (function () {
-// 	// todo: menu和item提成通用list
-// 	// var utils = baidu.editor.utils,
-// 	// 	uiUtils = baidu.editor.ui.uiUtils,
-// 	// 	Menu = baidu.editor.ui.Menu,
-// 	// 	SplitButton = baidu.editor.ui.SplitButton;
-
-// 	// var Combox = (baidu.editor.ui.Combox = function (options) {
-// 	var Combox = (UE_ui_Combox = function () {
-// 	});
-// 	Combox.prototype = {
-
-// 	};
-// })();
 
 // utils.inherits(Combox, SplitButton);[X]
 

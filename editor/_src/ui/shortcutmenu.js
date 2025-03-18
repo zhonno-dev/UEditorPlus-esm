@@ -57,7 +57,7 @@ class cls_uiShortCutMenu extends cls_UIBase {
 		this.initItems();
 		this.initEvent();
 		allMenus.push(this);
-	};
+	}
 	initEvent() {
 		var me = this,
 			doc = me.editor.document;
@@ -118,7 +118,7 @@ class cls_uiShortCutMenu extends cls_UIBase {
 				isSubMenuShow = true;
 			}
 		});
-	};
+	}
 	initItems() {
 		if (utils.isArray(this.items)) {
 			for (var i = 0, len = this.items.length; i < len; i++) {
@@ -133,14 +133,14 @@ class cls_uiShortCutMenu extends cls_UIBase {
 				}
 			}
 		}
-	};
+	}
 	setOpacity(el, value) {
 		if (browser.ie && browser.version < 9) {
 			el.style.filter = "alpha(opacity = " + parseFloat(value) * 100 + ");";
 		} else {
 			el.style.opacity = value;
 		}
-	};
+	}
 	getSubMenuMark() {
 		isSubMenuShow = false;
 		var layerEle = uiUtils.getFixedLayer();
@@ -154,7 +154,7 @@ class cls_uiShortCutMenu extends cls_UIBase {
 			}
 		}
 		return isSubMenuShow;
-	};
+	}
 	show(e, hasContextmenu) {
 		var me = this,
 			offset = {},
@@ -226,20 +226,20 @@ class cls_uiShortCutMenu extends cls_UIBase {
 			el.style.zIndex = me.editor.container.style.zIndex * 1 + 10;
 			fixedlayer.style.zIndex = el.style.zIndex - 1;
 		}
-	};
+	}
 	hide() {
 		if (this.getDom()) {
 			this.getDom().style.display = "none";
 		}
 		this.isHidden = true;
-	};
+	}
 	postRender() {
 		if (utils.isArray(this.items)) {
 			for (var i = 0, item; (item = this.items[i++]);) {
 				item.postRender();
 			}
 		}
-	};
+	}
 	getHtmlTpl() {
 		var buff;
 		if (utils.isArray(this.items)) {
@@ -257,7 +257,7 @@ class cls_uiShortCutMenu extends cls_UIBase {
 			buff +
 			"</div>"
 		);
-	};
+	}
 
 }
 

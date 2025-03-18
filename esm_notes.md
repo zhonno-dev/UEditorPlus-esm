@@ -206,6 +206,36 @@ _src/ui/breakline.js
 ### _src/ui/message.js
 _src/ui/message.js
 
+## ui/ 下的类继承关系
+- UIBase.js
+  - stateful.cls.js
+    - button.js
+    - cls_uiMenuItem(menu.js)
+    - pastepicker.js
+    - splitbutton.js
+      - colorbutton.js
+      - tablebutton.js
+      - menubutton.js
+      - combox.js
+      - autotypesetbutton.js
+      - multiMenu.js
+  - popup.js
+    - menu.js
+    - quick-operate.js
+  - toolbar.js
+  - dialog.js
+  - message.js
+  - breakline.js
+  - separator.js
+  - mask.js
+  - tablepicker.js
+  - colorpicker.js
+  - autotypesetpicker.js
+  - cellalignpicker.js
+  - shortcutmenu.js
+
+
+
 ## adapter/
 
 ### _src/adapter/editorui.js

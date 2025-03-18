@@ -76,7 +76,7 @@ class cls_uiAutoTypeSetButton extends cls_uiSplitButton {
 		this.initAutoTypeSetButton();
 	}
 
-	initAutoTypeSetButton = function () {
+	initAutoTypeSetButton() {
 		var me = this;
 		this.popup = new Popup({
 			//传入配置参数
