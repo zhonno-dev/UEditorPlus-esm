@@ -1232,7 +1232,8 @@ class cls_Editor extends EventBase {
 	 * @method  queryCommandState
 	 * @param { String } cmdName 需要查询的命令名称
 	 * @remind 具体命令的使用请参考<a href="#COMMAND.LIST">命令列表</a>
-	 * @return { Number } number 返回放前命令的状态，返回值三种情况：(-1|0|1)
+	 * @return {typeof UE.constants.STATEFUL} 返回放前命令的状态，返回值三种情况：-1:禁用；0:关闭（未选中）；1:开启（选中）
+	 * 
 	 * @example
 	 * ```javascript
 	 * editor.queryCommandState(cmdName)  => (-1|0|1)
