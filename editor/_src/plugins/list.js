@@ -3,6 +3,7 @@ import utils from "../core/utils.js";
 import { domUtils } from "../core/domUtils.js";
 import browser from "../core/browser.js";
 import dtd from "../core/dtd.js";
+import cls_uNode from "../core/node.js";
 /**
  * 有序列表,无序列表插件
  * @file

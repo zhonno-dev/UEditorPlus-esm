@@ -1,6 +1,7 @@
 import UE from "../UE.js";
 import utils from "../core/utils.js";
 import { domUtils } from "../core/domUtils.js";
+import cls_uNode from "../core/node.js";
 /**
  * 分页功能插件
  * @file
@@ -62,7 +63,7 @@ UE.plugins["pagebreak"] = function () {
     me.addOutputRule(function (node) {
         utils.each(node.getNodesByTagName("hr"), function (n) {
             if (n.getAttr("class") == "pagebreak") {
-                var txt = UE.uNode.createText(me.options.pageBreakTag);
+                var txt = cls_uNode.createText(me.options.pageBreakTag);
                 n.parentNode.insertBefore(txt, n);
                 n.parentNode.removeChild(n);
             }

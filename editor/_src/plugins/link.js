@@ -1,6 +1,7 @@
 import { domUtils } from '../core/domUtils.js';
 import utils from '../core/utils.js';
 import UE from "../UE.js";
+import browser from '../core/browser.js';
 /**
  * 超链接
  * @file

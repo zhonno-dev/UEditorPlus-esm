@@ -1,6 +1,5 @@
 import UE from "../UE.js";
-import utils from "../core/utils.js";
-import { domUtils } from "../core/domUtils.js";
+import cls_uNode from "../core/node.js";
 /**
  * 纯文本粘贴插件
  * @file
@@ -66,7 +65,7 @@ UE.plugins["pasteplain"] = function () {
                     var txt = !!node.innerText();
                     if (txt) {
                         node.parentNode.insertAfter(
-                            UE.uNode.createText(" &nbsp; &nbsp;"),
+                            cls_uNode.createText(" &nbsp; &nbsp;"),
                             node
                         );
                     }

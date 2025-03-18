@@ -1,6 +1,6 @@
 import UE from "../UE.js";
 import utils from "../core/utils.js";
-import { domUtils } from "../core/domUtils.js";
+import cls_uNode from "../core/node.js";
 /**
  * video插件， 为UEditor提供视频插入支持
  * @file

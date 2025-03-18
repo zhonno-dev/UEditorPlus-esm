@@ -2,6 +2,7 @@ import UE from "../UE.js";
 import utils from "../core/utils.js";
 import { domUtils } from "../core/domUtils.js";
 import browser from "../core/browser.js";
+import cls_uNode from "../core/node.js";
 /**
  * 插入代码插件
  * @file
@@ -206,7 +207,7 @@ UE.plugins["insertcode"] = function () {
                 browser.ie11below &&
                 browser.version > 8 &&
                 utils.each(brs, function (br) {
-                    var txt = UE.uNode.createText("\n");
+                    var txt = cls_uNode.createText("\n");
                     br.parentNode.insertBefore(txt, br);
                     br.parentNode.removeChild(br);
                 });
@@ -217,7 +218,7 @@ UE.plugins["insertcode"] = function () {
             pre.innerHTML("");
             utils.each(code, function (c) {
                 if (c.length) {
-                    pre.appendChild(UE.uNode.createText(c));
+                    pre.appendChild(cls_uNode.createText(c));
                 }
                 pre.appendChild(cls_uNode.createElement("br"));
             });

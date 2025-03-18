@@ -184,7 +184,7 @@ UE.plugins["defaultfilter"] = function () {
                         if (!node.children || !node.children.length) {
                             node.appendChild(
                                 browser.ie11below
-                                    ? UE.uNode.createText(" ")
+                                    ? cls_uNode.createText(" ")
                                     : cls_uNode.createElement("br")
                             );
                         }
@@ -192,7 +192,7 @@ UE.plugins["defaultfilter"] = function () {
                     case "table":
                         if (me.options.disabledTableInTable && tdParent(node)) {
                             node.parentNode.insertBefore(
-                                UE.uNode.createText(node.innerText()),
+                                cls_uNode.createText(node.innerText()),
                                 node
                             );
                             node.parentNode.removeChild(node);
@@ -229,7 +229,7 @@ UE.plugins["defaultfilter"] = function () {
                     case "div":
                         if ((val = node.getAttr("cdata_tag"))) {
                             node.tagName = val;
-                            node.appendChild(UE.uNode.createText(node.getAttr("cdata_data")));
+                            node.appendChild(cls_uNode.createText(node.getAttr("cdata_data")));
                             node.setAttr({
                                 cdata_tag: "",
                                 cdata_data: "",

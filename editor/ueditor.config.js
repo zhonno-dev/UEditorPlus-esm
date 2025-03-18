@@ -459,7 +459,7 @@ const UEDITOR_CONFIG = {
 	//            //没有内容的td直接删掉
 	//            var txt = !!node.innerText();
 	//            if(txt){
-	//                node.parentNode.insertAfter(UE.uNode.createText(' &nbsp; &nbsp;'),node);
+	//                node.parentNode.insertAfter(cls_uNode.createText(' &nbsp; &nbsp;'),node);
 	//            }
 	//            node.parentNode.removeChild(node,node.innerText())
 	//        }
