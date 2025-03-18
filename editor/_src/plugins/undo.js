@@ -232,7 +232,8 @@ UE.plugins["undo"] = function () {
 	});
 	me.commands["redo"] = me.commands["undo"] = {
 		execCommand: function (cmdName) {
-			this.undoManger[cmdName]();
+			// console.log(cmdName, this.undoManger);
+			this.undoManger[cmdName.toLowerCase()]();
 		},
 		queryCommandState: function (cmdName) {
 			return this.undoManger[

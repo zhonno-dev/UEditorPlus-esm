@@ -120,6 +120,7 @@ class cls_uiPopup extends cls_UIBase {
 				me = this;
 
 			ifr.length && (ifr = ifr[0]);
+			// console.log(ifr);
 
 			while (_top + _height > winHeight) {
 				_height -= 30;

@@ -382,7 +382,6 @@ class cls_EditorUI extends cls_UIBase{
 				}
 				// 链接选中处理
 				if (editor.ui._dialogs.linkDialog) {
-					// console.log(editor.ui._dialogs.linkDialog);
 					var link = editor.queryCommandValue("link");
 					var url;
 					if (
