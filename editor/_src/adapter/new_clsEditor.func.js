@@ -99,10 +99,13 @@ const new_clsEditor = function (options) {
 				var opt = editor.options;
 				// 给实例添加一个编辑器的容器引用
 				editor.container = editor.ui.getDom();
+				// console.log(editor.container);
 				var parents = domUtils.findParents(holder, true);
 				var displays = [];
 				for (var i = 0, ci; (ci = parents[i]); i++) {
+					//先备份原本的 style.display 到 displays，在下方再次用循环恢复
 					displays[i] = ci.style.display;
+					//把 style.display 临时改为 block（应该是用于计算宽、高度）
 					ci.style.display = "block";
 				}
 				if (opt.initialFrameWidth) {
@@ -119,6 +122,7 @@ const new_clsEditor = function (options) {
 				} else {
 					opt.initialFrameHeight = opt.minFrameHeight = holder.offsetHeight;
 				}
+				//恢复原本的 style.display 值
 				for (var i = 0, ci; (ci = parents[i]); i++) {
 					ci.style.display = displays[i];
 				}

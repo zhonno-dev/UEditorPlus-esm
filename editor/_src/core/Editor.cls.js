@@ -13,8 +13,8 @@ import browser from "./browser.js";
 // import cls_EditorUI from "../adapter/cls_EditorUI.js";
 const { ie, webkit, gecko, opera } = browser;
 
-var uid = 0,
-	_selectionChangeTimer;
+var uid = 0;
+var _selectionChangeTimer;
 
 /**
 * 获取编辑器的html内容，赋值到编辑器所在表单的textarea文本域里面
@@ -110,20 +110,68 @@ var ROOT_KEY = "UEditorPlusPref";
  * @since 1.2.6.1
  */
 class cls_Editor extends EventBase {
+	uid; //通过上方那个uid生成自增ID
 	key = '';
 	langIsReady = false;
+	/**
+	 * 编辑器是否`ready`
+	 * 在 this._setup() 中被设为1，并回调 me.fireEvent("ready");
+	 */
+	isReady;
 	/** 
 	 * 编辑器配置项
 	 * @type {typeof import('../../ueditor.config.js').default}
 	 */
-	options = {};
+	options = {
+		/** 语言 */
+		lang: {},
+	};
+	commands = {};
+	/** 快捷键 */
+	shortcutkeys = {};
+	/** 输入过滤规则 */
+	inputRules = [];
+	/** 输出过滤规则 */
+	outputRules = [];
 	/**
 	 * cls_EditorUI
 	 * @type {typeof import('../adapter/cls_EditorUI.js').default.prototype}
 	 */
 	ui;
-	/** @type { Document } */
+	/** 
+	 * iframe里面的document
+	 * @type { Document }
+	 */
 	document;
+	/**
+	 * 编辑器的容器\
+	 * 这个就是第一个 cls_EditorUI(id="edui1") 动态生成挂载的包括住整个编辑器的那个DIV
+	 * @type {HTMLElement}
+	 */
+	container;
+	/** iframe中的window */
+	window;
+	/**
+	 * iframe标签本身
+	 * @type {HTMLIFrameElement}
+	 */
+	iframe;
+	/** iframe里的body */
+	body;
+	/**
+	 * @type {cls_Selection}
+	 */
+	selection;
+	_bakRange;
+	_bakIERange;
+	_bakNativeRange;
+
+	_ignoreContentChange;
+
+	//bkqueryCommandState;
+	//queryCommandState;
+	//bkqueryCommandValue;
+	//queryCommandValue
 
 	/**
 	 * 构造函数
@@ -410,13 +458,12 @@ class cls_Editor extends EventBase {
 
 	/**
 	 * 编辑器初始化
-	 * @method _setup
-	 * @private
-	 * @param { Element } doc 编辑器Iframe中的文档对象
+	 * @param { Document } doc 编辑器Iframe中的文档对象
 	 */
 	_setup(doc) {
-		var me = this,
-			options = me.options;
+		/** @type {cls_Editor} */
+		var me = this;
+		var options = me.options;
 		if (ie) {
 			doc.body.disabled = true;
 			doc.body.contentEditable = true;
@@ -427,6 +474,7 @@ class cls_Editor extends EventBase {
 		doc.body.spellcheck = false;
 		me.document = doc;
 		me.window = doc.defaultView || doc.parentWindow;
+		// console.log(me.window);
 		me.iframe = me.window.frameElement;
 		me.body = doc.body;
 		//     me.selection = new dom.Selection(doc);
@@ -509,7 +557,7 @@ class cls_Editor extends EventBase {
 		me._bindshortcutKeys();
 		me.isReady = 1;
 		me.fireEvent("ready");
-		options.onready && options.onready.call(me);
+		options.onready && options.onready.call(me); //zhu:这个回调没东西注册
 		if (!browser.ie9below) {
 			domUtils.on(me.window, ["blur", "focus"], function (e) {
 				//chrome下会出现alt+tab切换时，导致选区位置不对
@@ -529,9 +577,9 @@ class cls_Editor extends EventBase {
 				}
 			});
 		}
-		//trace:1518 ff3.6body不够寛，会导致点击空白处无法获得焦点
+		//trace:1518 ff3.6 body不够寛，会导致点击空白处无法获得焦点
 		if (browser.gecko && browser.version <= 10902) {
-			//修复ff3.6初始化进来，不能点击获得焦点
+			//修复ff3.6 初始化进来，不能点击获得焦点
 			me.body.contentEditable = false;
 			setTimeout(function () {
 				me.body.contentEditable = true;
@@ -987,6 +1035,14 @@ class cls_Editor extends EventBase {
 	isFocus() {
 		return this.selection.isFocus();
 	}
+	/**
+	 * 使编辑器失去焦点
+	 * @method blur
+	 * @example
+	 * ```javascript
+	 * editor.blur()
+	 * ```
+	 */
 	blur() {
 		var sel = this.selection.getNative();
 		if (sel.empty && browser.ie) {
@@ -1073,8 +1129,7 @@ class cls_Editor extends EventBase {
 	}
 	/**
 	 * 触发事件代理
-	 * @method _proxyDomEvent
-	 * @private
+	 * @param {Event} evt 
 	 * @return { * } fireEvent的返回值
 	 * @see UE.EventBase:fireEvent(String)
 	 */
@@ -1430,8 +1485,7 @@ class cls_Editor extends EventBase {
 	/**
 	 * 设置默认内容
 	 * //zhu: 此方法修改了一下定义风格，如果出现问题可到 Editor.bak.js 中查看原本的风格
-	 * @method _setDefaultContent
-	 * @private
+	 * @this {cls_Editor}
 	 * @param  { String } cont 要存入的内容
 	 */
 	_setDefaultContent(cont) {
@@ -1439,6 +1493,7 @@ class cls_Editor extends EventBase {
 		me.body.innerHTML = '<p id="initContent">' + cont + "</p>";
 
 		function clear() {
+			/** @type {cls_Editor} */
 			var me = this;
 			if (me.document.getElementById("initContent")) {
 				me.body.innerHTML = "<p>" + (ie ? "" : "<br/>") + "</p>";
@@ -1557,12 +1612,35 @@ class cls_Editor extends EventBase {
 		return count;
 	}
 
+	/**
+	 * 获取编辑器文档的垂直滚动位置
+	 * @method getScrollTop
+	 * @return {Number} 返回文档的垂直滚动位置，以像素为单位
+	 * @example
+	 * ```javascript
+	 * var scrollTop = editor.getScrollTop();
+	 * console.log('当前垂直滚动位置:', scrollTop);
+	 * ```
+	 */
 	getScrollTop() {
+		// 返回文档的垂直滚动位置，取 documentElement 和 body 的 scrollTop 中的最大值
 		return Math.max(this.document.documentElement.scrollTop, this.document.body.scrollTop);
 	}
+	/**
+	 * 获取编辑器文档的水平滚动位置
+	 * @method getScrollLeft
+	 * @return {Number} 返回文档的水平滚动位置，以像素为单位
+	 * @example
+	 * ```javascript
+	 * var scrollLeft = editor.getScrollLeft();
+	 * console.log('当前水平滚动位置:', scrollLeft);
+	 * ```
+	 */
 	getScrollLeft() {
+		// 返回文档的水平滚动位置，取 documentElement 和 body 的 scrollLeft 中的最大值
 		return Math.max(this.document.documentElement.scrollLeft, this.document.body.scrollLeft);
 	}
+
 
 	/**
 	 * 注册输入过滤规则
